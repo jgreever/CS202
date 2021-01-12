@@ -1,16 +1,9 @@
-/* main.cpp
- *
- * Justin Greever
- * CS202 - Program #1
- * 01/09/2020
+/** main.cpp
  * 
- * //TODO: Add comments
+ * Justin Greever
+ * CS202 - Program 1
+ * 01/09/2021
+ * 
+ * ANCHOR //TODO Insert information about the program
  */
 
-#include "orders.hpp"
-
-int main()
-{
-
-    return 0;
-}
