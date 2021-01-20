@@ -73,7 +73,10 @@ class product : public warehouse
 class inventory : public product
 {
     public:
+        //Default constructor
         inventory();
+
+        //Default destructor
         ~inventory();
 
         //This is our copy constructor for passing in char arguments and turning
