@@ -18,9 +18,50 @@
 #include <cctype>
 #include <iostream>
 #include <cstdlib>
+#include "node.hpp"
 
 //MAX categories a warehouse can have for products, to keep it simple.
 static const int SIZE=10;
+
+//Forward declaration for inventory class
+class inventory;
+
+//This is our warehouse class. It will be in charge of determining where the
+//item should come from (local or national) distribution center and then help
+//to determine if the package should go out via local or national if the item
+//is found in the warehouses inventory.
+class warehouse
+{
+    public:
+        //Default constructor
+        warehouse();
+
+        //Default destructor
+        ~warehouse();
+        
+        //This will allow the user to pass in a product name or number
+        //and search to ensure the item is at a distribution center
+        void check_inventory(char *name, char *product_num);
+
+        //This is used so the user can input the product name/number, and a 
+        //choice for what to do: 0 = add inventory, 1 = edit inventory
+        void edit_inventory(char *name, char *product_num, int choice);
+
+        //This allows us to flag the package for local shipping
+        //This will most likely be merged with ship_national to make
+        //it easier and less code
+        void ship_local();
+
+        //This allows us to flag the package for national shipping
+        //This will most likely be merged with ship_local to make
+        //it easier and less code
+        void ship_national();
+
+    protected:
+        //This is our inventory pointer to our warehouse inventory
+        //at the particular distribution center
+        inventory *wh_inventory;
+};
 
 //Our product class will manage the physical item that is being shipped.
 //It will hold the item name, product number, tracking ID, and the current
@@ -62,8 +103,8 @@ class product : public warehouse
     protected:
         char *item_name;
         char *product_number;
-        int tracking_id;
-        int *current_stage;
+        char *tracking_id;
+        int current_stage;
 };
 
 //The inventory class will manage the items in each warehouse via a categories.
@@ -111,26 +152,22 @@ class inventory : public product
         product *aproduct;
 };
 
-class node : public inventory
-{
-    public:
-        //Default constructor
-        node();
-
-        //Default destructor
-        ~node();
-
-        //This sets our left pointer to point at the proper node
-        void set_left();
-
-        //This sets our right pointer to point at the proper node
-        void set_right();
-
-    protected:
-        inventory *an_inventory;
-        node *left;
-        node *right;
-};
+// class node : public inventory
+// {
+//     public:
+//         //Default constructor
+//         node();
+//         //Default destructor
+//         ~node();
+//         //This sets our left pointer to point at the proper node
+//         void set_left();
+//         //This sets our right pointer to point at the proper node
+//         void set_right();
+//     protected:
+//         inventory *an_inventory;
+//         node *left;
+//         node *right;
+// };
 
 //This is the "node" class for the warehouse class. It will keep track of
 //adding items, removing items, and giving a total amount of items in that
@@ -155,41 +192,5 @@ class node : public inventory
 //         inv_node *next;
 // };
 
-//This is our warehouse class. It will be in charge of determining where the
-//item should come from (local or national) distribution center and then help
-//to determine if the package should go out via local or national if the item
-//is found in the warehouses inventory.
-class warehouse
-{
-    public:
-        //Default constructor
-        warehouse();
-
-        //Default destructor
-        ~warehouse();
-        
-        //This will allow the user to pass in a product name or number
-        //and search to ensure the item is at a distribution center
-        void check_inventory(char *name, char *product_num);
-
-        //This is used so the user can input the product name/number, and a 
-        //choice for what to do: 0 = add inventory, 1 = edit inventory
-        void edit_inventory(char *name, char *product_num, int choice);
-
-        //This allows us to flag the package for local shipping
-        //This will most likely be merged with ship_national to make
-        //it easier and less code
-        void ship_local();
-
-        //This allows us to flag the package for national shipping
-        //This will most likely be merged with ship_local to make
-        //it easier and less code
-        void ship_national();
-
-    protected:
-        //This is our inventory pointer to our warehouse inventory
-        //at the particular distribution center
-        inventory *wh_inventory;
-};
 
 #endif

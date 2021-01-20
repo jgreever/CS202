@@ -7,3 +7,11 @@
  * ANCHOR //TODO Insert information about the program
  */
 
+#include "warehouse.hpp"
+using namespace std;
+
+int main()
+{
+
+    return 0;
+}
