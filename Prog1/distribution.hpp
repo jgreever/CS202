@@ -1,5 +1,5 @@
-#ifndef DISTRIBUTION_H
-#define DISTRIBUTION_H
+#ifndef DISTRIBUTION_HPP
+#define DISTRIBUTION_HPP
 
 /** distribution.hpp
  * 
@@ -24,6 +24,9 @@ class distribution : public warehouse
     public:
         //Default constructor
         distribution();
+
+        //Copy constructor
+        distribution(const int transport_type);
 
         //Default destructor
         ~distribution();

@@ -1,5 +1,5 @@
-#ifndef WAREHOUSE_H
-#define WAREHOUSE_H
+#ifndef WAREHOUSE_HPP
+#define WAREHOUSE_HPP
 
 /** warehouse.hpp
  * 
@@ -18,7 +18,6 @@
 #include <cctype>
 #include <iostream>
 #include <cstdlib>
-#include "node.hpp"
 
 //MAX categories a warehouse can have for products, to keep it simple.
 static const int SIZE=10;
@@ -117,12 +116,12 @@ class inventory : public product
         //Default constructor
         inventory();
 
-        //Default destructor
-        ~inventory();
-
         //This is our copy constructor for passing in char arguments and turning
         //them into an inventory object
-        inventory(const char *aname, char *anumber);
+        inventory(const char *aname, const char *anumber);
+
+        //Default destructor
+        ~inventory();
 
         //This copy constructor allows us to copy an inventory object to another
         //inventory object without worrying about memory or pointer issues
@@ -152,23 +151,6 @@ class inventory : public product
         product *aproduct;
 };
 
-// class node : public inventory
-// {
-//     public:
-//         //Default constructor
-//         node();
-//         //Default destructor
-//         ~node();
-//         //This sets our left pointer to point at the proper node
-//         void set_left();
-//         //This sets our right pointer to point at the proper node
-//         void set_right();
-//     protected:
-//         inventory *an_inventory;
-//         node *left;
-//         node *right;
-// };
-
 //This is the "node" class for the warehouse class. It will keep track of
 //adding items, removing items, and giving a total amount of items in that
 //warehouse (local/national).
@@ -177,20 +159,23 @@ class inventory : public product
 //think that may be easier for managing items and gives faster performance than
 //the LLL would.
 //inv_node = Inventory Node, as there is already an inventory class that is part
-//of the orders.hpp/cpp files.
-// class inv_node : public product
-// {
-//     public:
-//         inv_node();
-//         ~inv_node();
-//         void add_item();
-//         void remove_item();
-//         void total_items();
-
-//     protected:
-//         int total_items;
-//         inv_node *next;
-// };
+// of the orders.hpp/cpp files.
+class inv_node : public inventory
+{
+    public:
+        inv_node();
+        inv_node(const inv_node &to_copy);
+        inv_node(const inv_node &to_copy, inv_node *next);
+        ~inv_node();
+        inv_node *&goNext();
+        void setNext(inv_node *&new_next);
+        void setData(int to_set);
+        int getData() const;
+    protected:
+        //int t_items = Total Items
+        int t_items;
+        inv_node *next;
+};
 
 
 #endif

@@ -1,5 +1,5 @@
-#ifndef ORDERS_H
-#define ORDERS_H
+#ifndef ORDERS_HPP
+#define ORDERS_HPP
 
 /** orders.hpp
  * 
