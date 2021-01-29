@@ -36,7 +36,7 @@ class inventory
     public:
         inventory();
         inventory(const inventory &to_copy);
-        inventory(const inventory &);
+        //inventory(const inventory &);
         ~inventory();
 
     protected:

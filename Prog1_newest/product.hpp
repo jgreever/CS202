@@ -20,9 +20,9 @@ class category
 {
     public:
         category();
-        category(const char *category_name);
-        category(const category &to_copy);
+        category(const char *cata_name);
         category(const category &);
+        //category(const category &);
         ~category();
 
         bool add_category(char *cata_name);
@@ -39,17 +39,17 @@ class product
 {
     public:
         product();
-        product(const char *name);
+        product(const char *name, int location, int total);
         product(const product &);
         ~product();
 
-        bool add_product(char *name);
+        bool add_product(char *name, int location, int total);
         bool edit_product(product &to_edit);
         bool remove_product(product &to_remove);
 
     protected:
         char *product_name;
-        char *product_location;
+        int product_location;
         int total_product;
 
 };
