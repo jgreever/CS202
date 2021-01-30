@@ -36,7 +36,6 @@ class inventory
     public:
         inventory();
         inventory(const inventory &to_copy);
-        //inventory(const inventory &);
         ~inventory();
 
     protected:
@@ -51,13 +50,16 @@ class inventory
 class warehouse
 {
     public:
-        warehouse();
+        warehouse(int SIZE);
         ~warehouse();
         bool check_inventory(char *name);
         bool edit_inventory(char *name);
         bool set_shipping();
 
     protected:
+        //recursive function to delete our ARR and release any dynamically
+        //allocated memory in the process
+        void delete_arr(category *&wh_inventory);
         category **wh_inventory;
 };
 

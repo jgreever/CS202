@@ -3,6 +3,10 @@
 
 /** node.hpp
  * 
+ * Justin Greever
+ * CS202 - Program 1
+ * 01/09/2021
+ * 
  *
  *    // Product Inventory Class and ADT (class inventory) (class inv_node) //
  * 1. You will need one data structure to handle the products at a distribution
@@ -35,8 +39,7 @@ class inv_node : public category
 {
 	public:
 		inv_node(const char *a_category);
-		inv_node(const category &);
-		//~inv_node();
+		inv_node(const category &to_copy);
 
 		inv_node *&get_next();
 		void set_next(inv_node *to_set);
