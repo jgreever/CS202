@@ -39,6 +39,9 @@ warehouse::~warehouse()
 {
     for (int idx = 0; idx < SIZE; ++idx)
     {
-        
+           delete wh_inventory[idx];
+           wh_inventory[idx] = nullptr;
     }
+    delete wh_inventory;
+    wh_inventory = nullptr;
 };
