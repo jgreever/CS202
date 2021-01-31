@@ -53,13 +53,13 @@ public:
     warehouse(int SIZE);
     ~warehouse();
     bool check_inventory(char *name);
-    bool edit_inventory(char *name);
+    bool edit_inventory(char *name, category *&an_inventory);
     bool set_shipping();
 
 protected:
     //recursive function to delete our ARR and release any dynamically
     //allocated memory in the process
-    void delete_arr(category *&wh_inventory);
+    void delete_arr(category *&an_arr);
     category **wh_inventory;
 };
 

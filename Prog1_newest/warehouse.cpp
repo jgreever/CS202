@@ -55,6 +55,24 @@ warehouse::~warehouse()
 
 //Check inventory to ensure a product is in stock, if not
 //it will reorder more products.
-bool warehouse::check_inventory(char *name){
+bool warehouse::check_inventory(char *name)
+{
 
+};
+
+bool warehouse::edit_inventory(char *name, category *&an_inventory)
+{
+
+};
+
+bool warehouse::set_shipping()
+{
+
+};
+
+void warehouse::delete_arr(category *&an_arr)
+{
+    if (an_arr)
+        delete []an_arr;
+    an_arr = nullptr;
 };

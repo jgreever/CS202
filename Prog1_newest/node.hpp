@@ -60,17 +60,23 @@ class priority
 
 class pri_node : public priority
 {
+	public:
 
+	protected:
 };
 
 class tracking
 {
+	public:
 
+	protected:
 };
 
 class tra_node : public tracking
 {
+	public:
 
+	protected:
 };
 
 
