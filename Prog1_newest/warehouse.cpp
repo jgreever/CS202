@@ -14,34 +14,47 @@
  * 
  */
 
-
 //Inventory Class Functions
 //default constructor
-inventory::inventory() {};
+inventory::inventory() : a_product(nullptr), next(nullptr){};
 
 //Default copy constructor
-inventory::inventory(const inventory &to_copy) : a_product(to_copy.a_product),  next(nullptr) {};
+inventory::inventory(const inventory &to_copy) : a_product(to_copy.a_product), next(nullptr){};
 
 //default destructor
-inventory::~inventory() {};
-
+inventory::~inventory()
+{
+    if (this->a_product)
+        delete this->a_product;
+    if (this->next)
+        delete this->next;
+    this->a_product = nullptr;
+    this->next = nullptr;
+};
 
 //Warehouse Class Functions
 //default constructor
 warehouse::warehouse(int SIZE)
 {
-    wh_inventory = nullptr;
-
+    this->wh_inventory = nullptr;
+    for (int idx = 0; idx < SIZE; ++idx)
+        this->wh_inventory[idx] = nullptr;
 };
 
 //default destructor
-warehouse::~warehouse() 
+warehouse::~warehouse()
 {
     for (int idx = 0; idx < SIZE; ++idx)
     {
-           delete wh_inventory[idx];
-           wh_inventory[idx] = nullptr;
+        delete this->wh_inventory[idx];
+        this->wh_inventory[idx] = nullptr;
     }
-    delete wh_inventory;
-    wh_inventory = nullptr;
+    delete this->wh_inventory;
+    this->wh_inventory = nullptr;
+};
+
+//Check inventory to ensure a product is in stock, if not
+//it will reorder more products.
+bool warehouse::check_inventory(char *name){
+
 };

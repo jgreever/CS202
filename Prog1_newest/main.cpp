@@ -1,4 +1,4 @@
- /** main.cpp
+/** main.cpp
   *
   * Justin Greever
   * CS202 - Program 1
@@ -24,5 +24,5 @@
 int main(int argc, char *argv[])
 {
 
-	return 0;
+  return 0;
 }

@@ -20,44 +20,41 @@
 //and their related information.
 class category : public inventory
 {
-    public:
-        category();
-        category(const char *cata_name);
-        category(const category &to_copy);
-        ~category();
+public:
+    category();
+    category(const char *cata_name);
+    category(const category &to_copy);
+    ~category();
 
-        bool add_category(char *cata_name);
-        bool edit_category(category &to_edit);
-        bool remove_category(category &to_remove);
+    bool add_category(char *category_name);
+    bool edit_category(category *&to_edit, char *new_name);
+    bool remove_category(category *&to_remove);
 
-    protected:
-        char *cata_name;
-        inventory *an_inventory;
-
+protected:
+    char *cata_name;
+    inventory *an_inventory;
 };
-
 
 //Product class. This class contains an object that holds the products
 //name, where the product is located (which distribution center), and
 //the total amount of the product for inventory.
 class product
 {
-    public:
-        product();
-        product(const char *name, int location, int total);
-        product(const product &to_copy);
-        ~product();
+public:
+    product();
+    product(const char *name, int a_cagegory, int location, int total);
+    product(const product &to_copy);
+    ~product();
 
-        bool add_product(char *name, int location, int total);
-        bool edit_product(product &to_edit);
-        bool remove_product(product &to_remove);
+    bool add_product(char *name, int a_category, int location, int total);
+    bool edit_product(product &to_edit);
+    bool remove_product(product &to_remove);
 
-    protected:
-        char *product_name;
-        int product_location;
-        int total_product;
-
+protected:
+    char *product_name;
+    int product_category;
+    int product_location;
+    int total_product;
 };
-
 
 #endif

@@ -38,8 +38,10 @@
 class inv_node : public category
 {
 	public:
+		inv_node();
 		inv_node(const char *a_category);
 		inv_node(const category &to_copy);
+		~inv_node();
 
 		inv_node *&get_next();
 		void set_next(inv_node *to_set);
