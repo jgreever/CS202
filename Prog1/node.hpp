@@ -33,51 +33,37 @@
  *
  */
 
-#include "product.hpp"
+#include "warehouse.hpp"
 
-class inv_node : public category
+//Priority class node, this helps us to arrange items in an order
+//so we can retrieve them from the facility without doing a bunch
+//of traversal in the end.
+class priority : public product
 {
 	public:
-		inv_node();
-		inv_node(const char *a_category);
-		inv_node(const category &to_copy);
-		~inv_node();
+		priority();
+		~priority();
 
-		inv_node *&get_next();
-		void set_next(inv_node *to_set);
-
-	protected:
-		inv_node *next;
-};
-
-class priority
-{
-	public:
+		bool add_to_list(product &to_add);
+		bool remove_from_list(char *product_name);
+		bool clear_list();
 
 	protected:
-
+		product *an_item;
+		priority *next;
 };
 
-class pri_node : public priority
-{
-	public:
-
-	protected:
-};
-
+//This is our node for tracking where the package has been
+//and where it currently is at
 class tracking
 {
 	public:
 
 	protected:
-};
-
-class tra_node : public tracking
-{
-	public:
-
-	protected:
+		int tracking_stage;
+		tracking *next;
 };
 
 
 #endif
+

@@ -12,83 +12,63 @@
  * 
  */
 
-//Default constructor
-inv_node::inv_node() : next(nullptr) {};
-
-//Inventory Node class copy constructor
-inv_node::inv_node(const char *a_category)
-{
-    if (this->cata_name)
-    {
-        delete[] this->cata_name;
-        this->cata_name = nullptr;
-    }
-    this->cata_name = new char[strlen(a_category) + 1];
-    strcpy(this->cata_name, a_category);
-};
-
-//Inventory Copy Constructors
-inv_node::inv_node(const category &to_copy) : category(to_copy){};
-
-//Default destructor
-inv_node::~inv_node()
-{
-    if (this->next)
-        delete this->next;
-    this->next = nullptr;
-};
-
-//Get_Next, this bad boy will return the next ptr in the list.
-inv_node *&inv_node::get_next()
-{
-    return *&this->next;
-};
-
-//Set_Next, this will take the the current next ptr and point
-//it to the next node in the list
-void inv_node::set_next(inv_node *to_set)
-{
-    this->next = to_set;
-};
 
 //Category Class Functions
 //default constructor
-category::category() : cata_name(nullptr), an_inventory(nullptr){};
+category::category() : cate_name(nullptr), an_inventory(nullptr){};
 
 //constructor
 category::category(const char *category_name)
 {
-    this->cata_name = new char[strlen(category_name) + 1];
-    strcpy(this->cata_name, category_name);
+    this->cate_name = new char[strlen(category_name) + 1];
+    strcpy(this->cate_name, category_name);
 };
 
 //copy constructor
 category::category(const category &to_copy)
 {
-    this->cata_name = new char[strlen(to_copy.cata_name) + 1];
-    strcpy(this->cata_name, to_copy.cata_name);
+    this->cate_name = new char[strlen(to_copy.cate_name) + 1];
+    strcpy(this->cate_name, to_copy.cate_name);
     this->an_inventory = new inventory(*to_copy.an_inventory);
 };
 
 //destructor for the category class
 category::~category()
 {
-    if (this->cata_name)
-        delete[] this->cata_name;
-    this->cata_name = nullptr;
+    if (this->cate_name)
+        delete[] this->cate_name;
+    this->cate_name = nullptr;
     this->an_inventory = nullptr;
 };
 
 bool category::add_category(char *category_name)
 {
-    if (!this->cata_name)
+    if (!this->cate_name)
     {
-        this->cata_name = new char[strlen(category_name) + 1];
-        strcpy(this->cata_name, category_name);
+        this->cate_name = new char[strlen(category_name) + 1];
+        strcpy(this->cate_name, category_name);
         return true;
     }
     else
         return false;
+};
+
+//Wrapper to support check_stock function
+void category::check_stock_wrapper(char *category_name, char *product_name)
+{
+    if (!this->cate_name) return;
+    if (strcmp(this->cate_name, category_name) == 0)
+        check_stock(an_inventory, product_name);
+    else
+        check_stock(get_next(), product_name);
+
+};
+
+//Check_Stock: this allows us to check if an item is in stock, and if
+//so, where it is in stock at. If not in stock, check reorder process.
+bool category::check_stock(inventory *an_inventory, char *product_name)
+{
+    return true;
 };
 
 //Edit_Category, allows a user to edit the name of the category
@@ -98,8 +78,8 @@ bool category::edit_category(category *&to_edit, char *new_name)
         return false;
     else
     {
-        to_edit->cata_name = new char[strlen(new_name) + 1];
-        strcpy(to_edit->cata_name, new_name);
+        to_edit->cate_name = new char[strlen(new_name) + 1];
+        strcpy(to_edit->cate_name, new_name);
     }
     return true;
 };
@@ -115,8 +95,8 @@ bool category::remove_category(category *&to_remove)
         return false;
     else
     {
-        delete[] to_remove->cata_name;
-        to_remove->cata_name = nullptr;
+        delete[] to_remove->cate_name;
+        to_remove->cate_name = nullptr;
     }
     return true;
 };
@@ -171,6 +151,16 @@ bool product::add_product(char *name, int a_category, int location, int total)
         return false;
 };
 
+//Search_Product: This allows us to search if a product is in stock or not. If 
+//it is not in stock, check if reorder is needed.
+bool product::search_product(char *name)
+{
+    int found = strcmp(this->product_name, name);
+    if (found == 0)
+        return true;
+    return false;
+};
+
 //Edit a product. We will pass in teh entire object and determine what
 //needs to be edited: name, location, or amount of product.
 bool product::edit_product(product &to_edit)
@@ -186,3 +176,4 @@ bool product::remove_product(product &to_remove)
 
     return true;
 };
+

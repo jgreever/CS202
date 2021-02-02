@@ -1,155 +1,96 @@
+#include "node.hpp"
+
 /** warehouse.cpp
  * 
  * Justin Greever
  * CS202 - Program 1
  * 01/09/2021
  * 
- * The warehouse.cpp file contains the functions for the following classes:
- * -- class warehouse //Base class
- * -- class product //Derived from warehouse
- * -- class inventory //Derived from product
- * -- class inv_node //Derived from inventory
+ * In this file, we have the functions related to the Warehouse and Inventory
+ * classes. The warehouse is an ARR that contains a category node.  This keeps
+ * track of the products from various categories that reside at both of the
+ * distribution types (local and national). This should simplify tracking where
+ * items are at and reduce un-needed traversal and wasted operations.
  * 
  */
 
-#include "warehouse.hpp"
+//MAX size for our category array
+const static int SIZE = 10;
+//Inventory Class Functions
+//default constructor
+inventory::inventory() : a_product(nullptr), next(nullptr){};
 
-warehouse::warehouse() : wh_inventory(nullptr)
-{
+//Default copy constructor
+inventory::inventory(const inventory &to_copy) : a_product(to_copy.a_product), next(nullptr){};
 
-}
-
-warehouse::~warehouse()
-{
-    if(wh_inventory)
-        delete wh_inventory;
-    wh_inventory = nullptr;
-}
-
-void warehouse::check_inventory(char *name, char *product_num)
-{
-
-}
-
-void warehouse::edit_inventory(char *name, char *product_num, int choice)
-{
-
-}
-
-void warehouse::ship_local()
-{
-
-}
-
-void warehouse::ship_national()
-{
-
-}
-
-product::product()
-{
-
-}
-
-product::product(const char *name, char *number)
-{
-
-}
-
-product::~product()
-{
-
-}
-
-void product::add_product(char *name, char *number)
-{
-
-}
-
-void product::edit_product(product &aproduct)
-{
-
-}
-
-void product::add_tracking(int tracking, int current)
-{
-
-}
-
-void product::check_inventory(char *check_product, int search_what)
-{
-
-}
-
-inventory::inventory()
-{
-
-}
-
-inventory::inventory(const char *aname, const char *anumber)
-{
-
-}
-
+//default destructor
 inventory::~inventory()
 {
+    if (this->a_product)
+        delete this->a_product;
+    if (this->next)
+        delete this->next;
+    this->a_product = nullptr;
+    this->next = nullptr;
+};
 
-}
+//Get_Next: allows us to get the next node in the LLL
+inventory *&inventory::get_next()
+{
+    return *&this->next;
+};
 
-void inventory::search_inventory(char *aname, char *anumber)
+//Set_Next: allows us to set the next node in the LLL
+void inventory::set_next(inventory *to_set)
+{
+    this->next = to_set;
+};
+
+//Warehouse Class Functions
+//default constructor
+warehouse::warehouse(int SIZE)
+{
+    this->wh_inventory = nullptr;
+    for (int idx = 0; idx < SIZE; ++idx)
+        this->wh_inventory[idx] = nullptr;
+};
+
+//default destructor
+warehouse::~warehouse()
+{
+    for (int idx = 0; idx < SIZE; ++idx)
+    {
+        delete this->wh_inventory[idx];
+        this->wh_inventory[idx] = nullptr;
+    }
+    delete this->wh_inventory;
+    this->wh_inventory = nullptr;
+};
+
+//Check inventory to ensure a product is in stock, if not
+//it will reorder more products.
+bool warehouse::check_inventory(char *name)
 {
 
-}
+};
 
-void inventory::edit_inventory(product &aproduct)
+bool warehouse::edit_inventory(char *name, category *&an_inventory)
 {
 
-}
+};
 
-void inventory::add_inventory(char *aname, char *anumber)
+bool warehouse::set_shipping()
 {
+    if (product_location == 0)
+        shipping_type = 0;
+    if (product_location == 1)
+        shipping_type = 1;
+};
 
-}
-
-inv_node::inv_node() : t_items(0), next(nullptr)
+void warehouse::delete_arr(category *&an_arr)
 {
+    if (an_arr)
+        delete []an_arr;
+    an_arr = nullptr;
+};
 
-}
-
-inv_node::inv_node(const inv_node &to_copy)
-{
-
-}
-
-inv_node::inv_node(const inv_node &to_copy, inv_node *new_next)
-{
-    t_items = to_copy.t_items;
-    next = new_next;
-}
-
-inv_node::~inv_node()
-{
-    inv_node *temp;
-}
-
-inv_node *&inv_node::goNext()
-{
-    return next;
-}
-
-void inv_node::setNext(inv_node *&new_next)
-{
-    if (!new_next) next = nullptr;
-    else
-        next = new_next->next;
-}
-
-void inv_node::setData(int to_set)
-{
-    t_items = to_set;
-}
-
-int inv_node::getData() const
-{
-    return t_items;
-}

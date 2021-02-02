@@ -3,9 +3,9 @@
 #	A. Delis (ad@di.uoa.gr)
 #
 
-OBJS	= main.o distribution.o product.o warehouse.o
-SOURCE	= main.cpp distribution.cpp product.cpp warehouse.cpp
-HEADER	= distribution.hpp product.hpp warehouse.hpp node.hpp
+OBJS	= main.o product.o warehouse.o
+SOURCE	= main.cpp product.cpp warehouse.cpp node.cpp
+HEADER	= product.hpp warehouse.hpp node.hpp
 OUT	= Prog1
 CC	 = g++
 FLAGS	 = -g3 -c -Wall
