@@ -20,6 +20,11 @@ using namespace std;
 class calendar
 {
     public:
+        //Base class default constructor
+        calendar();
+
+        //Base class VIRTUAL destructor
+        virtual ~calendar();
 
     private:
 

@@ -15,6 +15,11 @@
 class events
 {
     public:
+        //Derived class default constructor
+        events();
+
+        //Derived class default destructor
+        ~events();
 
     private:
 

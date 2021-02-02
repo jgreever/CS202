@@ -15,6 +15,11 @@
 class projects
 {
     public:
+        //Derived class default constructor
+        projects();
+
+        //Derived class default destructor
+        ~projects();
 
     private:
 

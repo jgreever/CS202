@@ -15,6 +15,11 @@
 class phonecalls
 {
     public:
+        //Derived class default constructor
+        phonecalls();
+
+        //Derived class default destructor
+        ~phonecalls();
 
     private:
 
