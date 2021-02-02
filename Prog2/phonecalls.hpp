@@ -12,5 +12,14 @@
 
 #include "calendar.hpp"
 
+class phonecalls
+{
+    public:
+
+    private:
+
+    protected:
+
+};
 
 #endif

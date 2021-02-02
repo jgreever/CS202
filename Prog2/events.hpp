@@ -12,5 +12,14 @@
 
 #include "calendar.hpp"
 
+class events
+{
+    public:
+
+    private:
+
+    protected:
+
+};
 
 #endif

@@ -18,6 +18,30 @@
  * classes with similar functions, and one class that has at least ONE function
  * that is different than the rest so we can experience RTTI in action.
  * 
+ * Program #2 – Important C++ Syntax
+ * Remember to support the following constructs as necessary:
+ * 1. Every class should have a default constructor
+ * 2. Every class that manages dynamic memory must have a destructor
+ * 3. Every class that manages dynamic memory must have a copy constructor
+ * 4. If a derived class has a copy constructor, then it MUST have an
+ *    initialization list to cause the base class copy constructor to be invoked
+ * 5. Make sure to specify the base class’ destructor as virtual (but don’t make
+ *    it a pure virtual function)
+ * 6. It is expected that you will experience RTTI with dynamic_cast in this
+ *    assignment
+ *
+ * Program #2 – Data Structure Requirements
+ * The real beauty of dynamic binding is that we can have a data structure be a
+ * collection of different data types! There needs to be ONE data structure of
+ * base class pointers used to represent your weekly calendar. This data
+ * structure will keep track of all of the different items that are scheduled
+ * for the week, using upcasting. Luckily, with upcasting, a base class pointer
+ * can point to any object within the hierarchy.
+ * The data structure will be a doubly linked list of calendar days, where
+ * each day has a Linear linked list of base class pointers. Implementation of
+ * the data structure(s) requires full support of insert, removal, display,
+ * retrieval, and remove-all.
+ * 
  */
 
 #include "calendar.hpp"
