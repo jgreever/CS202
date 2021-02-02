@@ -12,7 +12,7 @@
 
 #include "calendar.hpp"
 
-class projects
+class projects : public entry
 {
     public:
         //Derived class default constructor
@@ -24,6 +24,7 @@ class projects
     private:
 
     protected:
+    projects *next;
 
 };
 

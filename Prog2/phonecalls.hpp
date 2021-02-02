@@ -12,7 +12,7 @@
 
 #include "calendar.hpp"
 
-class phonecalls
+class phonecalls : public entry
 {
     public:
         //Derived class default constructor
@@ -24,6 +24,7 @@ class phonecalls
     private:
 
     protected:
+        phonecalls *next;
 
 };
 
