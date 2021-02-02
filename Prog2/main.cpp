@@ -42,12 +42,21 @@
  * the data structure(s) requires full support of insert, removal, display,
  * retrieval, and remove-all.
  * 
+ * RTTI Example:
+ *   events * an_event = new calendar;
+ *   calendar * cal = dynamic_cast<calendar*>(events)
  */
 
 #include "calendar.hpp"
 
 int main(int argc, char **argv)
 {
+    calendar * mainCal = new calendar;
+
+
+
+    delete mainCal;
+    mainCal = nullptr;
 
     return 0;
 }
