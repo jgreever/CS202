@@ -8,24 +8,43 @@
  * 
  * This file contains our derived class, phonecalls.
  * 
+ * The phonecalls class will be the one using RTTI. It will have a
+ * function that allows the user to mask/unmask the phone number
+ * when it's being displayed (for privacy).
+ * 
  */
 
 #include "calendar.hpp"
 
 class phonecalls : public entry
 {
-    public:
-        //Derived class default constructor
-        phonecalls();
+public:
+    //Derived class default constructor
+    phonecalls();
 
-        //Derived class default destructor
-        ~phonecalls();
+    //Derived class decault copy constructor
+    phonecalls(const phonecalls &to_copy);
 
-    private:
+    //Derived class default destructor
+    ~phonecalls();
 
-    protected:
-        phonecalls *next;
+    //Self similar functions
+    bool add(char *name_to_call, char *number_to_call);
+    bool edit();
+    bool remove();
+    void display() const;
 
+    //RTTI function(s)
+    bool enable_privacy(int add_privacy);
+
+private:
+protected:
+    char *callee_name;
+    char *phone_number;
+
+    //to_mask: pass 0 for no, 1 for yes. Masking will make the  phone
+    //number appear as '***-***-****' when displaying the entry.
+    int to_mask;
 };
 
 #endif
