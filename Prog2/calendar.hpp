@@ -35,30 +35,23 @@ static const int TOTAL_DAYS = 365;
 //Forward declarations
 class week;
 class entry;
+class events;
+class phonecalls;
+class projects;
 
 //Calendar class. This is a pointer to the day class object. The day class
 //object keeps track of the weeks for us.
-//Since Calendar is the Base class, it also has a virtual destructor as to
-//not cause issues deleting allocated memory later on, and is required for
-//Derivation and RTTI to work properly.
 class calendar
 {
 public:
-    //Base class default constructor
+    //Class default constructor
     calendar();
 
-    //Base class default copy constructor
+    //Class default copy constructor
     calendar(const calendar &to_copy);
 
-    //Base class VIRTUAL destructor
-    virtual ~calendar();
-
-    //Self similar functions, VIRTUAL, arg1/arg2 are there just as
-    //placeholders since this function is virtual.
-    virtual bool add(char *arg1, char *arg2);
-    virtual bool edit();
-    virtual bool remove();
-    virtual void display() const;
+    //Class destructor
+    ~calendar();
 
     //ADT only functions
     bool insert(const calendar &to_insert);
@@ -85,11 +78,8 @@ public:
     //Default class constructor
     week();
 
-    //Default copy constructor
-    week(const week &);
-
     //Default copy constructor for an_entry
-    week(const entry &);
+    week(const entry &to_copy);
 
     //Default class destructor
     ~week();
@@ -113,11 +103,18 @@ protected:
 class entry
 {
 public:
-    //Default class constructor
+    //Default Base class constructor
     entry();
 
-    //Default class destructor
-    ~entry();
+    //Default VIRTUAL Base class destructor
+    virtual ~entry();
+
+    //Self similar functions, VIRTUAL, TODO: arg1/arg2 are there just as
+    //placeholders for the moment.
+    virtual bool add(char *arg1, char *arg2);
+    virtual bool edit(entry &to_edit);
+    virtual bool remove(entry *&to_remove);
+    virtual void display() const;
 
     //Set/Get next ptr
     entry *&go_next();
@@ -125,7 +122,9 @@ public:
 
 private:
 protected:
-    entry *an_entry;
+    events *an_event;
+    phonecalls *a_phonecall;
+    projects *a_project;
     entry *head;
     entry *next;
 };

@@ -18,29 +18,7 @@
 #include "calendar.hpp"
 
 //Forward Declarations
-class projects;
-
-//Simple node for our project class to hold an 'Items Needed' LLL
-class list : projects
-{
-public:
-    //Default list constructor
-    list();
-
-    //Default list copy constructor
-    list(const list &to_copy);
-
-    //Default list destructor
-    ~list();
-
-    list *&go_next();
-    void add_next(list *to_add);
-
-private:
-protected:
-    list *an_entry;
-    list *next;
-};
+class list;
 
 class projects : public entry
 {
@@ -65,6 +43,28 @@ protected:
     char *project_name;
     char *project_due_date;
     list *project_items;
+};
+
+//Simple node for our project class to hold an 'Items Needed' LLL
+class list : projects
+{
+public:
+    //Default list constructor
+    list();
+
+    //Default list copy constructor
+    list(const list &to_copy);
+
+    //Default list destructor
+    ~list();
+
+    list *&go_next();
+    void add_next(list *to_add);
+
+private:
+protected:
+    list *an_entry;
+    list *next;
 };
 
 #endif
