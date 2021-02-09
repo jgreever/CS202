@@ -37,7 +37,7 @@ public:
     calendar();
 
     //Class default copy constructor
-    calendar(const entry &to_copy);
+    calendar(const calendar &) = default;
 
     //Class destructor
     ~calendar();
@@ -47,22 +47,21 @@ public:
     calendar *&go_prev();
     bool set_next(calendar *next_node);
     bool set_prev(calendar *prev_node);
-    bool insert(const calendar &to_insert);
+    bool add(const entry &to_insert);
     bool remove(calendar *&to_remove);
-    void display_cal() const;
-    bool retrieve(const calendar &to_retrieve);
+    void display() const;
+    bool search(const calendar &to_search);
     bool remove_all();
 
     ;
 
 private:
 protected:
-    void display_cal(calendar *to_display);
     void remove_all(calendar *&to_remove);
-    entry *a_week;
-    calendar *head;
-    calendar *tail;
     calendar *prev;
+    calendar *head;
+    entry *day;
+    calendar *tail;
     calendar *next;
 };
 
@@ -90,6 +89,7 @@ public:
 
 private:
 protected:
+    //int day; //0 = new day, 1-7 = Sunday - Saturday
     entry *an_entry;
     entry *next;
 };

@@ -63,7 +63,7 @@ public:
 
 private:
 protected:
-    list *an_entry;
+    list *needed;
     list *next;
 };
 

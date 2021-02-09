@@ -52,14 +52,30 @@
  * 
  */
 
-#include "calendar.hpp"
+#include "events.hpp"
+#include "phonecalls.hpp"
+#include "projects.hpp"
 
 int main(int argc, char **argv)
 {
     calendar *mainCal = new calendar;
+    entry *mainEntry = new entry;
+
+    char *arg1 = new char[strlen("Test Arg 1") + 1];
+    char *arg2 = new char[strlen("Test Arg 2") + 1];
+    strcpy(arg1, "Test Arg 1");
+    strcpy(arg2, "Test Arg 2");
+
+    mainCal->add(*mainEntry);
 
     delete mainCal;
     mainCal = nullptr;
+    delete mainEntry;
+    mainEntry = nullptr;
+    delete[] arg1;
+    arg1 = nullptr;
+    delete[] arg2;
+    arg2 = nullptr;
 
     return 0;
 }

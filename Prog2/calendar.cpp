@@ -12,44 +12,85 @@
 
 //Calendar class functions
 //Calendar class default constructor
-calendar::calendar() : a_week(nullptr), head(nullptr), tail(nullptr), prev(nullptr), next(nullptr)
+calendar::calendar() : prev(nullptr), head(nullptr), day(nullptr), tail(nullptr), next(nullptr)
 {
 }
 
+/*
 //Calendar class default copy constructor
-calendar::calendar(const entry &to_copy)
+calendar::calendar(const calendar &to_copy)
 {
-    if (!this->a_week)
-    {
-        this->a_week = new entry;
-        this->a_week = nullptr;
-    }
-    *this->a_week = to_copy;
 }
+*/
 
 //Calendar class default destructor
 calendar::~calendar()
 {
-    if (this->a_week)
-        delete this->a_week;
-    this->a_week = nullptr;
-    head = tail = prev = next = nullptr;
+    if (this->day)
+        delete this->day;
+    if (this->head)
+        delete this->head;
+    this->head = nullptr;
+    this->day = nullptr;
+    this->tail = nullptr;
+    this->prev = this->tail = this->next = nullptr;
 }
 
-//Calendar class insert function
-bool calendar::insert(const calendar &to_insert)
+//Calendar class add function
+bool calendar::add(const entry &to_insert)
 {
-    this->a_week = new entry;
-    this->a_week = to_insert.a_week;
+    if (!head) //no list, create a new one
+    {
+        head = new calendar;
+        head->day = new entry;
+        head->prev = nullptr;
+        head->next = nullptr;
+        *head->day = to_insert;
+        tail = head;
+        return true;
+    }
+    else if (head == tail) //only one node, create a new one and link all 3
+    {
+        calendar *temp = new calendar;
+        head->next = temp;
+        temp->prev = head;
+        temp->next = tail;
+        tail->prev = temp;
+        *temp->day = to_insert;
+        return true;
+    }
+    else
+    {
+        calendar *temp = new calendar;
+        calendar *curr = new calendar;
+        curr = head;
+        if (curr->next == tail)
+        {
+            curr->next = temp;
+            temp->next = curr;
+            temp->next = tail;
+            tail->prev = temp;
+            *temp->day = to_insert;
+            return true;
+        }
+        else
+            curr = curr->next;
+    }
+    return false;
 }
 
-//Calendar class removal function
+//Calendar class remove function
 bool calendar::remove(calendar *&to_remove)
 {
 }
 
 //Calendar class display calendar function
-void calendar::display_cal() const
+void calendar::display() const
+{
+}
+
+//Calendar class search function
+bool search(const calendar &to_search)
 {
 }
 
@@ -60,13 +101,26 @@ bool calendar::remove_all()
 
 //Entry class functions
 //Entry class default constructor
-entry::entry()
+entry::entry() : an_entry(nullptr), next(nullptr)
 {
 }
 
 //Entry class VIRTUAL default destructor
 entry::~entry()
 {
+    if (this->an_entry)
+    {
+        delete an_entry;
+        an_entry = nullptr;
+    }
+    /*
+    if (this->day)
+    {
+        delete day;
+        day = nullptr;
+    }
+    */
+    next = nullptr;
 }
 
 //Entry class add new entry function
