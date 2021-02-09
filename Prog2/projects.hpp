@@ -59,7 +59,7 @@ public:
     ~list();
 
     list *&go_next();
-    void add_next(list *to_add);
+    void set_next(list *to_add);
 
 private:
 protected:

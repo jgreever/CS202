@@ -12,19 +12,19 @@
 
 //Calendar class functions
 //Calendar class default constructor
-calendar::calendar() : a_week(nullptr)
+calendar::calendar() : a_week(nullptr), head(nullptr), tail(nullptr), prev(nullptr), next(nullptr)
 {
 }
 
 //Calendar class default copy constructor
-calendar::calendar(const calendar &to_copy)
+calendar::calendar(const entry &to_copy)
 {
     if (!this->a_week)
     {
-        this->a_week = new week;
+        this->a_week = new entry;
         this->a_week = nullptr;
     }
-    this->a_week = to_copy.a_week;
+    *this->a_week = to_copy;
 }
 
 //Calendar class default destructor
@@ -33,11 +33,14 @@ calendar::~calendar()
     if (this->a_week)
         delete this->a_week;
     this->a_week = nullptr;
+    head = tail = prev = next = nullptr;
 }
 
 //Calendar class insert function
 bool calendar::insert(const calendar &to_insert)
 {
+    this->a_week = new entry;
+    this->a_week = to_insert.a_week;
 }
 
 //Calendar class removal function
@@ -54,43 +57,6 @@ void calendar::display_cal() const
 bool calendar::remove_all()
 {
 }
-
-//Week class functions
-//Week class default constructor
-week::week()
-{
-}
-
-//Week class default copy constructor
-week::week(const entry &to_copy)
-{
-}
-
-//Week class default destructor
-week::~week()
-{
-}
-
-//Week class go to the previous node
-week *&week::go_prev()
-{
-}
-
-//Week class go to the next node
-week *&week::go_next()
-{
-}
-
-//Week class sets prev pointer
-void week::set_prev(week *prev_ptr)
-{
-}
-
-//Week class sets next pointer
-void week::set_next(week *next_ptr)
-{
-}
-
 
 //Entry class functions
 //Entry class default constructor
@@ -129,6 +95,6 @@ entry *&entry::go_next()
 }
 
 //Entry class add the next entry
-void entry::add_next(entry *next_entry)
+void entry::set_next(entry *next_entry)
 {
 }
