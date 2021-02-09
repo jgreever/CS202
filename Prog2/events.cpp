@@ -9,3 +9,35 @@
  */
 
 #include "events.hpp"
+
+events::events() : event_name(nullptr), event_time(nullptr)
+{
+}
+
+events::events(char *arg1, char *arg2) : event_name(arg1), event_time(arg2)
+{
+}
+
+events::events(const events &to_copy) : entry(to_copy)
+{
+}
+
+events::~events()
+{
+}
+
+bool events::add(char *an_event, char *time_for_event)
+{
+}
+
+bool events::edit()
+{
+}
+
+bool events::remove()
+{
+}
+
+void events::display() const
+{
+}

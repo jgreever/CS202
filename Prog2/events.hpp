@@ -25,6 +25,7 @@ public:
     events();
 
     //Derived class default copy constructor
+    events(char *arg1, char *arg2);
     events(const events &to_copy);
 
     //Derived class default destructor
