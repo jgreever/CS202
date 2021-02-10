@@ -36,6 +36,52 @@ calendar::~calendar()
     this->prev = this->tail = this->next = nullptr;
 }
 
+//Calendar class build dll wrapper function
+bool calendar::build_dll()
+{
+    //head = new calendar;
+    //tail = new calendar;
+    build_dll(head, tail, 0);
+    return true;
+}
+
+//Calendar class build dll function
+bool calendar::build_dll(calendar *&head, calendar *&tail, int *count)
+{
+    if (*count == 7)
+        return true;
+    calendar *temp = new calendar;
+    head->next = temp;
+    temp->prev = head;
+    temp->next = tail;
+    tail->prev = temp;
+    ++count;
+    build_dll(head->next, tail, count);
+    return true;
+}
+
+//Calendar class go_next function
+calendar *&calendar::go_next()
+{
+    return *&next;
+}
+
+//Calendar class go_prev function
+calendar *&calendar::go_prev()
+{
+    return *&prev;
+}
+
+//Calendar class set_next function
+bool calendar::set_next(calendar *next_node)
+{
+}
+
+//Calendar class set_prev function
+bool calendar::set_prev(calendar *prev_node)
+{
+}
+
 //Calendar class add function
 bool calendar::add(const entry &to_insert)
 {

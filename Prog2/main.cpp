@@ -58,20 +58,22 @@
 
 int main(int argc, char **argv)
 {
-    calendar *mainCal = new calendar;
-    entry *mainEntry = new entry;
+    calendar mainCal;
+    entry mainEntry;
+
+    mainCal.build_dll();
 
     char *arg1 = new char[strlen("Test Arg 1") + 1];
     char *arg2 = new char[strlen("Test Arg 2") + 1];
     strcpy(arg1, "Test Arg 1");
     strcpy(arg2, "Test Arg 2");
 
-    mainCal->add(*mainEntry);
+    mainCal.add(mainEntry);
 
-    delete mainCal;
-    mainCal = nullptr;
-    delete mainEntry;
-    mainEntry = nullptr;
+    //delete mainCal;
+    //mainCal = nullptr;
+    //delete mainEntry;
+    //mainEntry = nullptr;
     delete[] arg1;
     arg1 = nullptr;
     delete[] arg2;

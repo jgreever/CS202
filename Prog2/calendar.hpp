@@ -37,12 +37,14 @@ public:
     calendar();
 
     //Class default copy constructor
-    calendar(const calendar &) = default;
+    //calendar(const calendar &) = default;
 
     //Class destructor
     ~calendar();
 
     //ADT only functions
+    bool build_dll(); //wrapper function
+    bool build_dll(calendar *&head, calendar *&tail, int *count);
     calendar *&go_next();
     calendar *&go_prev();
     bool set_next(calendar *next_node);
@@ -52,8 +54,6 @@ public:
     void display() const;
     bool search(const calendar &to_search);
     bool remove_all();
-
-    ;
 
 private:
 protected:
