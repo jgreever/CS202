@@ -14,10 +14,29 @@
 phonecalls::phonecalls() : callee_name(nullptr), phone_number(nullptr) {}
 
 //Phonecalls class default copy constructor
-phonecalls::phonecalls(const phonecalls &to_copy) : entry(to_copy) {}
+phonecalls::phonecalls(char *arg1, char *arg2) : callee_name(arg1), phone_number(arg2)
+{
+    this->callee_name = new char[strlen(arg1) + 1];
+    strcpy(this->callee_name, arg1);
+    this->phone_number = new char[strlen(arg2) + 1];
+    strcpy(this->phone_number, arg2);
+}
+
+//Phonecalls class default copy constructor
+phonecalls::phonecalls(const phonecalls &to_copy) : entry(to_copy)
+{
+    this->an_entry = new phonecalls(to_copy);
+}
 
 //Phonecalls class default destructor
-phonecalls::~phonecalls() {}
+phonecalls::~phonecalls()
+{
+    if (callee_name)
+        delete[] callee_name;
+    if (phone_number)
+        delete[] phone_number;
+    callee_name = phone_number = nullptr;
+}
 
 //Phonecalls class add function
 bool phonecalls::add(char *arg1, char *arg2) {}

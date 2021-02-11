@@ -22,6 +22,9 @@ public:
     //Derived class default constructor
     phonecalls();
 
+    //Derived class default copy constructor
+    phonecalls(char *arg1, char *arg2);
+
     //Derived class decault copy constructor
     phonecalls(const phonecalls &to_copy);
 

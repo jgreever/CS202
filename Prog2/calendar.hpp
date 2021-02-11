@@ -59,7 +59,6 @@ protected:
     calendar *prev;
     calendar *head;
     entry *day;
-    calendar *tail;
     calendar *next;
 };
 

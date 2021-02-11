@@ -12,14 +12,13 @@
 
 //Calendar class functions
 //Calendar class default constructor
-calendar::calendar() : prev(nullptr), head(nullptr), day(nullptr), tail(nullptr), next(nullptr)
+calendar::calendar() : prev(nullptr), head(nullptr), day(nullptr), next(nullptr)
 {
 }
 
 //Calendar class default copy constructor
-calendar::calendar(const calendar &to_copy) : prev(to_copy.prev), head(to_copy.head), day(to_copy.day), tail(to_copy.tail), next(to_copy.next)
+calendar::calendar(const calendar &to_copy) : prev(to_copy.prev), head(to_copy.head), day(to_copy.day), next(to_copy.next)
 {
-
 }
 
 //Calendar class default destructor
@@ -29,9 +28,7 @@ calendar::~calendar()
         delete this->day;
     if (this->head)
         delete this->head;
-    //this->head = nullptr;
-    //this->day = nullptr;
-    this->head = this->tail = nullptr;
+    this->head = nullptr;
     this->prev = this->next = nullptr;
 }
 
@@ -68,21 +65,16 @@ bool calendar::add(const entry &to_insert)
     if (!head) //no list, create a new one
     {
         head = new calendar;
-        head->day = nullptr;
+        head->set_next(head);
         head->prev = nullptr;
-        head->next = nullptr;
-        //*head->day = to_insert;
-        tail = head;
         return true;
     }
-    else if (head == tail) //only one node, create a new one and link all 3
+    else if (!head->next) //only one node, create a new one and link them
     {
         calendar *temp = new calendar;
-        head->next = temp;
-        temp->prev = head;
-        temp->next = tail;
-        tail->prev = temp;
-        //*temp->day = to_insert;
+        set_prev(head);
+        set_next(head);
+
         return true;
     }
     else
@@ -90,13 +82,10 @@ bool calendar::add(const entry &to_insert)
         calendar *temp = new calendar;
         calendar *curr = new calendar;
         curr = head;
-        if (curr->next == tail)
+        if (!curr->next)
         {
             curr->next = temp;
             temp->next = curr;
-            temp->next = tail;
-            tail->prev = temp;
-            *temp->day = to_insert;
             return true;
         }
         else
@@ -148,7 +137,13 @@ bool entry::remove(entry &to_remove) {}
 void entry::display() const {}
 
 //Entry class go to the next pointer
-entry *&entry::go_next() {}
+entry *&entry::go_next()
+{
+    return *&next;
+}
 
 //Entry class add the next entry
-void entry::set_next(entry *next_entry) {}
+void entry::set_next(entry *next_entry)
+{
+    this->next = next_entry;
+}

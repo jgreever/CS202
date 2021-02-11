@@ -62,9 +62,17 @@ int main(int argc, char **argv)
     entry *mainEvent = new events;
     entry *mainPhone = new phonecalls;
     entry *mainProject = new projects;
-    //events mainEvent;
-    //phonecalls mainCall;
-    //projects mainProject;
+    char arg1[101];
+    char arg2[101];
+
+    cout << "\nEnter the event name: ";
+    cin.get(arg1, 100, '\n');
+    cin.ignore(100, '\n');
+    cout << "\nEnter the event time: ";
+    cin.get(arg2, 100, '\n');
+    cin.ignore(100, '\n');
+
+    mainEvent->add(arg1, arg2);
 
     mainCal->add(*mainEvent);
 
