@@ -33,9 +33,9 @@ public:
     ~projects();
 
     //Self similar functions
-    bool add(char *project_to_add, char *due_date);
-    bool edit();
-    bool remove();
+    bool add(char *arg1, char *arg2);
+    bool edit(entry &to_edit);
+    bool remove(entry &to_remove);
     void display() const;
 
 private:
@@ -58,6 +58,13 @@ public:
     //Default list destructor
     ~list();
 
+    //Self similar functions
+    bool add(list *to_add);
+    bool edit(list *&to_edit);
+    bool remove(list *&to_remove);
+    void display() const;
+
+    //ADT functions
     list *&go_next();
     void set_next(list *to_add);
 

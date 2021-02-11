@@ -30,11 +30,11 @@ bool events::add(char *an_event, char *time_for_event)
 {
 }
 
-bool events::edit()
+bool events::edit(entry &to_edit)
 {
 }
 
-bool events::remove()
+bool events::remove(entry &to_remove)
 {
 }
 

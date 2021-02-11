@@ -37,27 +37,25 @@ public:
     calendar();
 
     //Class default copy constructor
-    //calendar(const calendar &) = default;
+    calendar(const calendar &);
 
     //Class destructor
     ~calendar();
 
     //ADT only functions
-    bool build_dll(); //wrapper function
-    bool build_dll(calendar *&head, calendar *&tail, int *count);
     calendar *&go_next();
     calendar *&go_prev();
     bool set_next(calendar *next_node);
     bool set_prev(calendar *prev_node);
     bool add(const entry &to_insert);
-    bool remove(calendar *&to_remove);
+    bool remove(calendar &to_remove);
     void display() const;
     bool search(const calendar &to_search);
     bool remove_all();
 
 private:
 protected:
-    void remove_all(calendar *&to_remove);
+    void remove_all(calendar &to_remove);
     calendar *prev;
     calendar *head;
     entry *day;
@@ -73,15 +71,18 @@ public:
     //Default Base class constructor
     entry();
 
+    //Default Base class copy constructor
+    entry(const entry &to_copy);
+
     //Default VIRTUAL Base class destructor
     virtual ~entry();
 
     //Self similar functions, VIRTUAL, TODO: arg1/arg2 are there just as
     //placeholders for the moment.
-    virtual bool add(char *arg1, char *arg2);
-    virtual bool edit(entry &to_edit);
-    virtual bool remove(entry *&to_remove);
-    virtual void display() const;
+    virtual bool add(char *arg1, char *arg2) = 0;
+    virtual bool edit(entry &to_edit) = 0;
+    virtual bool remove(entry &to_remove) = 0;
+    virtual void display() const = 0;
 
     //Set/Get next ptr
     entry *&go_next();

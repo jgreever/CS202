@@ -32,9 +32,9 @@ public:
     ~events();
 
     //Self similar functions
-    bool add(char *an_event, char *time_for_event);
-    bool edit();
-    bool remove();
+    bool add(char *arg1, char *arg2);
+    bool edit(entry &to_edit);
+    bool remove(entry &to_remove);
     void display() const;
 
 private:
