@@ -27,17 +27,17 @@ events::events(const events &to_copy) : entry(to_copy)
 
 events::~events()
 {
-    if (event_name)
-        delete []event_name;
-    if (event_time)
-        delete[] event_time;
-    event_name = event_time = nullptr;
+    if (this->event_name)
+        delete[] this->event_name;
+    if (this->event_time)
+        delete[] this->event_time;
+    this->event_name = this->event_time = nullptr;
 }
 
 bool events::add(char *an_event, char *time_for_event)
 {
     this->an_entry = new events(an_event, time_for_event);
-    set_next(this);
+    this->set_next(this);
     return true;
 }
 
@@ -48,9 +48,9 @@ bool events::edit(entry &to_edit)
 
 bool events::remove(entry &to_remove)
 {
-    delete[] event_name;
-    delete[] event_time;
-    event_name = event_time = nullptr;
+    delete[] this->event_name;
+    delete[] this->event_time;
+    this->event_name = this->event_time = nullptr;
 }
 
 void events::display() const
