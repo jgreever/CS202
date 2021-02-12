@@ -33,6 +33,7 @@ public:
     ~projects();
 
     //Self similar functions
+    bool add(entry *to_add);
     bool add(char *arg1, char *arg2);
     bool edit(entry &to_edit);
     bool remove(entry &to_remove);
@@ -59,10 +60,10 @@ public:
     ~list();
 
     //Self similar functions
-    bool add(list *to_add);
-    bool edit(list *&to_edit);
-    bool remove(list *&to_remove);
-    void display() const;
+    bool add_list(list *to_add);
+    bool edit_list(list *&to_edit);
+    bool remove_list(list *&to_remove);
+    void display_list() const;
 
     //ADT functions
     list *&go_next();

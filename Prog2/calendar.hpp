@@ -27,6 +27,9 @@ using namespace std;
 
 //Forward declarations
 class entry;
+class events;
+class phonecalls;
+class projects;
 
 //Calendar class. This is a pointer to the day class object. The day class
 //object keeps track of the weeks for us.
@@ -45,12 +48,12 @@ public:
     //ADT only functions
     calendar *&go_next();
     calendar *&go_prev();
-    bool set_next(calendar *next_node);
-    bool set_prev(calendar *prev_node);
+    bool set_next(calendar *&next_node);
+    bool set_prev(calendar *&prev_node);
     bool add(const entry &to_insert);
     bool remove(calendar &to_remove);
     void display() const;
-    bool search(const calendar &to_search);
+    bool search(const calendar *to_search);
     bool remove_all();
 
 private:
@@ -78,18 +81,21 @@ public:
 
     //Self similar functions, VIRTUAL, TODO: arg1/arg2 are there just as
     //placeholders for the moment.
-    virtual bool add(char *arg1, char *arg2) = 0;
-    virtual bool edit(entry &to_edit) = 0;
-    virtual bool remove(entry &to_remove) = 0;
-    virtual void display() const = 0;
+    virtual bool add(entry *to_add);
+    virtual bool add(char *arg1, char *arg2);
+    virtual bool edit(entry &to_edit);
+    virtual bool remove(entry &to_remove);
+    virtual void display() const;
 
     //Set/Get next ptr
     entry *&go_next();
-    void set_next(entry *next_entry);
+    void set_next(entry *&next_entry);
 
 private:
 protected:
-    //int day; //0 = new day, 1-7 = Sunday - Saturday
+    events *anEvent;
+    phonecalls *aPhoneCall;
+    projects *aProject;
     entry *an_entry;
     entry *next;
 };

@@ -59,9 +59,12 @@
 int main(int argc, char **argv)
 {
     calendar *mainCal = new calendar;
-    entry *mainEvent = new events;
-    entry *mainPhone = new phonecalls;
-    entry *mainProject = new projects;
+    events mainEvent;
+    phonecalls mainPhone;
+    projects mainProject;
+    entry *an_event = &mainEvent;
+    entry *a_phone = &mainPhone;
+    entry *a_project = &mainProject;
     char arg1[101];
     char arg2[101];
 
@@ -72,14 +75,10 @@ int main(int argc, char **argv)
     cin.get(arg2, 100, '\n');
     cin.ignore(100, '\n');
 
-    mainEvent->add(arg1, arg2);
-
-    mainCal->add(*mainEvent);
-
-    delete mainProject;
-    delete mainPhone;
-    delete mainEvent;
-    delete mainCal;
+    an_event->add(arg1, arg2);
+    //mainEvent.display();
+    mainCal->add(*an_event);
+    mainCal->display();
 
     return 0;
 }

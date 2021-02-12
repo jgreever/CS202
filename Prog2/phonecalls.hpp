@@ -32,6 +32,7 @@ public:
     ~phonecalls();
 
     //Self similar functions
+    bool add(entry *to_add);
     bool add(char *arg1, char *arg2);
     bool edit(entry &to_edit);
     bool remove(entry &to_remove);
@@ -41,13 +42,14 @@ public:
     bool enable_privacy(int add_privacy);
 
 private:
+
 protected:
     char *callee_name;
     char *phone_number;
-
     //to_mask: pass 0 for no, 1 for yes. Masking will make the  phone
     //number appear as '***-***-****' when displaying the entry.
     int to_mask;
+
 };
 
 #endif
