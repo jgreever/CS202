@@ -13,13 +13,13 @@
 //Phonecalls class default constructor
 phonecalls::phonecalls() : callee_name(nullptr), phone_number(nullptr)
 {
-    cout << "\nPhonecalls class constructor called";
+    //cout << "\nPhonecalls class constructor called";
 }
 
 //Phonecalls class default copy constructor
 phonecalls::phonecalls(char *arg1, char *arg2) : callee_name(arg1), phone_number(arg2)
 {
-    cout << "\nPhonecalls class copy constructor called (char, char)";
+    //cout << "\nPhonecalls class copy constructor called (char, char)";
     this->callee_name = new char[strlen(arg1) + 1];
     strcpy(this->callee_name, arg1);
     this->phone_number = new char[strlen(arg2) + 1];
@@ -27,16 +27,16 @@ phonecalls::phonecalls(char *arg1, char *arg2) : callee_name(arg1), phone_number
 }
 
 //Phonecalls class default copy constructor
-phonecalls::phonecalls(const phonecalls &to_copy) : entry(to_copy)
+phonecalls::phonecalls(const entry &to_copy) : entry(to_copy)
 {
-    cout << "\nPhonecalls class copy constructor called (obj)";
+    //cout << "\nPhonecalls class copy constructor called (obj)";
     *this = to_copy;
 }
 
 //Phonecalls class default destructor
 phonecalls::~phonecalls()
 {
-    cout << "\nPhonecalls class destructor called";
+    //cout << "\nPhonecalls class destructor called";
     if (callee_name)
         delete[] callee_name;
     if (phone_number)
@@ -44,6 +44,10 @@ phonecalls::~phonecalls()
     callee_name = phone_number = nullptr;
 }
 
+entry *phonecalls::clone() const
+{
+    return new phonecalls(static_cast<entry const &>(*this));
+}
 
 //Phonecalls class add function
 bool phonecalls::add(entry *to_add)

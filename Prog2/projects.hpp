@@ -27,10 +27,13 @@ public:
     projects();
 
     //Derived class default copy constructor
-    projects(const projects &to_copy);
+    projects(const entry &to_copy);
 
     //Derived class default destructor
     ~projects();
+
+    //Deep copy object
+    entry *clone() const;
 
     //Self similar functions
     bool add(entry *to_add);

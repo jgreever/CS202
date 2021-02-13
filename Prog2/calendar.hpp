@@ -30,6 +30,7 @@ class entry;
 class events;
 class phonecalls;
 class projects;
+class node;
 
 //Calendar class. This is a pointer to the day class object. The day class
 //object keeps track of the weeks for us.
@@ -40,29 +41,50 @@ public:
     calendar();
 
     //Class default copy constructor
-    calendar(const calendar &);
+    calendar(entry &to_copy);
+    //Class default copy constructor
+    calendar(calendar &to_copy);
 
     //Class destructor
     ~calendar();
 
     //ADT only functions
-    calendar *&go_next();
-    calendar *&go_prev();
-    bool set_next(calendar *&next_node);
-    bool set_prev(calendar *&prev_node);
-    bool add(const entry &to_insert);
-    bool remove(calendar &to_remove);
+    bool add(entry *to_insert);
+    bool remove(entry &to_remove);
     void display() const;
-    bool search(const calendar *to_search);
+    bool search(const entry *to_search);
     bool remove_all();
 
 private:
 protected:
-    void remove_all(calendar &to_remove);
-    calendar *prev;
-    calendar *head;
+    void display(node *next) const;
+    void remove_all(entry &to_remove);
+    node *head;
+    node *tail;
+    //node *an_entry;
+    int day_num;
     entry *day;
-    calendar *next;
+};
+
+//Node class for the calendar class. This is a DLL with a base
+//class ptr to a LLL of things
+class node : public calendar
+{
+public:
+    node();
+    node(entry &to_copy);
+    //node(const calendar &to_copy);
+    node *&go_next();
+    node *&go_prev();
+    void set_next(node *next_node);
+    void set_prev(node *prev_node);
+
+private:
+protected:
+    node *prev;
+    //int day_num;
+    //entry *day;
+    node *next;
 };
 
 //Entry class. This class has a ptr to an entry (either an event,
@@ -74,10 +96,16 @@ public:
     entry();
 
     //Default Base class copy constructor
+    entry(char *arg1, char *arg2);
+
+    //Default Base class copy constructor
     entry(const entry &to_copy);
 
     //Default VIRTUAL Base class destructor
     virtual ~entry();
+
+    //Pure virtual function
+    virtual entry *clone() const;
 
     //Self similar functions, VIRTUAL, TODO: arg1/arg2 are there just as
     //placeholders for the moment.
@@ -89,13 +117,15 @@ public:
 
     //Set/Get next ptr
     entry *&go_next();
-    void set_next(entry *&next_entry);
+    void set_next(entry *next_entry);
 
 private:
 protected:
-    events *anEvent;
-    phonecalls *aPhoneCall;
-    projects *aProject;
+    //events *anEvent;
+    //phonecalls *aPhoneCall;
+    //projects *aProject;
+    char *temp1;
+    char *temp2;
     entry *an_entry;
     entry *next;
 };

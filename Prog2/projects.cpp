@@ -13,20 +13,25 @@
 //Projects class default constructor
 projects::projects() : project_name(nullptr), project_due_date(nullptr), project_items(nullptr)
 {
-    cout << "\nProjects class constructor called";
+    //cout << "\nProjects class constructor called";
 }
 
 //Projects class default copy constructor
-projects::projects(const projects &to_copy) : entry(to_copy)
+projects::projects(const entry &to_copy) : entry(to_copy)
 {
-    cout << "\nProjects class copy constructor called";
+    //cout << "\nProjects class copy constructor called";
     *this = to_copy;
 }
 
 //Projects class default destructor
 projects::~projects()
 {
-    cout << "\nProjects class destructor called";
+    //cout << "\nProjects class destructor called";
+}
+
+entry *projects::clone() const
+{
+    return new projects(static_cast<entry const &>(*this));
 }
 
 //Projects class add function

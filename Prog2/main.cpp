@@ -58,7 +58,7 @@
 
 int main(int argc, char **argv)
 {
-    calendar *mainCal = new calendar;
+    calendar mainCal;
     events mainEvent;
     phonecalls mainPhone;
     projects mainProject;
@@ -76,9 +76,19 @@ int main(int argc, char **argv)
     cin.ignore(100, '\n');
 
     an_event->add(arg1, arg2);
-    //mainEvent.display();
-    mainCal->add(*an_event);
-    mainCal->display();
+
+    mainCal.add(an_event);
+    mainCal.display();
+
+    cout << "\nAdding a second entry...\n";
+
+    char arg3[] = "Pizza Time";
+    char arg4[] = "12:37 PM";
+
+    an_event->add(arg3, arg4);
+
+    mainCal.add(an_event);
+    mainCal.display();
 
     return 0;
 }
