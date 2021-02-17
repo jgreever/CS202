@@ -44,8 +44,8 @@ public:
 private:
 
 protected:
-    char *callee_name;
-    char *phone_number;
+    //char *callee_name;
+    //char *phone_number;
     //to_mask: pass 0 for no, 1 for yes. Masking will make the  phone
     //number appear as '***-***-****' when displaying the entry.
     int to_mask;

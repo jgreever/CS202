@@ -68,27 +68,84 @@ int main(int argc, char **argv)
     char arg1[101];
     char arg2[101];
 
-    cout << "\nEnter the event name: ";
-    cin.get(arg1, 100, '\n');
-    cin.ignore(100, '\n');
-    cout << "\nEnter the event time: ";
-    cin.get(arg2, 100, '\n');
-    cin.ignore(100, '\n');
 
-    an_event->add(arg1, arg2);
+    int choice = 1;
 
-    mainCal.add(an_event);
-    mainCal.display();
+    while (choice != 0)
+    {
+        cout << "\n********************\n";
+        cout << " Main Menu\n";
+        cout << " --------------------\n";
+        cout << "1. Add an event\n";
+        cout << "2. Add a project\n";
+        cout << "3. Add a phonecall\n";
+        cout << "4. Display calendar\n";
+        cout << "0. Exit the program\n";
+        cout << "********************\n";
+        cin >> choice;
+        cin.ignore(100, '\n');
 
-    cout << "\nAdding a second entry...\n";
+        switch (choice)
+        {
+        case 1:
+            cout << "\nEnter the event name: ";
+            cin.get(arg1, 100, '\n');
+            cin.ignore(100, '\n');
+            cout << "\nEnter the event time: ";
+            cin.get(arg2, 100, '\n');
+            cin.ignore(100, '\n');
 
-    char arg3[] = "Pizza Time";
-    char arg4[] = "12:37 PM";
+            an_event->add(arg1, arg2);
 
-    an_event->add(arg3, arg4);
+            mainCal.add(an_event);
 
-    mainCal.add(an_event);
-    mainCal.display();
+            cin.clear();
+            break;
+
+        case 2:
+            cout << "\nEnter the Name to call: ";
+            cin.get(arg1, 100, '\n');
+            cin.ignore(100, '\n');
+            cout << "\nEnter the phone number to call: ";
+            cin.get(arg2, 100, '\n');
+            cin.ignore(100, '\n');
+
+            a_phone->add(arg1, arg2);
+
+            mainCal.add(a_phone);
+            cin.clear();
+            break;
+
+        case 3:
+            cout << "\nEnter the project name: ";
+            cin.get(arg1, 100, '\n');
+            cin.ignore(100, '\n');
+            cout << "\nEnter the project due date: ";
+            cin.get(arg2, 100, '\n');
+            cin.ignore(100, '\n');
+
+            a_project->add(arg1, arg2);
+
+            mainCal.add(a_project);
+            cin.clear();
+            break;
+
+        case 4:
+            cout << "\nDisplaying Calendar:\n";
+            mainCal.display();
+            break;
+
+        case 0:
+            cout << "\nThank you and goodbye!\n";
+            cin.clear();
+            break;
+
+        default:
+            cout << "Invalid entry, try again.\n";
+            cin.clear();
+            continue;
+        }
+    }
 
     return 0;
 }

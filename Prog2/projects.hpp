@@ -44,13 +44,13 @@ public:
 
 private:
 protected:
-    char *project_name;
-    char *project_due_date;
+    //char *project_name;
+    //char *project_due_date;
     list *project_items;
 };
 
 //Simple node for our project class to hold an 'Items Needed' LLL
-class list : projects
+class list : public projects
 {
 public:
     //Default list constructor

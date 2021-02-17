@@ -1,0 +1,93 @@
+==1185248== Memcheck, a memory error detector
+==1185248== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1185248== Using Valgrind-3.16.1 and LibVEX; rerun with -h for copyright info
+==1185248== Command: ./Prog2
+==1185248== Parent PID: 1185247
+==1185248== 
+==1185248== 
+==1185248== HEAP SUMMARY:
+==1185248==     in use at exit: 1,048 bytes in 19 blocks
+==1185248==   total heap usage: 33 allocs, 14 frees, 76,000 bytes allocated
+==1185248== 
+==1185248== 40 bytes in 1 blocks are indirectly lost in loss record 1 of 13
+==1185248==    at 0x483CE63: operator new(unsigned long) (vg_replace_malloc.c:342)
+==1185248==    by 0x10AD94: calendar::add(entry*) (calendar.cpp:104)
+==1185248==    by 0x10A679: main (main.cpp:115)
+==1185248== 
+==1185248== 40 bytes in 1 blocks are indirectly lost in loss record 2 of 13
+==1185248==    at 0x483CE63: operator new(unsigned long) (vg_replace_malloc.c:342)
+==1185248==    by 0x10ABB3: calendar::add(entry*) (calendar.cpp:77)
+==1185248==    by 0x10ADBA: calendar::add(entry*) (calendar.cpp:105)
+==1185248==    by 0x10A679: main (main.cpp:115)
+==1185248== 
+==1185248== 40 bytes in 1 blocks are definitely lost in loss record 3 of 13
+==1185248==    at 0x483CE63: operator new(unsigned long) (vg_replace_malloc.c:342)
+==1185248==    by 0x10AB92: calendar::add(entry*) (calendar.cpp:75)
+==1185248==    by 0x10A58F: main (main.cpp:100)
+==1185248== 
+==1185248== 40 bytes in 1 blocks are definitely lost in loss record 4 of 13
+==1185248==    at 0x483CE63: operator new(unsigned long) (vg_replace_malloc.c:342)
+==1185248==    by 0x10AB92: calendar::add(entry*) (calendar.cpp:75)
+==1185248==    by 0x10ADBA: calendar::add(entry*) (calendar.cpp:105)
+==1185248==    by 0x10A679: main (main.cpp:115)
+==1185248== 
+==1185248== 72 bytes in 1 blocks are indirectly lost in loss record 5 of 13
+==1185248==    at 0x483CE63: operator new(unsigned long) (vg_replace_malloc.c:342)
+==1185248==    by 0x10AB59: calendar::add(entry*) (calendar.cpp:73)
+==1185248==    by 0x10ADBA: calendar::add(entry*) (calendar.cpp:105)
+==1185248==    by 0x10A679: main (main.cpp:115)
+==1185248== 
+==1185248== 72 bytes in 1 blocks are indirectly lost in loss record 6 of 13
+==1185248==    at 0x483CE63: operator new(unsigned long) (vg_replace_malloc.c:342)
+==1185248==    by 0x10AB75: calendar::add(entry*) (calendar.cpp:74)
+==1185248==    by 0x10ADBA: calendar::add(entry*) (calendar.cpp:105)
+==1185248==    by 0x10A679: main (main.cpp:115)
+==1185248== 
+==1185248== 80 bytes in 2 blocks are indirectly lost in loss record 7 of 13
+==1185248==    at 0x483CE63: operator new(unsigned long) (vg_replace_malloc.c:342)
+==1185248==    by 0x10AD94: calendar::add(entry*) (calendar.cpp:104)
+==1185248==    by 0x10A58F: main (main.cpp:100)
+==1185248== 
+==1185248== 80 bytes in 2 blocks are indirectly lost in loss record 8 of 13
+==1185248==    at 0x483CE63: operator new(unsigned long) (vg_replace_malloc.c:342)
+==1185248==    by 0x10ABB3: calendar::add(entry*) (calendar.cpp:77)
+==1185248==    by 0x10ADBA: calendar::add(entry*) (calendar.cpp:105)
+==1185248==    by 0x10A58F: main (main.cpp:100)
+==1185248== 
+==1185248== 80 bytes in 2 blocks are definitely lost in loss record 9 of 13
+==1185248==    at 0x483CE63: operator new(unsigned long) (vg_replace_malloc.c:342)
+==1185248==    by 0x10AB92: calendar::add(entry*) (calendar.cpp:75)
+==1185248==    by 0x10ADBA: calendar::add(entry*) (calendar.cpp:105)
+==1185248==    by 0x10A58F: main (main.cpp:100)
+==1185248== 
+==1185248== 144 bytes in 2 blocks are indirectly lost in loss record 10 of 13
+==1185248==    at 0x483CE63: operator new(unsigned long) (vg_replace_malloc.c:342)
+==1185248==    by 0x10AB59: calendar::add(entry*) (calendar.cpp:73)
+==1185248==    by 0x10ADBA: calendar::add(entry*) (calendar.cpp:105)
+==1185248==    by 0x10A58F: main (main.cpp:100)
+==1185248== 
+==1185248== 144 bytes in 2 blocks are indirectly lost in loss record 11 of 13
+==1185248==    at 0x483CE63: operator new(unsigned long) (vg_replace_malloc.c:342)
+==1185248==    by 0x10AB75: calendar::add(entry*) (calendar.cpp:74)
+==1185248==    by 0x10ADBA: calendar::add(entry*) (calendar.cpp:105)
+==1185248==    by 0x10A58F: main (main.cpp:100)
+==1185248== 
+==1185248== 296 (72 direct, 224 indirect) bytes in 1 blocks are definitely lost in loss record 12 of 13
+==1185248==    at 0x483CE63: operator new(unsigned long) (vg_replace_malloc.c:342)
+==1185248==    by 0x10AD68: calendar::add(entry*) (calendar.cpp:101)
+==1185248==    by 0x10A679: main (main.cpp:115)
+==1185248== 
+==1185248== 592 (144 direct, 448 indirect) bytes in 2 blocks are definitely lost in loss record 13 of 13
+==1185248==    at 0x483CE63: operator new(unsigned long) (vg_replace_malloc.c:342)
+==1185248==    by 0x10AD68: calendar::add(entry*) (calendar.cpp:101)
+==1185248==    by 0x10A58F: main (main.cpp:100)
+==1185248== 
+==1185248== LEAK SUMMARY:
+==1185248==    definitely lost: 376 bytes in 7 blocks
+==1185248==    indirectly lost: 672 bytes in 12 blocks
+==1185248==      possibly lost: 0 bytes in 0 blocks
+==1185248==    still reachable: 0 bytes in 0 blocks
+==1185248==         suppressed: 0 bytes in 0 blocks
+==1185248== 
+==1185248== For lists of detected and suppressed errors, rerun with: -s
+==1185248== ERROR SUMMARY: 5 errors from 5 contexts (suppressed: 0 from 0)

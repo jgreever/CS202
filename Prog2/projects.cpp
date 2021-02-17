@@ -11,7 +11,7 @@
 #include "projects.hpp"
 
 //Projects class default constructor
-projects::projects() : project_name(nullptr), project_due_date(nullptr), project_items(nullptr)
+projects::projects() : project_items(nullptr)
 {
     //cout << "\nProjects class constructor called";
 }
@@ -39,6 +39,15 @@ bool projects::add(entry *to_add)
 //Projects class add function
 bool projects::add(char *arg1, char *arg2)
 {
+    if (this->temp1)
+        delete[] this->temp1;
+    if (this->temp2)
+        delete[] this->temp2;
+    this->temp1 = this->temp2 = nullptr;
+    this->temp1 = new char[strlen(arg1) + 1];
+    this->temp2 = new char[strlen(arg2) + 1];
+    strcpy(this->temp1, arg1);
+    strcpy(this->temp2, arg2);
     return true;
 }
 
@@ -61,7 +70,6 @@ void projects::display() const {}
 //List class default constructor
 list::list() : needed(nullptr), next(nullptr)
 {
-
 }
 
 //List default copy constructor
@@ -73,12 +81,12 @@ list::list(list &to_copy) : needed(to_copy.needed), next(to_copy.next)
 //List default destructor
 list::~list()
 {
-    if (needed)
-        delete[] needed;
-    needed = nullptr;
-    if (next)
-        delete next;
-    next = nullptr;
+    if (this->needed)
+        delete[] this->needed;
+    this->needed = nullptr;
+    if (this->next)
+        delete this->next;
+    this->next = nullptr;
 }
 
 bool list::add_list(list *to_add)
@@ -101,15 +109,15 @@ bool list::remove_list(list *&to_remove)
 
 void list::display_list() const
 {
-    cout << "\nNeeded: " << needed;
+    cout << "\nNeeded: " << this->needed;
 }
 
 list *&list::go_next()
 {
-    return next;
+    return this->next;
 }
 
 void list::set_next(list *to_add)
 {
-    next = to_add;
+    this->next = to_add;
 }
