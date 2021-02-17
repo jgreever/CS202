@@ -12,13 +12,13 @@
 
 //Calendar class functions
 //Calendar class default constructor
-calendar::calendar() : head(nullptr), tail(nullptr), day_num(0), day(nullptr)
+calendar::calendar() : head(nullptr), tail(nullptr), prev(nullptr), next(nullptr), day(nullptr)
 {
     //cout << "\nCalendar class constructor called";
 }
 
 //Calendar class default copy constructor
-calendar::calendar(calendar &to_copy) : head(to_copy.head), tail(to_copy.tail), day_num(to_copy.day_num), day(to_copy.day)
+calendar::calendar(calendar &to_copy) : head(to_copy.head), tail(to_copy.tail), prev(to_copy.prev), next(to_copy.next), day(to_copy.day)
 {
     //cout << "\nCalendar class copy constructor called";
 }
@@ -33,9 +33,14 @@ calendar::~calendar()
         head = nullptr;
     }
     delete tail;
-    head = tail = prev = next = nullptr;
-    day_num = 0;
-    day = nullptr;
+    head = tail = nullptr;
+    prev = next = nullptr;
+    //day_num = 0;
+    //if (day)
+    //{
+    //    delete day;
+    //    day = nullptr;
+    //}
 }
 
 //Calendar class DLL functions
@@ -59,6 +64,49 @@ void calendar::set_next(calendar *is_next)
     next = is_next;
 }
 
+//Calendar class add function
+bool calendar::add(entry *to_insert)
+{
+    if (!head) //no list, create a new one
+    {
+        head = new node;
+        tail = new node;
+        head->day = new entry(*to_insert);
+        head->day->add(to_insert);
+        head->set_next(tail);
+        tail->set_prev(head);
+        return true;
+    }
+    else if (!head->go_next()) //only one node, create a new one and link them
+    {
+        node *temp = new node;
+        temp->day = new entry(*to_insert);
+        temp->day->add(to_insert);
+        temp->set_prev(head);
+        head->set_next(temp);
+
+        return true;
+    }
+    else
+    {
+        node *temp = new node;
+        node *curr = new node;
+        temp->day = new entry(*to_insert);
+        temp->day->add(to_insert);
+        curr = head;
+        if (!curr->go_next())
+        {
+            curr->set_next(temp);
+            temp->set_next(curr);
+            return true;
+        }
+        else
+            curr = curr->go_next();
+    }
+    return false;
+}
+
+/* 
 //Calendar class add function
 bool calendar::add(entry *&to_insert)
 {
@@ -105,6 +153,7 @@ bool calendar::add(entry *&to_insert)
     }
     return false;
 }
+ */
 
 //Calendar class remove function
 bool calendar::remove(entry &to_remove)
@@ -147,7 +196,6 @@ bool calendar::remove_all()
     return true;
 }
 
-/*
 //Node class functions
 //node class default constructor
 node::node() : prev(nullptr), next(nullptr)
@@ -156,7 +204,7 @@ node::node() : prev(nullptr), next(nullptr)
 }
 
 //node class copy constructor
-node::node(entry &to_copy) : calendar(to_copy)
+node::node(entry &to_copy) : a_day(&to_copy)
 {
     //cout << "\nNode class copy constructor called (obj)";
 }
@@ -186,7 +234,6 @@ void node::set_prev(node *prev_node)
     prev = prev_node;
     //prev_node->next = this;
 }
- */
 
 //Entry class functions
 //Entry class default constructor
@@ -214,19 +261,28 @@ entry::entry(entry &to_copy) : an_entry(to_copy.an_entry), next(to_copy.next)
 entry::~entry()
 {
     //cout << "\nEntry class destructor called";
+    if (temp1)
+        delete[] temp1;
+    temp1 = nullptr;
+    if (temp2)
+        delete[] temp2;
+    temp2 = nullptr;
     if (an_entry)
-    {
         delete an_entry;
-        an_entry = nullptr;
-    }
+    an_entry = nullptr;
+    if (next)
+        delete next;
     next = nullptr;
 }
 
 //Entry class add new entry function
-bool entry::add(entry *&to_add)
+bool entry::add(entry *to_add)
 {
+    /*
     an_entry = to_add;
     an_entry->set_next(to_add);
+    */
+    this->an_entry = to_add;
     return true;
 }
 

@@ -32,7 +32,7 @@ public:
     ~events();
 
     //Self similar functions
-    bool add(entry *&to_add);
+    bool add(entry *to_add);
     bool add(char *arg1, char *arg2);
     bool edit(entry &to_edit);
     bool remove(entry &to_remove);

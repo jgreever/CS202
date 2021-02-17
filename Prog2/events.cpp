@@ -39,7 +39,7 @@ events::~events()
     event_name = event_time = nullptr;
 }
 
-bool events::add(entry *&to_add)
+bool events::add(entry *to_add)
 {
     an_entry = to_add;
     return true;

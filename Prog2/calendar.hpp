@@ -51,7 +51,7 @@ public:
     calendar &go_next();
     void set_prev(calendar *is_prev);
     void set_next(calendar *is_next);
-    bool add(entry *&to_insert);
+    bool add(entry *to_insert);
     bool remove(entry &to_remove);
     void display() const;
     bool search(const entry *to_search);
@@ -61,16 +61,16 @@ private:
 protected:
     void display(entry *next) const;
     void remove_all(entry &to_remove);
-    calendar *head;
-    calendar *tail;
+    node *head;
+    node *tail;
     calendar *prev;
     calendar *next;
     //node *an_entry;
-    int day_num;
+    //int day_num;
     entry *day;
 };
 
-/*
+
 //Node class for the calendar class. This is a DLL with a base
 //class ptr to a LLL of things
 class node : public calendar
@@ -87,11 +87,11 @@ public:
 private:
 protected:
     node *prev;
-    //int day_num;
-    //entry *day;
+    int day_num;
+    entry *a_day;
     node *next;
 };
- */
+
 
 //Entry class. This class has a ptr to an entry (either an event,
 //a phonecall, or a project), as well as a next ptr.
@@ -112,7 +112,7 @@ public:
 
     //Self similar functions, VIRTUAL, TODO: arg1/arg2 are there just as
     //placeholders for the moment.
-    virtual bool add(entry *&to_add);
+    virtual bool add(entry *to_add);
     virtual bool add(char *arg1, char *arg2);
     virtual bool edit(entry &to_edit);
     virtual bool remove(entry &to_remove);

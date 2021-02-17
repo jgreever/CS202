@@ -45,7 +45,7 @@ phonecalls::~phonecalls()
 }
 
 //Phonecalls class add function
-bool phonecalls::add(entry *&to_add)
+bool phonecalls::add(entry *to_add)
 {
     this->an_entry = to_add;
     return true;

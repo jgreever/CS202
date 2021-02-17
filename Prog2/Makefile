@@ -13,8 +13,10 @@ LFLAGS	 = -lpthread
 # -g option enables debugging mode 
 # -c flag generates object code for separate files
 
+all: ## Compile the program and create logs
+	$(MAKE) objs 2>&1 | tee build.log
 
-all: $(OBJS) ## Make all objects and executables
+objs: $(OBJS) ## Make all objects and executables
 	$(CC) -g $(OBJS) -o $(OUT) $(LFLAGS)
 
 # create/compile the individual files >>separately<<
@@ -35,7 +37,7 @@ projects.o: projects.cpp ## Compile only projects.o
 
 # clean house
 clean: ## Cleanup all files from compilation
-	rm -f $(OBJS) $(OUT) valgrind.log
+	rm -f $(OBJS) $(OUT) valgrind.log build.log
 
 # run the program
 run: $(OUT) ## Runs the program

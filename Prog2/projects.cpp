@@ -30,7 +30,7 @@ projects::~projects()
 }
 
 //Projects class add function
-bool projects::add(entry *&to_add)
+bool projects::add(entry *to_add)
 {
     this->an_entry = to_add;
     return true;
@@ -56,3 +56,60 @@ bool projects::remove(entry &to_remove)
 
 //Projects class display function
 void projects::display() const {}
+
+//List class functions
+//List class default constructor
+list::list() : needed(nullptr), next(nullptr)
+{
+
+}
+
+//List default copy constructor
+list::list(list &to_copy) : needed(to_copy.needed), next(to_copy.next)
+{
+
+}
+
+//List default destructor
+list::~list()
+{
+    if (needed)
+        delete[] needed;
+    needed = nullptr;
+    if (next)
+        delete next;
+    next = nullptr;
+}
+
+bool list::add_list(list *to_add)
+{
+
+    return true;
+}
+
+bool list::edit_list(list *&to_edit)
+{
+
+    return true;
+}
+
+bool list::remove_list(list *&to_remove)
+{
+
+    return true;
+}
+
+void list::display_list() const
+{
+    cout << "\nNeeded: " << needed;
+}
+
+list *&list::go_next()
+{
+    return next;
+}
+
+void list::set_next(list *to_add)
+{
+    next = to_add;
+}

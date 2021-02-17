@@ -36,7 +36,7 @@ public:
     entry *clone() const;
 
     //Self similar functions
-    bool add(entry *&to_add);
+    bool add(entry *to_add);
     bool add(char *arg1, char *arg2);
     bool edit(entry &to_edit);
     bool remove(entry &to_remove);
@@ -63,7 +63,7 @@ public:
     ~list();
 
     //Self similar functions
-    bool add_list(list *&to_add);
+    bool add_list(list *to_add);
     bool edit_list(list *&to_edit);
     bool remove_list(list *&to_remove);
     void display_list() const;
@@ -74,7 +74,7 @@ public:
 
 private:
 protected:
-    list *needed;
+    char *needed;
     list *next;
 };
 
