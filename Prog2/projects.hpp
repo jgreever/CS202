@@ -27,7 +27,7 @@ public:
     projects();
 
     //Derived class default copy constructor
-    projects(const entry &to_copy);
+    projects(entry &to_copy);
 
     //Derived class default destructor
     ~projects();
@@ -36,7 +36,7 @@ public:
     entry *clone() const;
 
     //Self similar functions
-    bool add(entry *to_add);
+    bool add(entry *&to_add);
     bool add(char *arg1, char *arg2);
     bool edit(entry &to_edit);
     bool remove(entry &to_remove);
@@ -57,13 +57,13 @@ public:
     list();
 
     //Default list copy constructor
-    list(const list &to_copy);
+    list(list &to_copy);
 
     //Default list destructor
     ~list();
 
     //Self similar functions
-    bool add_list(list *to_add);
+    bool add_list(list *&to_add);
     bool edit_list(list *&to_edit);
     bool remove_list(list *&to_remove);
     void display_list() const;

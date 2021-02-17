@@ -18,13 +18,13 @@ events::events() : event_name(nullptr), event_time(nullptr)
 events::events(char *arg1, char *arg2) : event_name(arg1), event_time(arg2)
 {
     //cout << "\nEvents class copy constructor called (char, char)";
-    this->event_name = new char[strlen(arg1) + 1];
-    strcpy(this->event_name, arg1);
-    this->event_time = new char[strlen(arg2) + 1];
-    strcpy(this->event_time, arg2);
+    event_name = new char[strlen(arg1) + 1];
+    strcpy(event_name, arg1);
+    event_time = new char[strlen(arg2) + 1];
+    strcpy(event_time, arg2);
 }
 
-events::events(const entry &to_copy) : entry(to_copy)
+events::events(entry &to_copy) : entry(to_copy)
 {
     //cout << "\nEvents class copy constructor called (obj)";
 }
@@ -32,32 +32,31 @@ events::events(const entry &to_copy) : entry(to_copy)
 events::~events()
 {
     //cout << "\nEvents class destructor called";
-    if (this->event_name)
-        delete[] this->event_name;
-    if (this->event_time)
-        delete[] this->event_time;
-    this->event_name = this->event_time = nullptr;
+    if (event_name)
+        delete[] event_name;
+    if (event_time)
+        delete[] event_time;
+    event_name = event_time = nullptr;
 }
 
-entry *events::clone() const
+bool events::add(entry *&to_add)
 {
-    return new events(static_cast<entry const &>(*this));
-}
-
-bool events::add(entry *to_add)
-{
-    this->an_entry = to_add;
+    an_entry = to_add;
     return true;
 }
 
 bool events::add(char *an_event, char *time_for_event)
 {
     //events *new_event = new events();
-    this->event_name = new char[strlen(an_event) + 1];
-    this->event_time = new char[strlen(time_for_event) + 1];
-    strcpy(this->event_name, an_event);
-    strcpy(this->event_time, time_for_event);
-    entry::set_next(this);
+    if (event_name)
+        delete[] event_name;
+    if (event_time)
+        delete[] event_time;
+
+    event_name = new char[strlen(an_event) + 1];
+    event_time = new char[strlen(time_for_event) + 1];
+    strcpy(event_name, an_event);
+    strcpy(event_time, time_for_event);
     return true;
 }
 
@@ -68,9 +67,9 @@ bool events::edit(entry &to_edit)
 
 bool events::remove(entry &to_remove)
 {
-    delete[] this->event_name;
-    delete[] this->event_time;
-    this->event_name = this->event_time = nullptr;
+    delete[] event_name;
+    delete[] event_time;
+    event_name = event_time = nullptr;
     return true;
 }
 

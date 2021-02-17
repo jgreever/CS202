@@ -26,16 +26,13 @@ public:
     phonecalls(char *arg1, char *arg2);
 
     //Derived class decault copy constructor
-    phonecalls(const entry &to_copy);
+    phonecalls(entry &to_copy);
 
     //Derived class default destructor
     ~phonecalls();
 
-    //Deep copy object
-    entry *clone() const;
-
     //Self similar functions
-    bool add(entry *to_add);
+    bool add(entry *&to_add);
     bool add(char *arg1, char *arg2);
     bool edit(entry &to_edit);
     bool remove(entry &to_remove);

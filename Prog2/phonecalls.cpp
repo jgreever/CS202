@@ -27,7 +27,7 @@ phonecalls::phonecalls(char *arg1, char *arg2) : callee_name(arg1), phone_number
 }
 
 //Phonecalls class default copy constructor
-phonecalls::phonecalls(const entry &to_copy) : entry(to_copy)
+phonecalls::phonecalls(entry &to_copy) : entry(to_copy)
 {
     //cout << "\nPhonecalls class copy constructor called (obj)";
     *this = to_copy;
@@ -44,13 +44,8 @@ phonecalls::~phonecalls()
     callee_name = phone_number = nullptr;
 }
 
-entry *phonecalls::clone() const
-{
-    return new phonecalls(static_cast<entry const &>(*this));
-}
-
 //Phonecalls class add function
-bool phonecalls::add(entry *to_add)
+bool phonecalls::add(entry *&to_add)
 {
     this->an_entry = to_add;
     return true;

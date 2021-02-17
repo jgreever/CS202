@@ -26,16 +26,13 @@ public:
 
     //Derived class default copy constructor
     events(char *arg1, char *arg2);
-    events(const entry &to_copy);
+    events(entry &to_copy);
 
     //Derived class default destructor
     ~events();
 
-    //Deep copy object
-    virtual entry *clone() const;
-
     //Self similar functions
-    bool add(entry *to_add);
+    bool add(entry *&to_add);
     bool add(char *arg1, char *arg2);
     bool edit(entry &to_edit);
     bool remove(entry &to_remove);

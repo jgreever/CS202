@@ -41,15 +41,17 @@ public:
     calendar();
 
     //Class default copy constructor
-    calendar(entry &to_copy);
-    //Class default copy constructor
     calendar(calendar &to_copy);
 
     //Class destructor
     ~calendar();
 
     //ADT only functions
-    bool add(entry *to_insert);
+    calendar &go_prev();
+    calendar &go_next();
+    void set_prev(calendar *is_prev);
+    void set_next(calendar *is_next);
+    bool add(entry *&to_insert);
     bool remove(entry &to_remove);
     void display() const;
     bool search(const entry *to_search);
@@ -57,15 +59,18 @@ public:
 
 private:
 protected:
-    void display(node *next) const;
+    void display(entry *next) const;
     void remove_all(entry &to_remove);
-    node *head;
-    node *tail;
+    calendar *head;
+    calendar *tail;
+    calendar *prev;
+    calendar *next;
     //node *an_entry;
     int day_num;
     entry *day;
 };
 
+/*
 //Node class for the calendar class. This is a DLL with a base
 //class ptr to a LLL of things
 class node : public calendar
@@ -86,6 +91,7 @@ protected:
     //entry *day;
     node *next;
 };
+ */
 
 //Entry class. This class has a ptr to an entry (either an event,
 //a phonecall, or a project), as well as a next ptr.
@@ -99,17 +105,14 @@ public:
     entry(char *arg1, char *arg2);
 
     //Default Base class copy constructor
-    entry(const entry &to_copy);
+    entry(entry &to_copy);
 
     //Default VIRTUAL Base class destructor
     virtual ~entry();
 
-    //Pure virtual function
-    virtual entry *clone() const;
-
     //Self similar functions, VIRTUAL, TODO: arg1/arg2 are there just as
     //placeholders for the moment.
-    virtual bool add(entry *to_add);
+    virtual bool add(entry *&to_add);
     virtual bool add(char *arg1, char *arg2);
     virtual bool edit(entry &to_edit);
     virtual bool remove(entry &to_remove);
