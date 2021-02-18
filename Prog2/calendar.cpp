@@ -258,7 +258,7 @@ bool calendar::remove_all(calendar *&to_remove)
     {
         delete head;
         head = nullptr;
-        return;
+        return true;
     }
     if (head)
     {
