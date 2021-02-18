@@ -80,6 +80,7 @@ int main(int argc, char **argv)
         cout << "2. Add a phonecall\n";
         cout << "3. Add a project\n";
         cout << "4. Display calendar\n";
+        cout << "5. Delete all\n";
         cout << "0. Exit the program\n";
         cout << "********************\n";
         cin >> choice;
@@ -133,6 +134,11 @@ int main(int argc, char **argv)
         case 4:
             cout << "\nDisplaying Calendar:\n";
             mainCal.display();
+            break;
+
+        case 5:
+            cout << "\nRemoving all entries...\n";
+            mainCal.remove_all();
             break;
 
         case 0:

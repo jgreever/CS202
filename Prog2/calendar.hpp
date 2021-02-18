@@ -59,10 +59,11 @@ public:
 
 private:
     bool add(calendar *&to_add, entry &to_insert);
+    bool remove_all(calendar *&to_remove);
 
 protected:
     void display(calendar *&to_display, entry *&disp);
-    void remove_all(entry &to_remove);
+    //void remove_all(calendar *&to_remove);
     calendar *head;
     calendar *tail;
     calendar *prev;

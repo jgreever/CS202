@@ -246,10 +246,28 @@ bool calendar::search(const entry *to_search)
     return true;
 }
 
-//Calendar class remove all function
 bool calendar::remove_all()
 {
-    return true;
+    return remove_all(head);
+}
+//Calendar class remove all function
+bool calendar::remove_all(calendar *&to_remove)
+{
+    calendar *temp = new calendar;
+    if (!head)
+    {
+        delete head;
+        head = nullptr;
+        return;
+    }
+    if (head)
+    {
+        temp = head->go_next();
+        delete head;
+        head = nullptr;
+        head = temp;
+    }
+    return remove_all(head->go_next());
 }
 
 /*
