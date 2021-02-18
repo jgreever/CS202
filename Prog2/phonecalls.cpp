@@ -11,7 +11,7 @@
 #include "phonecalls.hpp"
 
 //Phonecalls class default constructor
-phonecalls::phonecalls() : to_mask(0)
+phonecalls::phonecalls() : entry(), to_mask(0)
 {
     //cout << "\nPhonecalls class constructor called";
 }
@@ -20,9 +20,14 @@ phonecalls::phonecalls() : to_mask(0)
 phonecalls::phonecalls(char *arg1, char *arg2) : entry(arg1, arg2)
 {
     //cout << "\nPhonecalls class copy constructor called (char, char)";
+    if (this->temp1)
+        delete[] this->temp1;
+    if (this->temp2)
+        delete[] this->temp2;
+    this->temp1 = this->temp2 = nullptr;
     this->temp1 = new char[strlen(arg1) + 1];
-    strcpy(this->temp1, arg1);
     this->temp2 = new char[strlen(arg2) + 1];
+    strcpy(this->temp1, arg1);
     strcpy(this->temp2, arg2);
 }
 
@@ -30,7 +35,7 @@ phonecalls::phonecalls(char *arg1, char *arg2) : entry(arg1, arg2)
 phonecalls::phonecalls(entry &to_copy) : entry(to_copy)
 {
     //cout << "\nPhonecalls class copy constructor called (obj)";
-    *this = to_copy;
+    *this->an_entry = to_copy;
 }
 
 //Phonecalls class default destructor
@@ -52,11 +57,7 @@ phonecalls::~phonecalls()
 //Phonecalls class add function
 bool phonecalls::add(entry *to_add)
 {
-    if (!this->next)
-    {
-        this->an_entry = to_add;
-        this->next->set_next(nullptr);
-    }
+    this->an_entry = to_add;
     return true;
 }
 
@@ -83,6 +84,7 @@ bool phonecalls::add(char *arg1, char *arg2)
     strcpy(callee_name, arg1);
     strcpy(phone_number, arg2);
     */
+    add(this);
     return true;
 }
 
@@ -99,7 +101,11 @@ bool phonecalls::remove(entry &to_remove)
 }
 
 //Phonecalls class display function
-void phonecalls::display() const {}
+void phonecalls::display()
+{
+    cout << "\nCallee Name: " << this->temp1;
+    cout << "\nPhone Number: " << this->temp2;
+}
 
 //Phonecalls class RTTI (enable_privacy) function
 bool phonecalls::enable_privacy(int add_privacy)

@@ -36,13 +36,13 @@ public:
     bool add(char *arg1, char *arg2);
     bool edit(entry &to_edit);
     bool remove(entry &to_remove);
-    void display() const;
+    void display();
 
 private:
 
 protected:
-    char *event_name;
-    char *event_time;
+    //char *event_name;
+    //char *event_time;
 };
 
 #endif

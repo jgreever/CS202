@@ -62,12 +62,12 @@ int main(int argc, char **argv)
     events mainEvent;
     phonecalls mainPhone;
     projects mainProject;
-    entry *an_event = &mainEvent;
-    entry *a_phone = &mainPhone;
-    entry *a_project = &mainProject;
+    events *newEvent = dynamic_cast<events *>(&mainPhone);
+    //entry *an_event = &mainEvent;
+    //entry *a_phone = &mainPhone;
+    //entry *a_project = &mainProject;
     char arg1[101];
     char arg2[101];
-
 
     int choice = 1;
 
@@ -77,8 +77,8 @@ int main(int argc, char **argv)
         cout << " Main Menu\n";
         cout << " --------------------\n";
         cout << "1. Add an event\n";
-        cout << "2. Add a project\n";
-        cout << "3. Add a phonecall\n";
+        cout << "2. Add a phonecall\n";
+        cout << "3. Add a project\n";
         cout << "4. Display calendar\n";
         cout << "0. Exit the program\n";
         cout << "********************\n";
@@ -95,9 +95,9 @@ int main(int argc, char **argv)
             cin.get(arg2, 100, '\n');
             cin.ignore(100, '\n');
 
-            an_event->add(arg1, arg2);
+            mainEvent.add(arg1, arg2);
 
-            mainCal.add(an_event);
+            mainCal.add(mainEvent);
 
             cin.clear();
             break;
@@ -110,9 +110,9 @@ int main(int argc, char **argv)
             cin.get(arg2, 100, '\n');
             cin.ignore(100, '\n');
 
-            a_phone->add(arg1, arg2);
+            mainPhone.add(arg1, arg2);
 
-            mainCal.add(a_phone);
+            mainCal.add(mainPhone);
             cin.clear();
             break;
 
@@ -124,9 +124,9 @@ int main(int argc, char **argv)
             cin.get(arg2, 100, '\n');
             cin.ignore(100, '\n');
 
-            a_project->add(arg1, arg2);
+            mainProject.add(arg1, arg2);
 
-            mainCal.add(a_project);
+            mainCal.add(mainProject);
             cin.clear();
             break;
 

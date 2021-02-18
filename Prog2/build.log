@@ -1,8 +1,0 @@
-make[1]: Entering directory '/srv/nfs4/homes/luser/git/CS202/Prog2'
-g++ -g3 -c -Wall main.cpp
-g++ -g3 -c -Wall calendar.cpp
-g++ -g3 -c -Wall events.cpp
-g++ -g3 -c -Wall phonecalls.cpp
-g++ -g3 -c -Wall projects.cpp
-g++ -g main.o calendar.o events.o phonecalls.o projects.o -o Prog2 -lpthread
-make[1]: Leaving directory '/srv/nfs4/homes/luser/git/CS202/Prog2'

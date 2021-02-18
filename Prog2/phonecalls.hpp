@@ -36,7 +36,7 @@ public:
     bool add(char *arg1, char *arg2);
     bool edit(entry &to_edit);
     bool remove(entry &to_remove);
-    void display() const;
+    void display();
 
     //RTTI function(s)
     bool enable_privacy(int add_privacy);

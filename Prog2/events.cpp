@@ -10,7 +10,7 @@
 
 #include "events.hpp"
 
-events::events() : event_name(nullptr), event_time(nullptr)
+events::events() : entry()
 {
     //cout << "\nEvents class constructor called";
 }
@@ -35,7 +35,7 @@ events::events(char *arg1, char *arg2) : entry(arg1, arg2)
 
 events::events(entry &to_copy) : entry(to_copy)
 {
-    *this = to_copy;
+    *this->an_entry = to_copy;
     //cout << "\nEvents class copy constructor called (obj)";
 }
 
@@ -100,7 +100,7 @@ bool events::remove(entry &to_remove)
     return true;
 }
 
-void events::display() const
+void events::display()
 {
     cout << "\nEvent Name: " << this->temp1;
     cout << "\nEvent Time: " << this->temp2;

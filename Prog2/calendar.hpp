@@ -47,22 +47,24 @@ public:
     ~calendar();
 
     //ADT only functions
-    calendar &go_prev();
-    calendar &go_next();
+    calendar *&go_prev();
+    calendar *&go_next();
     void set_prev(calendar *is_prev);
     void set_next(calendar *is_next);
-    bool add(entry *to_insert);
+    bool add(entry &to_insert);
     bool remove(entry &to_remove);
-    void display() const;
+    void display();
     bool search(const entry *to_search);
     bool remove_all();
 
 private:
+    bool add(calendar *&to_add, entry &to_insert);
+
 protected:
-    void display(entry *next) const;
+    void display(calendar *&to_display, entry *&disp);
     void remove_all(entry &to_remove);
-    node *head;
-    node *tail;
+    calendar *head;
+    calendar *tail;
     calendar *prev;
     calendar *next;
     //node *an_entry;
@@ -70,7 +72,7 @@ protected:
     entry *day;
 };
 
-
+/*
 //Node class for the calendar class. This is a DLL with a base
 //class ptr to a LLL of things
 class node : public calendar
@@ -91,7 +93,7 @@ protected:
     entry *a_day;
     node *next;
 };
-
+*/
 
 //Entry class. This class has a ptr to an entry (either an event,
 //a phonecall, or a project), as well as a next ptr.
