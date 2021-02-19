@@ -27,6 +27,6 @@ class node
 
 	protected:
 		node *root;
-}
+};
 
 #endif
