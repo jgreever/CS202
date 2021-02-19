@@ -1,0 +1,49 @@
+==1246539== Memcheck, a memory error detector
+==1246539== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1246539== Using Valgrind-3.16.1 and LibVEX; rerun with -h for copyright info
+==1246539== Command: ./Prog2
+==1246539== Parent PID: 1246382
+==1246539== 
+==1246539== 
+==1246539== HEAP SUMMARY:
+==1246539==     in use at exit: 160 bytes in 4 blocks
+==1246539==   total heap usage: 19 allocs, 15 frees, 75,164 bytes allocated
+==1246539== 
+==1246539== 40 bytes in 1 blocks are definitely lost in loss record 1 of 4
+==1246539==    at 0x483CE63: operator new(unsigned long) (vg_replace_malloc.c:342)
+==1246539==    by 0x10AE70: calendar::remove_all(calendar*&) (calendar.cpp:256)
+==1246539==    by 0x10AE4E: calendar::remove_all() (calendar.cpp:251)
+==1246539==    by 0x10A786: main (main.cpp:141)
+==1246539== 
+==1246539== 40 bytes in 1 blocks are definitely lost in loss record 2 of 4
+==1246539==    at 0x483CE63: operator new(unsigned long) (vg_replace_malloc.c:342)
+==1246539==    by 0x10AE70: calendar::remove_all(calendar*&) (calendar.cpp:256)
+==1246539==    by 0x10AF38: calendar::remove_all(calendar*&) (calendar.cpp:270)
+==1246539==    by 0x10AE4E: calendar::remove_all() (calendar.cpp:251)
+==1246539==    by 0x10A786: main (main.cpp:141)
+==1246539== 
+==1246539== 40 bytes in 1 blocks are definitely lost in loss record 3 of 4
+==1246539==    at 0x483CE63: operator new(unsigned long) (vg_replace_malloc.c:342)
+==1246539==    by 0x10AE70: calendar::remove_all(calendar*&) (calendar.cpp:256)
+==1246539==    by 0x10AF38: calendar::remove_all(calendar*&) (calendar.cpp:270)
+==1246539==    by 0x10AF38: calendar::remove_all(calendar*&) (calendar.cpp:270)
+==1246539==    by 0x10AE4E: calendar::remove_all() (calendar.cpp:251)
+==1246539==    by 0x10A786: main (main.cpp:141)
+==1246539== 
+==1246539== 40 bytes in 1 blocks are definitely lost in loss record 4 of 4
+==1246539==    at 0x483CE63: operator new(unsigned long) (vg_replace_malloc.c:342)
+==1246539==    by 0x10AE70: calendar::remove_all(calendar*&) (calendar.cpp:256)
+==1246539==    by 0x10AF38: calendar::remove_all(calendar*&) (calendar.cpp:270)
+==1246539==    by 0x10AF38: calendar::remove_all(calendar*&) (calendar.cpp:270)
+==1246539==    by 0x10AF38: calendar::remove_all(calendar*&) (calendar.cpp:270)
+==1246539==    by 0x10AE4E: calendar::remove_all() (calendar.cpp:251)
+==1246539==    by 0x10A786: main (main.cpp:141)
+==1246539== 
+==1246539== LEAK SUMMARY:
+==1246539==    definitely lost: 160 bytes in 4 blocks
+==1246539==    indirectly lost: 0 bytes in 0 blocks
+==1246539==      possibly lost: 0 bytes in 0 blocks
+==1246539==    still reachable: 0 bytes in 0 blocks
+==1246539==         suppressed: 0 bytes in 0 blocks
+==1246539== 
+==1246539== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
