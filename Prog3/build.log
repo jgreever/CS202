@@ -1,7 +1,0 @@
-g++ -g3 -c -Wall main.cpp
-g++ -g3 -c -Wall node.cpp
-g++ -g3 -c -Wall bst.cpp
-g++ -g3 -c -Wall contact.cpp
-g++ -g3 -c -Wall device.cpp
-g++ -g3 -c -Wall methods.cpp
-g++ -g main.o node.o bst.o contact.o device.o methods.o -o prog3 -lpthread
