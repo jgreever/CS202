@@ -17,7 +17,7 @@
  *
  */
 
-#include "bst.hpp"
+#include "contact.hpp"
 
 class node
 {
@@ -26,7 +26,10 @@ class node
 	private:
 
 	protected:
-		node *root;
+		node *left;
+		node *parent;
+		contact *a_contact;
+		node *right;
 };
 
 #endif
