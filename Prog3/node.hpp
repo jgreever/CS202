@@ -28,6 +28,7 @@ class node
 	protected:
 		node *left;
 		node *parent;
+		int height;
 		contact *a_contact;
 		node *right;
 };
