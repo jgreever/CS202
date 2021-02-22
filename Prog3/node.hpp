@@ -17,8 +17,8 @@
  *
  */
 
-#include "contact.hpp"
-
+//#include "contact.hpp"
+/*
 class node
 {
 	public:
@@ -32,5 +32,5 @@ class node
 		contact *a_contact;
 		node *right;
 };
-
+*/
 #endif

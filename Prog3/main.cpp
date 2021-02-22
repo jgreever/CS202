@@ -27,8 +27,7 @@
  *
  */
 
-#include "node.hpp"
-
+#include "contact.hpp"
 
 int main(int argc, char *argv[])
 {

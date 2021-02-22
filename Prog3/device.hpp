@@ -1,4 +1,3 @@
-//#include "methods.hpp"
 #include <iostream>
 #include <cstring>
 #include <cctype>
