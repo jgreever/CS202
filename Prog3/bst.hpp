@@ -49,33 +49,34 @@ class node
 		node *left;
 		node *parent;
 		contact *a_contact;
-		int height;
 		node *right;
 
 };
 
-class bst
+class bst : public node
 {
     public:
 		bst();
 		bst(const bst &to_copy);
 		~bst();
-
-    private:
 		void insert(contact *to_insert);
 		void display_all() const;
 		bool search(contact *to_search);
 		void remove(contact *to_remove);
+
+    private:
 		int s_node(contact *a_contact);
 		int p_node(contact *a_contact);
+		bool get_node(node *root, contact &to_get);
+		bool delete_tree(node *&tree);
 
     protected:
 		node *insert(node *to_insert, contact *a_contact);
-		node *search(node *to_search);
-		node *remove(node *to_remove, contact *a_contact);
+		node *search(node *to_search, contact *a_contact);
+		node *remove(node *to_remove);
 		void display_all(node *to_display) const;
-		int s_node(node *a_node); //Successor node
-		int p_node(node *a_node); //Predecessor nod
+		node *s_node(node *a_node, contact *a_contact); //Successor node
+		node *p_node(node *a_node, contact *a_contact); //Predecessor nod
         node *root;
 };
 

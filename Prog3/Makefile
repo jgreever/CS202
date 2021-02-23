@@ -15,10 +15,10 @@
 # 	valgrind.log
 #
 
-OBJS	= main.o node.o bst.o contact.o device.o methods.o
-SOURCE	= main.cpp node.cpp bst.cpp contact.cpp device.cpp methods.cpp
-HEADER	= node.hpp bst.hpp contact.hpp device.hpp methods.hpp
-OUT	= prog3
+OBJS	= main.o bst.o contact.o device.o methods.o
+SOURCE	= main.cpp bst.cpp contact.cpp device.cpp methods.cpp
+HEADER	= bst.hpp contact.hpp device.hpp methods.hpp
+OUT	= Prog3
 CC	 = g++
 FLAGS	 = -g3 -c -Wall
 LFLAGS	 = -lpthread
@@ -34,9 +34,6 @@ objs: $(OBJS) ## Make all objects and executables
 # create/compile the individual files >>separately<<
 main.o: main.cpp ## Compile only main.o
 	$(CC) $(FLAGS) main.cpp
-
-node.o: node.cpp ## Compile only node.o
-	$(CC) $(FLAGS) node.cpp
 
 bst.o: bst.cpp ## Compile only bst.o
 	$(CC) $(FLAGS) bst.cpp
