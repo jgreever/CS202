@@ -10,3 +10,5 @@ contact::~contact()
         delete []name;
     name = nullptr;
 }
+
+int contact::add(char *to_add, device *a_device) { return 0; }

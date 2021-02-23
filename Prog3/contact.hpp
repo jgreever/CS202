@@ -1,4 +1,4 @@
-#include "device.hpp"
+#include "methods.hpp"
 
 
 class contact
