@@ -13,15 +13,14 @@
 
 #include "methods.hpp"
 
-
+template <class Type>
 class contact
 {
     public:
         contact();
         contact(contact &to_copy);
         ~contact();
-
-        int add(char *to_add, device *a_device);
+        int add(char *to_add, Type *a_device);
         int edit(char *to_edit);
         int search(char *to_search);
         int remove(char *to_remove);
@@ -29,7 +28,7 @@ class contact
 
     private:
         char *name;
-        device *a_device;
+        device<Type> a_device;
 
     protected:
     /*

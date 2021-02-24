@@ -22,19 +22,19 @@
  
 #include "device.hpp"
 
-
-class phone : public device
+template <class Type>
+class phone : public device<Type>
 {
     public:
         phone();
-        phone(const device &);
-        phone(const phone &);
+        //phone(const device &);
+        phone(const Type &);
         ~phone();
 
-        int add(device *to_add);
+        int add(Type *to_add);
         int remove();
         void display() const;
-        int search(device *to_search);
+        int search(Type *to_search);
 
     private:
 
@@ -42,44 +42,44 @@ class phone : public device
         char *number, *capabilities;
 };
 
-class pager : public device
+template <class Type>
+class pager : public device<Type>
 {
     public:
         pager();
-        pager(const device &);
-        pager(const pager &);
+        //pager(const device &);
+        pager(const Type &);
         ~pager();
 
-        int add(device *to_add);
+        int add(Type *to_add);
         int remove();
         void display() const;
-        int search(device *to_search);
+        int search(Type *to_search);
 
     private:
     
     protected:
-        char *number;
-        char *capabilities;
+        char *number, *capabilities;
 };
 
-class voip : public device
+template <class Type>
+class voip : public device<Type>
 {
     public:
         voip();
-        voip(const device &);
-        voip(const voip &);
+        //voip(const device &);
+        voip(const Type &);
         ~voip();
 
-        int add(device *to_add);
+        int add(Type *to_add);
         int remove();
         void display() const;
-        int search(device *to_search);
+        int search(Type *to_search);
 
     private:
 
     protected:
-        char *number;
-        char *capabilities;
+        char *number, *capabilities;
 };
 
 

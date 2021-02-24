@@ -14,17 +14,31 @@
  */
 
 #include "device.hpp"
+using namespace std;
 
-device::device() : number(nullptr), capabilities(nullptr),  device_type(nullptr), next(nullptr) {}
+template <class Type>
+device<Type>::device() {}
 
-device::device(const device &to_copy) : number(to_copy.number), capabilities(to_copy.capabilities), device_type(to_copy.device_type), next(to_copy.next) {}
+//device::device(const device &to_copy) {}
 
-device::~device() {}
+template <class Type>
+device<Type>::~device() {}
 
-int device::add(device *to_add) { return 0; }
+template <class Type>
+int device<Type>::add(Type *to_add) { return 0; }
 
-int device::remove() { return 0; } //TODO create non-public function
+template <class Type>int device<Type>::remove() { return 0; }
 
-void device::display() const {}
+template <class Type>
+void device<Type>::display() const {}
 
-int device::search(device *to_search) { return 0; }
+template <class Type>
+int device<Type>::search(Type *to_search) { return 0; }
+
+/*
+int device::remove(device &to_remove) { return 0; }
+
+void device::set_next(device *next) { this->next = next; }
+
+device *device::get_next() { return this->next; }
+*/

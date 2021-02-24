@@ -19,28 +19,28 @@
 #include <iostream>
 #include <cstring>
 #include <cctype>
-using namespace std;
 
+template <class Type>
 class device
 {
     public:
         device();
-        device(const device &);
+        //device(const device &);
         virtual ~device();
 
         //Virtual functions
-        virtual int add(device *to_add);
-        virtual int remove(); //TODO create non-public prototype
-        virtual void display() const;
-        virtual int search(device *to_search);
+        virtual int add(Type *to_add) = 0;
+        virtual int remove() = 0;
+        virtual void display() const = 0;
+        virtual int search(Type *to_search) = 0;
     
     private:
-        int remove(device &to_remove);
-        void set_next(device *next);
-        device *&get_next();
+        //int remove(device &to_remove);
+        //void set_next(device *next);
+        //device *get_next();
     
-        char *number, *capabilities, *device_type;
-        device *next;
+        //char *number, *capabilities;
+        //device *next;
 
     protected:
     /*
