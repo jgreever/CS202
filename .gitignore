@@ -14,3 +14,9 @@ valgrind.log
 *_new
 *_temp
 *_tmp
+
+## Mac/Windows annoying files
+.DS_*
+*esktop.ini
+'RECYCLE.BIN'
+
