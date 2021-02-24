@@ -54,16 +54,8 @@ run: $(OUT) ## Runs the program
 debug: $(OUT) ## Compiles with debugging information
 	valgrind ./$(OUT)
 
-# run program with valgrind for errors
-valgrind: $(OUT) ## Runs valgrind to check for errors
-	valgrind ./$(OUT)
-
-# run program with valgrind for leak checks
-valgrind_leakcheck: $(OUT) ##Run valgrind with leak tests
-	valgrind --leak-check=full ./$(OUT)
-
 # run program with valgrind for leak checks (extreme)
-valgrind_extreme: $(OUT) ## Runs valgrind for ALL leak tests
+valgrind: $(OUT) ## Runs valgrind for ALL leak tests
 	valgrind --leak-check=full --show-leak-kinds=all --leak-resolution=high --track-origins=yes --vgdb=yes --log-file=valgrind.log ./$(OUT)
 
 # show the user help for running the make command
