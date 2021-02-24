@@ -3,8 +3,6 @@
 #	A. Delis (ad@di.uoa.gr)
 #
 # Files for this program:
-# 	node.hpp node.cpp
-# 	bst.hpp bst.cpp
 # 	main.cpp
 # 	contact.hpp contact.cpp
 # 	device.hpp device.cpp
@@ -15,10 +13,10 @@
 # 	valgrind.log
 #
 
-OBJS	= main.o bst.o contact.o device.o methods.o
-SOURCE	= main.cpp bst.cpp contact.cpp device.cpp methods.cpp
-HEADER	= bst.hpp contact.hpp device.hpp methods.hpp
-OUT	= Prog3
+OBJS	= main.o contact.o device.o methods.o
+SOURCE	= main.cpp contact.cpp device.cpp methods.cpp
+HEADER	= contact.hpp device.hpp methods.hpp
+OUT	= prog3
 CC	 = g++
 FLAGS	 = -g3 -c -Wall
 LFLAGS	 = -lpthread
@@ -34,9 +32,6 @@ objs: $(OBJS) ## Make all objects and executables
 # create/compile the individual files >>separately<<
 main.o: main.cpp ## Compile only main.o
 	$(CC) $(FLAGS) main.cpp
-
-bst.o: bst.cpp ## Compile only bst.o
-	$(CC) $(FLAGS) bst.cpp
 
 contact.o: contact.cpp ## Compile only contact.o
 	$(CC) $(FLAGS) contact.cpp
@@ -59,8 +54,16 @@ run: $(OUT) ## Runs the program
 debug: $(OUT) ## Compiles with debugging information
 	valgrind ./$(OUT)
 
+# run program with valgrind for errors
+valgrind: $(OUT) ## Runs valgrind to check for errors
+	valgrind ./$(OUT)
+
+# run program with valgrind for leak checks
+valgrind_leakcheck: $(OUT) ##Run valgrind with leak tests
+	valgrind --leak-check=full ./$(OUT)
+
 # run program with valgrind for leak checks (extreme)
-valgrind: $(OUT) ## Runs valgrind for ALL leak tests
+valgrind_extreme: $(OUT) ## Runs valgrind for ALL leak tests
 	valgrind --leak-check=full --show-leak-kinds=all --leak-resolution=high --track-origins=yes --vgdb=yes --log-file=valgrind.log ./$(OUT)
 
 # show the user help for running the make command

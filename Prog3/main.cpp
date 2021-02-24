@@ -1,50 +1,42 @@
-/* main.cpp */
-
-/* Justin Greever
+/** main.cpp
+ * 
+ * Justin Greever
  * CS202 - Program 3
  * 2/18/2021
- *
- * This program is designed to teach us about operator overloading
- * and inheritance better than we already should.
- *
- * This program will have us create a "contact list" that holds info
- * about a contact and three methods of contact (two paid, one must
- * be a text based option) for each contact. In this case, mine will
- * be a cellphone, a pager (who uses these even?! xD) and a VoIP type
- * service, similar to Skype Premium.
- *
- * Operator Overloading Requirements (as per the CS202 Program 3.pdf):
- * "The operators to support must include: =, +, +=, [], ==, !=,
- *  the relational/equality operators, and the ability to input/output
- *  data."
- *
- * "In Program #3, you CAN now write your own STRING data type, but it
- *  can’t be the only place you use operator overloading (since it is
- *  provided in topic #6!)"
- *
- * The Data Structure I will be using will be a BST and a LLL. Both of
- * these will be implemented as classes, no structs, to keep it OOP.
- *
+ * 
+ * Program 3, or Let's Overload those operators and Inherit
+ * our Base class!
+ * 
+ * The main purpose of this program is to experience operator
+ * overloading and continue with Inheritance.
+ * 
+ * As per Program 3 instructions:
+ * Apply Operator Overloading to these classes: An important
+ * part of this assignment is to implement a complete set of
+ * operators. The operators to support must include: =, +, +=,
+ * [], ==, !=, the relational/equality operators, and the ability
+ * to input/output data. You may apply these to a single class
+ * or use them throughout your hierarchy.
+ * 
+ * Using https://en.cppreference.com/w/cpp/language/operators
+ * as a reference for Operator Overloading.
+ * 
+ * Overloads planned (+/- a few more later):
+ *   bool &operator==(const T&);
+ *   bool &operator!=(const T&);
+ *   bool &operator<(const T&);
+ *   bool &operator>(const T&);
+ *   T& operator+(const T&, const T&);
+ *   T& operator[](const T&) const;
+ *   T& operator=(const T&);
+ *   T& operator+=(const T&);
+ * 
  */
 
-#include "bst.hpp"
+#include "contact.hpp"
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-	bst *tree = new bst;
-	node *root = new node;
-	contact *mainContact = new contact;
-	device *mainDevice = new device;
-	phone *mainPhone = new phone;
-	device *aDevice = new phone;
 
-	delete tree; tree = nullptr;
-	delete root; tree = nullptr;
-	delete mainContact; mainContact = nullptr;
-	delete mainDevice; mainDevice = nullptr;
-	delete mainPhone; mainPhone = nullptr;
-	delete aDevice; aDevice = nullptr;
-
-	return 0;
+    return 0;
 }
-
