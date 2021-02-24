@@ -27,10 +27,23 @@
  *
  */
 
-#include "contact.hpp"
+#include "bst.hpp"
 
 int main(int argc, char *argv[])
 {
+	bst *tree = new bst;
+	node *root = new node;
+	contact *mainContact = new contact;
+	device *mainDevice = new device;
+	phone *mainPhone = new phone;
+	device *aDevice = new phone;
+
+	delete tree; tree = nullptr;
+	delete root; tree = nullptr;
+	delete mainContact; mainContact = nullptr;
+	delete mainDevice; mainDevice = nullptr;
+	delete mainPhone; mainPhone = nullptr;
+	delete aDevice; aDevice = nullptr;
 
 	return 0;
 }

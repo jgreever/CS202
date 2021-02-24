@@ -13,12 +13,9 @@
 
 #include "bst.hpp"
 
-node::node() : left(nullptr), parent(nullptr), a_contact(nullptr), height(0), right(nullptr)
-{
+node::node() : left(nullptr), parent(nullptr), a_contact(nullptr), right(nullptr) {}
 
-}
-
-node::node(const node &to_copy) : left(to_copy.left), parent(to_copy.parent), a_contact(to_copy.a_contact), height(to_copy.height), right(to_copy.right)
+node::node(const node &to_copy) : left(to_copy.left), parent(to_copy.parent), a_contact(to_copy.a_contact), right(to_copy.right)
 {
     if(this->left)
         delete this->left;
@@ -26,13 +23,11 @@ node::node(const node &to_copy) : left(to_copy.left), parent(to_copy.parent), a_
         delete this->parent;
     if(this->a_contact)
         delete this->a_contact;
-    height = 0;
     if (this->right)
         delete this->right;
     this->left = to_copy.left;
     this->parent = to_copy.parent;
     this->a_contact = to_copy.a_contact;
-    this->height = to_copy.height;
     this->right = to_copy.right;
 }
 
@@ -44,18 +39,13 @@ node::~node()
         delete this->parent;
     if(this->a_contact)
         delete this->a_contact;
-    height = 0;
     if (this->right)
         delete this->right;
     this->left = this->parent = this->right = nullptr;
     this->a_contact = nullptr;
-    height = 0;
 }
 
-bst::bst() : root(nullptr)
-{
-
-}
+bst::bst() : root(nullptr) {}
 
 bst::bst(const bst &to_copy) : root(to_copy.root)
 {
@@ -78,7 +68,7 @@ void bst::insert(contact *to_insert)
 
 void bst::display_all() const
 {
-
+    if(!root) return;
 }
 
 bool bst::search(contact *to_search)
@@ -89,19 +79,37 @@ bool bst::search(contact *to_search)
 
 void bst::remove(contact *to_remove)
 {
-
+    if(!root) return;
+    remove(root);
 }
 
 int bst::s_node(contact *a_contact)
 {
-
+    if(!root) return 0;
+    s_node(root, a_contact);
     return 0;
 }
 
 int bst::p_node(contact *a_contact)
 {
-
+    if(!root) return 0;
+    p_node(root, a_contact);
     return 0;
+}
+
+bool bst::delete_tree(node *&tree)
+{
+    if(root)
+    {
+        if(root)
+        {
+            delete_tree(root->left);
+            delete_tree(root->right);
+            delete root;
+        }
+        root = nullptr;
+    }
+    return true;
 }
 
 node *bst::insert(node *to_insert, contact *a_contact)
@@ -113,7 +121,6 @@ node *bst::insert(node *to_insert, contact *a_contact)
         to_insert->left = nullptr;
         to_insert->right = nullptr;
         to_insert->parent = nullptr;
-        to_insert->height = 0;
     }
     else if(to_insert->a_contact < a_contact)
     {
@@ -128,15 +135,13 @@ node *bst::insert(node *to_insert, contact *a_contact)
     return to_insert;
 }
 
-node *bst::search(node *to_search)
+node *bst::search(node *to_search, contact *a_contact)
 {
-
     return nullptr;
 }
 
-node *bst::remove(node *to_remove, contact *a_contact)
+node *bst::remove(node *to_remove)
 {
-
     return nullptr;
 }
 
@@ -145,14 +150,16 @@ void bst::display_all(node *to_display) const
 
 }
 
-int bst::s_node(node *a_node)
+node *bst::s_node(node *a_node, contact *a_contact)
 {
-
-    return 0;
+    while(root->left)
+        root = root->left;
+    return root;
 }
 
-int bst::p_node(node *a_node)
+node *bst::p_node(node *a_node, contact *a_contact)
 {
-
-    return 0;
+    while(root->right)
+        root = root->right;
+    return root;
 }
