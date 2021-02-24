@@ -5,6 +5,9 @@
 a.out
 *.o
 
+## macOS debugging folder
+*.dSYM
+
 ## Build log and Valgrind log
 build.log
 valgrind.log
