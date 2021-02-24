@@ -44,7 +44,7 @@ methods.o: methods.cpp ## Compile only methods.o
 
 # clean house
 clean: ## Cleanup all files from compilation
-	rm -f $(OBJS) $(OUT) valgrind.log build.log
+	rm -f $(OBJS) $(OUT) valgrind.log build.log leaks.log
 
 # run the program
 run: $(OUT) ## Runs the program
@@ -53,6 +53,12 @@ run: $(OUT) ## Runs the program
 # compile program with debugging information
 debug: $(OUT) ## Compiles with debugging information
 	valgrind ./$(OUT)
+
+# run program with 'leaks' for macOS, since valgrind is broken
+# on Big Sur and complains about dydl cache errors, check here
+# for info: https://github.com/LouisBrunner/valgrind-macos/issues/19
+leaks: $(OUT) ## Runs leaks for leak tests on macOS
+	leaks --atExit -- ./$(OUT) 2>&1 | tee leaks.log
 
 # run program with valgrind for leak checks (extreme)
 valgrind: $(OUT) ## Runs valgrind for ALL leak tests
