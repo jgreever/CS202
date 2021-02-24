@@ -1,2 +1,16 @@
+## VS Code subfolder with .json config/build/debug files
 .vscode
+
+## Program/Executable and object files
 a.out
+*.o
+
+## Build log and Valgrind log
+build.log
+valgrind.log
+
+## New/Temp folders created to test new code, but don't include it in git
+*_OOP
+*_new
+*_temp
+*_tmp
