@@ -19,18 +19,12 @@ contact_list::~contact_list()
     contact_list::delete_list();
 }
 
-int contact_list::search() { return 1; }
-int contact_list::add() { return 1; }
+contact_list *contact_list::search(contact_list *to_search) { return this; }
+int contact_list::add(contact_list *node) { return 1; }
 void contact_list::delete_list() {}
 void contact_list::inOrder() {}
 void contact_list::preOrder() {}
 void contact_list::postOrder() {}
-contact_list *contact_list::search(contact_list *to_search) { return this; }
-
-int contact_list::add(contact_list *node)
-{
-    return 1;
-}
 
 void contact_list::delete_list(contact_list *a_list) 
 {

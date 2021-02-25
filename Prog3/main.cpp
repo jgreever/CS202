@@ -38,9 +38,10 @@
 int main(int argc, char **argv)
 {
     contact_list *myList = new contact_list;
-
-
-
+    phone myPhone;
+    device *myDevice = &myPhone;
+    myDevice = nullptr;
+    myList->add(myList);
     delete myList;
     myList = nullptr;
 

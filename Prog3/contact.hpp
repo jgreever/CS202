@@ -26,9 +26,7 @@ class contact
         int search(char *to_search);
         int remove(char *to_remove);
         void display() const;
-        friend contact operator +(const contact &);
-        friend ostream &operator <<(ostream &, const contact &);
-        friend istream &operator <<(istream &, contact &);
+
 
     private:
         contact_list *left;
@@ -42,16 +40,16 @@ class contact_list : public contact
     public:
         contact_list();
         ~contact_list();
-        int search();
-        int add();
+        contact_list *search(contact_list *to_search);
+        int add(contact_list *node);
         void delete_list();
         void inOrder();
         void preOrder();
         void postOrder();
 
     private:
-        contact_list *search(contact_list *to_search);
-        int add(contact_list *node);
+        //contact_list *search(contact_list *to_search);
+        //int add(contact_list *node);
         void delete_list(contact_list *a_list);
         void inOrder(contact_list *to_go);
         void preOrder(contact_list *to_go);
