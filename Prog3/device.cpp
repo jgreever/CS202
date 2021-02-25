@@ -15,29 +15,16 @@
 
 #include "device.hpp"
 
-template <class Type>
-device<Type>::device() {}
+device::device() {}
 
 //device::device(const device &to_copy) {}
 
-template <class Type>
-device<Type>::~device() {}
+device::~device() {}
 
-template <class Type>
-int device<Type>::add(Type *to_add) { return 0; }
+int device::add(device *to_add) { return 0; }
 
-template <class Type>int device<Type>::remove() { return 0; }
+int device::remove() { return 0; }
 
-template <class Type>
-void device<Type>::display() const {}
+void device::display() const {}
 
-template <class Type>
-int device<Type>::search(Type *to_search) { return 0; }
-
-/*
-int device::remove(device &to_remove) { return 0; }
-
-void device::set_next(device *next) { this->next = next; }
-
-device *device::get_next() { return this->next; }
-*/
+int device::search(device *to_search) { return 0; }

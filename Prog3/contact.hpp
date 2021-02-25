@@ -14,27 +14,30 @@
 #include "methods.hpp"
 
 class contact_list;
-template <class Type>
+//template <class Type>
 class contact
 {
     public:
         contact();
         contact(contact &to_copy);
         ~contact();
-        int add(char *to_add, device<Type> *a_device);
+        int add(char *to_add);
         int edit(char *to_edit);
         int search(char *to_search);
         int remove(char *to_remove);
-        int display() const;
+        void display() const;
+        friend contact operator +(const contact &);
+        friend ostream &operator <<(ostream &, const contact &);
+        friend istream &operator <<(istream &, contact &);
 
     private:
         contact_list *left;
         contact_list *right;
         char *name;
-        device<Type> *a_device;
+        device *a_device;
 };
 
-class contact_list : public contact<class Type>
+class contact_list : public contact
 {
     public:
         contact_list();
@@ -45,6 +48,7 @@ class contact_list : public contact<class Type>
         void inOrder();
         void preOrder();
         void postOrder();
+
     private:
         contact_list *search(contact_list *to_search);
         int add(contact_list *node);

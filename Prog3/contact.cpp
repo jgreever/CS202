@@ -43,14 +43,14 @@ void contact_list::inOrder(contact_list *to_go) {}
 void contact_list::preOrder(contact_list *to_go) {}
 void contact_list::postOrder(contact_list *to_go) {}
 
-template <class Type>
-contact<Type>::contact() : left(nullptr), right(nullptr), name(nullptr), a_device(nullptr) {}
+ contact::contact() : left(nullptr), right(nullptr), name(nullptr), a_device(nullptr) {}
 
-template <class Type>
-contact<Type>::contact(contact &to_copy) : left(to_copy.left), right(to_copy.right), name(to_copy.name), a_device(to_copy.device)
+ contact::contact(contact &to_copy) : left(to_copy.left), right(to_copy.right), name(to_copy.name), a_device(to_copy.a_device)
 {
-    if (!to_copy)
-        this = nullptr;
+    if (!to_copy.name)
+        this->name = nullptr;
+    if (!to_copy.a_device)
+        this->a_device = nullptr;
     else
     {
         this->left = to_copy.left;
@@ -60,8 +60,7 @@ contact<Type>::contact(contact &to_copy) : left(to_copy.left), right(to_copy.rig
     }
 }
 
-template <class Type>
-contact<Type>::~contact()
+ contact::~contact()
 {
     if (this->left)
         delete this->left;
@@ -77,10 +76,19 @@ contact<Type>::~contact()
     this->a_device = nullptr;
 }
 
-template <class Type>
-int contact<Type>::add(char *to_add, device<Type> *a_device)
+ int contact::add(char *to_add)
 {
     if (this->name)
         delete []name;
     name = nullptr;
+    this->name = new char[strlen(to_add) + 1];
+    strcpy(this->name, to_add);
+    return 1;
 }
+ int contact::edit(char *to_edit) { return 1; }
+
+ int contact::search(char *to_search) { return 1; }
+
+ int contact::remove(char *to_remove) { return 1; }
+
+ void contact::display() const {}

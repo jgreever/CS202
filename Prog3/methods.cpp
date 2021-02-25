@@ -10,11 +10,10 @@
 
 #include "methods.hpp"
 
-template <class Type>
-phone<Type>::phone() : number(nullptr), capabilities(nullptr) {}
+phone::phone() : number(nullptr), capabilities(nullptr) {}
 
-template <class Type>
-phone<Type>::phone(const Type &copy) : number(copy.number), capabilities(copy.capabilities)
+
+phone::phone(const phone &copy) : number(copy.number), capabilities(copy.capabilities)
 {
     if (!copy.number && !copy.capabilities)
     {
@@ -30,8 +29,8 @@ phone<Type>::phone(const Type &copy) : number(copy.number), capabilities(copy.ca
     }
 }
 
-template <class Type>
-phone<Type>::~phone()
+
+phone::~phone()
 {
     if (this->number)
         delete []this->number;
@@ -40,8 +39,13 @@ phone<Type>::~phone()
     this->number = this->capabilities = nullptr;
 }
 
-template <class Type>
-int phone<Type>::add(Type *to_add)
+
+int phone::add(device *to_add)
 {
 
+    return 1;
 }
+
+int phone::remove() { return 1; }
+void phone::display() const {}
+int phone::search(device *to_search) { return 1; }
