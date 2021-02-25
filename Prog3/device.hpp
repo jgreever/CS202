@@ -19,7 +19,9 @@
 #include <iostream>
 #include <cstring>
 #include <cctype>
+using namespace std;
 
+//Attempting to make this a pure virtual function/abstract class
 template <class Type>
 class device
 {
@@ -33,22 +35,6 @@ class device
         virtual int remove() = 0;
         virtual void display() const = 0;
         virtual int search(Type *to_search) = 0;
-    
-    private:
-        //int remove(device &to_remove);
-        //void set_next(device *next);
-        //device *get_next();
-    
-        //char *number, *capabilities;
-        //device *next;
-
-    protected:
-    /*
-	    char *number;
-	    char *capabilities;
-        char *device_type;
-        device *next;
-    */
 };
 
 

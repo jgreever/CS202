@@ -14,7 +14,6 @@
  */
 
 #include "device.hpp"
-using namespace std;
 
 template <class Type>
 device<Type>::device() {}

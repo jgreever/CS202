@@ -27,7 +27,6 @@ class phone : public device<Type>
 {
     public:
         phone();
-        //phone(const device &);
         phone(const Type &);
         ~phone();
 
@@ -47,7 +46,6 @@ class pager : public device<Type>
 {
     public:
         pager();
-        //pager(const device &);
         pager(const Type &);
         ~pager();
 
@@ -67,7 +65,6 @@ class voip : public device<Type>
 {
     public:
         voip();
-        //voip(const device &);
         voip(const Type &);
         ~voip();
 

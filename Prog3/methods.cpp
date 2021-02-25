@@ -9,7 +9,6 @@
  */
 
 #include "methods.hpp"
-using namespace std;
 
 template <class Type>
 phone<Type>::phone() : number(nullptr), capabilities(nullptr) {}

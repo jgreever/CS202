@@ -13,6 +13,7 @@
 
 #include "methods.hpp"
 
+class contact_list;
 template <class Type>
 class contact
 {
@@ -20,21 +21,38 @@ class contact
         contact();
         contact(contact &to_copy);
         ~contact();
-        int add(char *to_add, Type *a_device);
+        int add(char *to_add, device<Type> *a_device);
         int edit(char *to_edit);
         int search(char *to_search);
         int remove(char *to_remove);
         int display() const;
 
     private:
+        contact_list *left;
+        contact_list *right;
         char *name;
-        device<Type> a_device;
+        device<Type> *a_device;
+};
 
-    protected:
-    /*
-        char *name;
-        device *a_device;
-    */
+class contact_list : public contact<class Type>
+{
+    public:
+        contact_list();
+        ~contact_list();
+        int search();
+        int add();
+        void delete_list();
+        void inOrder();
+        void preOrder();
+        void postOrder();
+    private:
+        contact_list *search(contact_list *to_search);
+        int add(contact_list *node);
+        void delete_list(contact_list *a_list);
+        void inOrder(contact_list *to_go);
+        void preOrder(contact_list *to_go);
+        void postOrder(contact_list *to_go);
+        contact_list *root;
 };
 
 

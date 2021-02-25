@@ -34,10 +34,15 @@
  */
 
 #include "contact.hpp"
-using namespace std;
 
 int main(int argc, char **argv)
 {
+    contact_list *myList = new contact_list;
+
+
+
+    delete myList;
+    myList = nullptr;
 
     return 0;
 }
