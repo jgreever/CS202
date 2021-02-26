@@ -49,3 +49,4 @@ int phone::add(device *to_add)
 int phone::remove() { return 1; }
 void phone::display() const {}
 int phone::search(device *to_search) { return 1; }
+

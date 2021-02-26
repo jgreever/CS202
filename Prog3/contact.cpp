@@ -11,8 +11,16 @@
  */
 
 #include "contact.hpp"
+using namespace std;
 
+
+/*
 contact_list::contact_list() : root(nullptr) {}
+
+contact_list::contact_list(const contact_list &to_copy) : root(to_copy.root)
+{
+    
+}
 
 contact_list::~contact_list()
 {
@@ -20,26 +28,43 @@ contact_list::~contact_list()
 }
 
 contact_list *contact_list::search(contact_list *to_search) { return this; }
-int contact_list::add(contact_list *node) { return 1; }
+
+contact_list *contact_list::add(contact_list *to_add)
+{
+    if (!root)
+    {
+        root = new contact(*to_add->root);
+        return root;
+    }
+    else if (to_add->root > this->root)
+    {
+
+    }
+    return this;
+}
+
 void contact_list::delete_list() {}
+
 void contact_list::inOrder() {}
+
 void contact_list::preOrder() {}
+
 void contact_list::postOrder() {}
 
 void contact_list::delete_list(contact_list *a_list) 
 {
-    if (a_list->root)
-        delete a_list->root;
-    a_list->root = nullptr;
 }
 
 void contact_list::inOrder(contact_list *to_go) {}
+
 void contact_list::preOrder(contact_list *to_go) {}
+
 void contact_list::postOrder(contact_list *to_go) {}
+*/
 
- contact::contact() : left(nullptr), right(nullptr), name(nullptr), a_device(nullptr) {}
+contact::contact() : left(nullptr), right(nullptr), name(nullptr), a_device(nullptr) {}
 
- contact::contact(contact &to_copy) : left(to_copy.left), right(to_copy.right), name(to_copy.name), a_device(to_copy.a_device)
+contact::contact(const contact &to_copy) : left(to_copy.left), right(to_copy.right), name(to_copy.name), a_device(to_copy.a_device)
 {
     if (!to_copy.name)
         this->name = nullptr;
@@ -54,35 +79,111 @@ void contact_list::postOrder(contact_list *to_go) {}
     }
 }
 
- contact::~contact()
+contact::contact(const char *a_name)
 {
-    if (this->left)
-        delete this->left;
-    this->left = nullptr;
-    if (this->right)
-        delete this->right;
-    this->right = nullptr;
     if (this->name)
         delete []this->name;
     this->name = nullptr;
+    this->name = new char[strlen(a_name) + 1];
+    strcpy(this->name, a_name);
+}
+
+contact::~contact()
+{
+    if (this->left)
+        delete this->left;
+    if (this->right)
+        delete this->right;
+    if (this->name)
+        delete []this->name;
     if (this->a_device)
         delete this->a_device;
+    this->left = this->right = nullptr;
+    this->name = nullptr;
     this->a_device = nullptr;
 }
 
- int contact::add(char *to_add)
+contact &contact::operator =(const contact &a_contact)
 {
-    if (this->name)
+    if (this == &a_contact)
+        return *this;
+    if (name)
         delete []name;
-    name = nullptr;
-    this->name = new char[strlen(to_add) + 1];
-    strcpy(this->name, to_add);
-    return 1;
+    name = new char[strlen(a_contact.name) + 1];
+    strcpy(name, a_contact.name);
+    a_device->add(a_contact.a_device);
+    return *this;
 }
- int contact::edit(char *to_edit) { return 1; }
 
- int contact::search(char *to_search) { return 1; }
+bool operator ==(const contact &a_contact, char *a_name)
+{
 
- int contact::remove(char *to_remove) { return 1; }
+    return true;
+}
 
- void contact::display() const {}
+ostream &operator << (ostream &a_display, contact &b_display)
+{
+    a_display << b_display.name;
+    return a_display;
+}
+
+istream &operator >>(istream &a_input, contact &b_contact)
+{
+    char temp[101];
+    a_input >> temp;
+    b_contact.name = new char[strlen(temp) + 1];
+    strcpy(b_contact.name, temp);
+    return a_input;
+}
+
+bool operator >(const contact &a_contact, const contact &b_contact)
+{
+
+    return true;
+}
+
+bool operator <(const contact &a_contact, const contact &b_contact)
+{
+
+    return true;
+}
+
+bool operator >=(const contact &a_contact, const contact &b_contact)
+{
+
+    return true;
+}
+
+bool operator <=(const contact &a_contact, const contact &b_contact)
+{
+
+    return true;
+}
+
+bool operator >(const contact &a_contact, const char *a_name)
+{
+
+    return true;
+}
+
+bool contact::set_left(contact *a_contact)
+{
+    this->left = a_contact;
+    return true;
+}
+
+bool contact::set_right(contact *a_contact)
+{
+    this->right = a_contact;
+    return true;
+}
+
+contact *&contact::go_left()
+{
+    return this->left;
+}
+
+contact *&contact ::go_right()
+{
+    return this->right;
+}

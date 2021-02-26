@@ -37,13 +37,18 @@
 
 int main(int argc, char **argv)
 {
-    contact_list *myList = new contact_list;
+    contact *mainList = new contact;
     phone myPhone;
-    device *myDevice = &myPhone;
-    myDevice = nullptr;
-    myList->add(myList);
-    delete myList;
-    myList = nullptr;
+    pager myPager;
+    voip myVoip;
+    device *aPhone = &myPhone;
+    device *aPager = &myPager;
+    device *aVoip = &myVoip;
 
-    return 0;
+    delete aPhone;
+    delete aPager;
+    delete aVoip;
+    delete mainList;
+    aPhone = aPager = aVoip = nullptr;
+    mainList = nullptr;
 }

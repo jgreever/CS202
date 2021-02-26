@@ -1,6 +1,5 @@
 #ifndef CONTACT_HPP
 #define CONTACT_HPP
-
 /** contact.hpp
  *
  * Justin Greever
@@ -13,48 +12,62 @@
 
 #include "methods.hpp"
 
-class contact_list;
-//template <class Type>
-class contact
+/*
+//Forward declaration
+class contact;
+
+//This acts like the BST
+class contact_list //: public contact
 {
     public:
-        contact();
-        contact(contact &to_copy);
-        ~contact();
-        int add(char *to_add);
-        int edit(char *to_edit);
-        int search(char *to_search);
-        int remove(char *to_remove);
-        void display() const;
+        contact_list(); //default constructor
+        contact_list(const contact_list &); //copy constructor
+        ~contact_list(); //default destructor
 
-
-    private:
-        contact_list *left;
-        contact_list *right;
-        char *name;
-        device *a_device;
-};
-
-class contact_list : public contact
-{
-    public:
-        contact_list();
-        ~contact_list();
         contact_list *search(contact_list *to_search);
-        int add(contact_list *node);
+        contact_list *add(contact_list *to_add);
         void delete_list();
         void inOrder();
         void preOrder();
         void postOrder();
 
     private:
-        //contact_list *search(contact_list *to_search);
-        //int add(contact_list *node);
         void delete_list(contact_list *a_list);
         void inOrder(contact_list *to_go);
         void preOrder(contact_list *to_go);
         void postOrder(contact_list *to_go);
-        contact_list *root;
+        contact *root;
+};
+*/
+
+//This acts like a node
+class contact
+{
+    public:
+        contact();
+        contact(const contact &to_copy);
+        contact(const char *a_name);
+        ~contact();
+        contact &operator =(const contact &a_contact);
+        friend bool operator ==(contact &a_contact, char *a_name);
+        friend ostream &operator <<(ostream &a_display, contact &b_display);
+        friend istream &operator >>(istream &a_input, contact &b_input);
+        friend bool operator >(const contact &a_contact, const contact &b_contact);
+        friend bool operator <(const contact &a_contact, const contact &b_contact);
+        friend bool operator >=(const contact &a_contact, const contact &b_contact);
+        friend bool operator <=(const contact &a_contact, const contact &b_contact);
+        friend bool operator >(const contact &a_contact, const char *a_name);
+
+        bool set_left(contact *a_contact);
+        bool set_right(contact *a_contact);
+        contact *&go_left();
+        contact *&go_right();
+
+    private:
+        contact *left;
+        contact *right;
+        char *name;
+        device *a_device;
 };
 
 
