@@ -14,7 +14,6 @@
 using namespace std;
 
 
-/*
 contact_list::contact_list() : root(nullptr) {}
 
 contact_list::contact_list(const contact_list &to_copy) : root(to_copy.root)
@@ -27,20 +26,23 @@ contact_list::~contact_list()
     contact_list::delete_list();
 }
 
-contact_list *contact_list::search(contact_list *to_search) { return this; }
+contact_list contact_list::search(contact *to_search)
+{
+    return *this;
+}
 
-contact_list *contact_list::add(contact_list *to_add)
+contact_list contact_list::add(contact *to_add)
 {
     if (!root)
     {
-        root = new contact(*to_add->root);
-        return root;
+        root = new contact(*to_add);
+        return *this;
     }
-    else if (to_add->root > this->root)
+    else if (to_add->name > root->name)
     {
-
+        return *this;
     }
-    return this;
+    return *this;
 }
 
 void contact_list::delete_list() {}
@@ -51,16 +53,15 @@ void contact_list::preOrder() {}
 
 void contact_list::postOrder() {}
 
-void contact_list::delete_list(contact_list *a_list) 
+void contact_list::delete_list(contact *a_list) 
 {
 }
 
-void contact_list::inOrder(contact_list *to_go) {}
+void contact_list::inOrder(contact *to_go) {}
 
-void contact_list::preOrder(contact_list *to_go) {}
+void contact_list::preOrder(contact *to_go) {}
 
-void contact_list::postOrder(contact_list *to_go) {}
-*/
+void contact_list::postOrder(contact *to_go) {}
 
 contact::contact() : left(nullptr), right(nullptr), name(nullptr), a_device(nullptr) {}
 
@@ -115,13 +116,15 @@ contact &contact::operator =(const contact &a_contact)
     return *this;
 }
 
-bool operator ==(const contact &a_contact, char *a_name)
+bool operator ==(const contact &a_contact, const char *a_name)
 {
-
-    return true;
+    if (strcmp(a_contact.name, a_name) == 0)
+        return true;
+    else
+        return false;
 }
 
-ostream &operator << (ostream &a_display, contact &b_display)
+ostream &operator <<(ostream &a_display, contact &b_display)
 {
     a_display << b_display.name;
     return a_display;
@@ -138,32 +141,51 @@ istream &operator >>(istream &a_input, contact &b_contact)
 
 bool operator >(const contact &a_contact, const contact &b_contact)
 {
+    if (strcmp(a_contact.name, b_contact.name) > 0)
+        return true;
+    else
+        return false;
 
-    return true;
 }
 
 bool operator <(const contact &a_contact, const contact &b_contact)
 {
-
-    return true;
+    if (strcmp(a_contact.name, b_contact.name) < 0)
+        return true;
+    else
+        return false;
 }
 
 bool operator >=(const contact &a_contact, const contact &b_contact)
 {
-
-    return true;
+    if ((strcmp(a_contact.name, b_contact.name) > 0) || (strcmp(a_contact.name, b_contact.name) == 0))
+        return true;
+    else
+        return false;
 }
 
 bool operator <=(const contact &a_contact, const contact &b_contact)
 {
-
-    return true;
+    if ((strcmp(a_contact.name, b_contact.name) < 0) || (strcmp(a_contact.name, b_contact.name) == 0))
+        return true;
+    else
+        return false;
 }
 
 bool operator >(const contact &a_contact, const char *a_name)
 {
+    if (strcmp(a_contact.name, a_name) > 0)
+        return true;
+    else
+        return false;
+}
 
-    return true;
+bool operator <(const contact &a_contact, const char *a_name)
+{
+    if (strcmp(a_contact.name, a_name) < 0)
+        return true;
+    else
+        return false;
 }
 
 bool contact::set_left(contact *a_contact)

@@ -12,33 +12,32 @@
 
 #include "methods.hpp"
 
-/*
 //Forward declaration
 class contact;
 
 //This acts like the BST
-class contact_list //: public contact
+class contact_list
 {
     public:
         contact_list(); //default constructor
         contact_list(const contact_list &); //copy constructor
-        ~contact_list(); //default destructor
+        virtual ~contact_list(); //default destructor
 
-        contact_list *search(contact_list *to_search);
-        contact_list *add(contact_list *to_add);
+        virtual contact_list search(contact *to_search);
+        virtual contact_list add(contact *to_add);
         void delete_list();
         void inOrder();
         void preOrder();
         void postOrder();
+        friend class contact;
 
     private:
-        void delete_list(contact_list *a_list);
-        void inOrder(contact_list *to_go);
-        void preOrder(contact_list *to_go);
-        void postOrder(contact_list *to_go);
+        void delete_list(contact *a_list);
+        void inOrder(contact *to_go);
+        void preOrder(contact *to_go);
+        void postOrder(contact *to_go);
         contact *root;
 };
-*/
 
 //This acts like a node
 class contact
@@ -49,7 +48,7 @@ class contact
         contact(const char *a_name);
         ~contact();
         contact &operator =(const contact &a_contact);
-        friend bool operator ==(contact &a_contact, char *a_name);
+        friend bool operator ==(const contact &a_contact, const char *a_name);
         friend ostream &operator <<(ostream &a_display, contact &b_display);
         friend istream &operator >>(istream &a_input, contact &b_input);
         friend bool operator >(const contact &a_contact, const contact &b_contact);
@@ -57,11 +56,13 @@ class contact
         friend bool operator >=(const contact &a_contact, const contact &b_contact);
         friend bool operator <=(const contact &a_contact, const contact &b_contact);
         friend bool operator >(const contact &a_contact, const char *a_name);
+        friend bool operator <(const contact &a_contact, const char *a_name);
 
         bool set_left(contact *a_contact);
         bool set_right(contact *a_contact);
         contact *&go_left();
         contact *&go_right();
+        friend class contact_list;
 
     private:
         contact *left;
