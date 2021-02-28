@@ -64,6 +64,7 @@ class contact
         int add(contact *&a_contact, char *a_name);
         int edit(contact &a_contact, char *a_name);
         int search(contact &a_contact, char *to_search);
+        void display(contact *display);
         void removeAll(contact *&to_remove);
         contact *root, *left, *right;
         char *contact_name;

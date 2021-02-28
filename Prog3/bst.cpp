@@ -37,13 +37,13 @@ contact::contact(const contact &a_contact) : /* root(root) */ left(a_contact.lef
 // Default class destructor
 contact::~contact()
 {
-    this->root = this->left = this->right = nullptr;
-    if (this->contact_name)
-        delete []this->contact_name;
-    this->contact_name = nullptr;
-    if (this->a_device)
-        delete this->a_device;
-    this->a_device = nullptr;
+    root = left = right = nullptr;
+    if (contact_name)
+        delete []contact_name;
+    contact_name = nullptr;
+    if (a_device)
+        delete a_device;
+    a_device = nullptr;
 }
 
 // Operator overloads for contact class
@@ -82,7 +82,7 @@ istream &operator >>(istream &input, contact &a_contact)
     a_contact.contact_name = new char[strlen(temp) + 1];
     strcpy(a_contact.contact_name, temp);
     delete []temp;
-
+    temp = nullptr;
     return input;
 
 
@@ -170,7 +170,7 @@ bool contact::set_right(contact *is_right)
 int contact::add() {
 
     contact *temp = new contact;
-    temp->contact_name = new char;
+    //temp->contact_name = new char;
     cin >> *temp;
     return add(root, temp->contact_name);
     //return 1;
@@ -192,15 +192,19 @@ int contact::search(char *to_search)
     return 0;
 }
 
-void contact::display()
+void contact::display() {
+
+    root->display(root);
+}
+void contact::display(contact *display)
 {
-    if (!root) return;
-    if (!root->left && !root->right)
-        cout << *root;
-    if (root->left)
-        root->go_left();
-    if (root->right)
-        root->go_right();
+    if (!display) return;
+    if (!display->left && !display->right)
+        cout << *display;
+    if (display->left)
+        display->display(go_left());
+    if (display->right)
+        display->display(go_right());
     //root->go_left();
     //root->go_right();
     //cout << *root;
@@ -213,6 +217,26 @@ void contact::removeAll()
 
 int contact::add(contact *&a_contact, char *a_name)
 {
+    if(!a_contact) {
+        a_contact = new contact;
+        a_contact->set_name(a_name);
+        a_contact->set_left(nullptr);
+        a_contact->set_right(nullptr);
+       if(root == NULL)
+         root = a_contact;
+       return 1;
+    }
+    else if(a_name < a_contact->contact_name) {
+       add(a_contact->go_left(), a_name);
+    }
+    else if(a_name > a_contact->contact_name) {
+        add(a_contact->go_left(), a_name);
+    }
+    else {
+        cout << "Duplicate element \n";
+        return 0;
+    }
+    /*
     if (!root) {
         root = new contact;
         root->left = root->right = nullptr;
@@ -221,13 +245,14 @@ int contact::add(contact *&a_contact, char *a_name)
     }
     if (root->contact_name < a_name) {
         //set_left(a_contact);
-        add(root->go_left(), a_name);
+        root->add(root->go_left(), a_name);
     }
-    if (root->contact_name > a_name) {
+    else if (root->contact_name > a_name) {
         //set_right(a_contact);
-        add(root = root->go_right(), a_name);
+        root->add(root = root->go_right(), a_name);
     }
     return 0;
+    */
 }
 
 int contact::edit(contact &a_contact, char *a_name)
