@@ -19,7 +19,7 @@
  * members to hold the information, much like I did in program 2.
  *
  */
- 
+
 #include "device.hpp"
 
 class phone : public device
@@ -69,5 +69,4 @@ class voip : public device
         char *number, *capabilities;
 };
 
-
-#endif
+ #endif

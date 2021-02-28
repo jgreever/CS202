@@ -1,128 +1,135 @@
 /** methods.cpp
- * 
+ *
  * Justin Greever
  * CS202 - Program 3
  * 2/18/2021
- * 
- * This file contains the functions for the methods class.
- * 
+ *
+ * This file holds the three derived classes: phone, pager, voip
+ * Each class holds the same phone: number, capabilities
+ * Number can be be a few types of things. It can be in the standard
+ * telephone number style (555-555-1212), or as a VoIP number similar
+ * to phone_extension@ip.address (101@127.0.0.1) or user@domain.name
+ *
+ * I am going to work on, and hopefully by the time I turn this in, 
+ * have the base class, Device, be pure virtual. If that can't happen
+ * for some reason, I plan on keeping it simple and using its phone 
+ * members to hold the information, much like I did in program 2.
+ *
  */
-
+ 
 #include "methods.hpp"
 
 
-// Phone class
-phone::phone() : number(nullptr), capabilities(nullptr) {}
-
-phone::phone(const phone &copy) : number(copy.number), capabilities(copy.capabilities)
+phone::phone() 
 {
-    if (!copy.number && !copy.capabilities)
-    {
-        this->number = nullptr;
-        this->capabilities = nullptr;
-    }
-    else
-    {
-        this->number = new char[strlen(copy.number) + 1];
-        this->capabilities = new char[strlen(copy.capabilities) + 1];
-        strcpy(this->number, copy.number);
-        strcpy(this->capabilities, copy.capabilities);
-    }
+    
 }
 
-phone::~phone()
+phone::phone(const phone &) 
 {
-    if (this->number)
-        delete []this->number;
-    if (this->capabilities)
-        delete []this->capabilities;
-    this->number = this->capabilities = nullptr;
+    
 }
 
+phone::~phone() 
+{
+    
+}
 
-int phone::add(device *to_add)
+int phone::add(device *to_add) 
 {
 
     return 1;
 }
 
-int phone::remove() { return 1; }
-void phone::display() const {}
-int phone::search(device *to_search) { return 1; }
-
-
-// Pager Class
-pager::pager() : number(nullptr), capabilities(nullptr) {}
-
-pager::pager(const pager &copy) : number(copy.number), capabilities(copy.capabilities)
-{
-    if (!copy.number && !copy.capabilities)
-    {
-        this->number = nullptr;
-        this->capabilities = nullptr;
-    }
-    else
-    {
-        this->number = new char[strlen(copy.number) + 1];
-        this->capabilities = new char[strlen(copy.capabilities) + 1];
-        strcpy(this->number, copy.number);
-        strcpy(this->capabilities, copy.capabilities);
-    }
-}
-
-pager::~pager()
-{
-    if (this->number)
-        delete []this->number;
-    if (this->capabilities)
-        delete []this->capabilities;
-    this->number = this->capabilities = nullptr;
-}
-
-int pager::add(device *to_add)
+int phone::remove() 
 {
 
     return 1;
 }
 
-int pager::remove() { return 1; }
-void pager::display() const {}
-int pager::search(device *to_search) { return 1; }
-
-
-// VoIP class
-voip::voip() : number(nullptr), capabilities(nullptr) {}
-voip::voip(const voip &copy) : number(copy.number), capabilities(copy.capabilities)
+void phone::display() const
 {
-    if (!copy.number && !copy.capabilities)
-    {
-        this->number = nullptr;
-        this->capabilities = nullptr;
-    }
-    else
-    {
-        this->number = new char[strlen(copy.number) + 1];
-        this->capabilities = new char[strlen(copy.capabilities) + 1];
-        strcpy(this->number, copy.number);
-        strcpy(this->capabilities, copy.capabilities);
-    }
+    
 }
 
-voip::~voip()
-{
-    if (this->number)
-        delete []this->number;
-    if (this->capabilities)
-        delete []this->capabilities;
-    this->number = this->capabilities = nullptr;
-}
-
-int voip::add(device *to_add)
+int phone::search(device *to_search) 
 {
 
     return 1;
 }
 
-int voip::remove() { return 1; }
-void voip::display() const {}
-int voip::search(device *to_search) { return 1; }
+pager::pager() 
+{
+    
+}
+
+pager::pager(const pager &) 
+{
+    
+}
+
+pager::~pager() 
+{
+    
+}
+
+int pager::add(device *to_add) 
+{
+
+    return 1;
+}
+
+int pager::remove() 
+{
+
+    return 1;
+}
+
+void pager::display() const
+{
+    
+}
+
+int pager::search(device *to_search) 
+{
+
+    return 1;
+}
+
+voip::voip() 
+{
+    
+}
+
+voip::voip(const voip &) 
+{
+    
+}
+
+voip::~voip() 
+{
+    
+}
+
+int voip::add(device *to_add) 
+{
+
+    return 1;
+}
+
+int voip::remove() 
+{
+
+    return 1;
+}
+
+void voip::display() const
+{
+    
+}
+
+int voip::search(device *to_search) 
+{
+
+    return 1;
+}

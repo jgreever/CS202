@@ -13,9 +13,9 @@
 # 	valgrind.log
 #
 
-OBJS	= main.o contact.o device.o methods.o
-SOURCE	= main.cpp contact.cpp device.cpp methods.cpp
-HEADER	= contact.hpp device.hpp methods.hpp
+OBJS	= main.o bst.o device.o methods.o
+SOURCE	= main.cpp bst.cpp device.cpp methods.cpp
+HEADER	= device.hpp device.hpp methods.hpp
 OUT	= prog3
 CC	 = g++
 FLAGS	 = -g3 -c -Wall
@@ -33,8 +33,8 @@ objs: $(OBJS) ## Make all objects and executables
 main.o: main.cpp ## Compile only main.o
 	$(CC) $(FLAGS) main.cpp
 
-contact.o: contact.cpp ## Compile only contact.o
-	$(CC) $(FLAGS) contact.cpp
+bst.o: bst.cpp ## Compile only bst.o
+	$(CC) $(FLAGS) bst.cpp
 
 device.o: device.cpp ## Compile only device.o
 	$(CC) $(FLAGS) device.cpp

@@ -13,18 +13,31 @@
  * 
  */
 
-#include "device.hpp"
+#include "methods.hpp"
 
-device::device() {}
+device::device() {} // Abstract class constructor
 
-//device::device(const device &to_copy) {}
+device::~device() {} // Abstract class destructor
 
-device::~device() {}
+int device::add(device *to_add)
+{
+    // Pure virtual function    
+    return 1;
+}
 
-int device::add(device *to_add) { return 0; }
+int device::remove()
+{
+    // Pure virtual function
+    return 1;
+}
 
-int device::remove() { return 0; }
+void device::display() const
+{
+    // Pure virtual function
+}
 
-void device::display() const {}
-
-int device::search(device *to_search) { return 0; }
+int device::search(device *to_search)
+{
+    // Pure virtual function
+    return 1;
+}

@@ -1,5 +1,6 @@
 #ifndef DEVICE_HPP
 #define DEVICE_HPP
+
 /** device.hpp
  *
  * Justin Greever
@@ -15,10 +16,7 @@
  *
  */
 
-#include <iostream>
-#include <cstring>
-#include <cctype>
-using namespace std;
+#include "bst.hpp"
 
 //Attempting to make this a pure virtual function/abstract class
 class device
@@ -32,6 +30,9 @@ class device
         virtual int remove() = 0;
         virtual void display() const = 0;
         virtual int search(device *to_search) = 0;
+
+    private:
+        char *number, *capabilities;
 };
 
 
