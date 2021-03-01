@@ -73,16 +73,16 @@ ostream &operator <<(ostream &output, const contact &a_contact)
 // Stream Insertion Assignment Operator
 istream &operator >>(istream &input, contact &a_contact)
 {
-    char* temp;
-    int size(256);
-    temp = new char[size];
+    char *temp = new char[256];
+    //int size(256);
+    //char temp[size];
     cout << "\nEnter the contact name: ";
-    input.get(temp, size, '\n');
-    input.ignore(100, '\n');
-    a_contact.contact_name = new char[strlen(temp) + 1];
+    input.get(temp, 256, '\n');
+    input.ignore(256, '\n');
+    int length = strlen(temp) + 1;
+    a_contact.contact_name = new char[length];
     strcpy(a_contact.contact_name, temp);
     delete []temp;
-    temp = nullptr;
     return input;
 
 
@@ -196,15 +196,15 @@ void contact::display() {
 
     root->display(root);
 }
-void contact::display(contact *display)
+void contact::display(contact *to_display)
 {
-    if (!display) return;
-    if (!display->left && !display->right)
-        cout << *display;
-    if (display->left)
-        display->display(go_left());
-    if (display->right)
-        display->display(go_right());
+    if (!to_display) return;
+    if (!to_display->left && !to_display->right)
+        cout << *to_display;
+    if (to_display->left)
+        to_display->display(go_left());
+    if (to_display->right)
+        to_display->display(go_right());
     //root->go_left();
     //root->go_right();
     //cout << *root;
@@ -222,7 +222,7 @@ int contact::add(contact *&a_contact, char *a_name)
         a_contact->set_name(a_name);
         a_contact->set_left(nullptr);
         a_contact->set_right(nullptr);
-       if(root == NULL)
+        if(root == NULL)
          root = a_contact;
        return 1;
     }
@@ -233,7 +233,7 @@ int contact::add(contact *&a_contact, char *a_name)
         add(a_contact->go_left(), a_name);
     }
     else {
-        cout << "Duplicate element \n";
+        cout << "Entry already exists.\n";
         return 0;
     }
     /*
@@ -253,6 +253,7 @@ int contact::add(contact *&a_contact, char *a_name)
     }
     return 0;
     */
+   return 0;
 }
 
 int contact::edit(contact &a_contact, char *a_name)

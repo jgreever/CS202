@@ -51,17 +51,20 @@ int main(int argc, const char * argv[]) {
     newList.add();
     newList.display();
 
-    newVoip = nullptr;
-    newPager = nullptr;
-    newPhone = nullptr;
+    newList.add();
+    newList.display();
+
+    //newVoip = nullptr;
+    //newPager = nullptr;
+    //newPhone = nullptr;
 
     delete aVoip;
     delete aPager;
     delete aPhone;
     //delete newList;
-    aVoip = nullptr;
-    aPager = nullptr;
-    aPhone = nullptr;
+    //aVoip = nullptr;
+    //aPager = nullptr;
+    //aPhone = nullptr;
     //newList = nullptr;
 
     return 0;
