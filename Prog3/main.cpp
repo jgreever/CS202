@@ -36,15 +36,14 @@
 #include "methods.hpp"
 
 int main(int argc, const char * argv[]) {
-    contact newContact;
     contact newList;
-    phone *aPhone = new phone;
+/*     phone *aPhone = new phone;
     pager *aPager = new pager;
     voip *aVoip = new voip;
     device *newPhone = reinterpret_cast<device *>(&aPhone);
     device *newPager = reinterpret_cast<device *>(&aPager);
     device *newVoip = reinterpret_cast<device *>(&aVoip);
-
+ */
     newList.add();
     newList.display();
 
@@ -54,19 +53,10 @@ int main(int argc, const char * argv[]) {
     newList.add();
     newList.display();
 
-    //newVoip = nullptr;
-    //newPager = nullptr;
-    //newPhone = nullptr;
-
-    delete aVoip;
+/*     delete aVoip;
     delete aPager;
     delete aPhone;
-    //delete newList;
-    //aVoip = nullptr;
-    //aPager = nullptr;
-    //aPhone = nullptr;
-    //newList = nullptr;
-
+ */
     return 0;
 
 }

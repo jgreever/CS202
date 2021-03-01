@@ -1,10 +1,23 @@
+# Makefile
 #
-# In order to execute this "Makefile" just type "make"
-#	A. Delis (ad@di.uoa.gr)
+# Justin Greever
+# CS202 - Program 3
+# 2/18/2021
+#
+# To use this Makefile, simply type 'make'
+# to see all options, or type 'make all' 
+# to do a full compile, and "make valgrind'
+# after doing a 'make all' to generate Prog3,
+# to check for memory leaks using valgrind, 
+# or 'make leaks' if you are on macOS and
+# unable to use valgrind due to errors in
+# the program from High Sierra on. See notes
+# below under the Valgrind section for more
+# information.
 #
 # Files for this program:
 # 	main.cpp
-# 	contact.hpp contact.cpp
+# 	bst.hpp bst.cpp
 # 	device.hpp device.cpp
 # 	methods.hpp methods.cpp
 #
@@ -18,7 +31,7 @@ SOURCE	= main.cpp bst.cpp device.cpp methods.cpp
 HEADER	= device.hpp device.hpp methods.hpp
 OUT	= prog3
 CC	 = g++
-FLAGS	 = -g3 -c -Wall
+FLAGS	 = -ggdb -c -Wall
 LFLAGS	 = -lpthread
 # -g option enables debugging mode 
 # -c flag generates object code for separate files
