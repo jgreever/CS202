@@ -29,8 +29,6 @@ contact::contact(const contact &a_contact) : left(a_contact.left), right(a_conta
         this->contact_name = new char[strlen(a_contact.contact_name) + 1];
         strcpy(this->contact_name, a_contact.contact_name);
     }
-    //this->left = a_contact.left;
-    //this->right = a_contact.right;
     this->a_device = a_contact.a_device;
 }
 
@@ -80,7 +78,6 @@ istream &operator >>(istream &input, contact &a_contact)
     int length = strlen(temp) + 1;
     a_contact.contact_name = new char[length];
     strcpy(a_contact.contact_name, temp);
-    //delete []temp;
     return input;
 }
 
@@ -173,17 +170,21 @@ int contact::search(char *to_search)
 
 void contact::display() {
 
-    root->display(root);
+    display(root);
 }
+
 void contact::display(contact *to_display)
 {
-    if (!to_display) return;
-    if (!to_display->left && !to_display->right)
-        cout << *to_display;
-    if (to_display->left && !to_display->right)
-        to_display->display(go_left());
-    if (to_display->right && !to_display->left)
-        to_display->display(go_right());
+    //if (to_display->left || to_display->right) {
+    cout << *to_display;
+    if (to_display->right) {
+        to_display = to_display->go_right();
+        return display(to_display);
+    }
+    if (to_display->left) {
+        to_display = to_display->go_left();
+        return display(to_display);
+    }
 }
 
 void contact::removeAll()
@@ -204,7 +205,7 @@ int contact::add(contact *&root, char *a_name)
         add(root->go_left(), a_name);
     }
     else if(a_name > root->contact_name) {
-        add(root->go_left(), a_name);
+        add(root->go_right(), a_name);
     }
     else {
         cout << "Entry already exists.\n";

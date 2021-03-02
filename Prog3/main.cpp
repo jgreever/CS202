@@ -37,7 +37,8 @@
 
 int main(int argc, const char * argv[]) {
     contact newList;
-/*     phone *aPhone = new phone;
+
+/*  phone *aPhone = new phone;
     pager *aPager = new pager;
     voip *aVoip = new voip;
     device *newPhone = reinterpret_cast<device *>(&aPhone);
@@ -53,7 +54,10 @@ int main(int argc, const char * argv[]) {
     newList.add();
     newList.display();
 
-/*     delete aVoip;
+    newList.add();
+    newList.display();
+
+/*  delete aVoip;
     delete aPager;
     delete aPhone;
  */
