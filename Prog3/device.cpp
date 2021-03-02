@@ -19,7 +19,7 @@ device::device() {} // Abstract class constructor
 
 device::~device() {} // Abstract class destructor
 
-int device::add(device *to_add)
+int device::add()
 {
     // Pure virtual function    
     return 1;

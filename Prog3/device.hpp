@@ -26,7 +26,7 @@ class device
         virtual ~device();
 
         //Virtual functions
-        virtual int add(device *to_add) = 0;
+        virtual int add() = 0;
         virtual int remove() = 0;
         virtual void display() const = 0;
         virtual int search(device *to_search) = 0;

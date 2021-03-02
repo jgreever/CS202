@@ -20,24 +20,64 @@
 #include "methods.hpp"
 
 
-phone::phone() 
+phone::phone() : number(nullptr), capabilities(nullptr)
 {
-    
+    // Default constructor, no args needed
 }
 
-phone::phone(const phone &) 
+phone::phone(const phone &toCopy) : number(toCopy.number), capabilities(toCopy.capabilities)
 {
-    
+    if (number)
+        delete number;
+    if (capabilities)
+        delete capabilities;
+    number = new char[strlen(toCopy.number) + 1];
+    strcpy(number, toCopy.number);
+    capabilities = new char[strlen(toCopy.capabilities) + 1];
+    strcpy(capabilities, toCopy.capabilities);
 }
 
 phone::~phone() 
 {
-    
+    if (number)
+        delete number;
+    if (capabilities)
+        delete capabilities;
+    number = capabilities = nullptr;
 }
 
-int phone::add(device *to_add) 
-{
+ostream &operator <<(ostream &output, const phone &a_device) {
 
+    output << "\nDevice:\n" << a_device.number << endl;
+    output << "\nDevice Capabilities:\n" << a_device.capabilities << endl;
+    return output;
+}
+
+istream &operator >>(istream &input, phone &a_device) {
+
+    char temp[256];
+    cout << "\nEnter the devices phone number: ";
+    input.get(temp, 256, '\n');
+    input.ignore(256, '\n');
+    int length = strlen(temp) + 1;
+    a_device.number = new char[length];
+    strcpy(a_device.number, temp);
+
+    char temp2[256];
+    cout << "\nEnter the device capabilities:\n(example: Phonecalls, Messaging, 1-Way Messaging, 2-Way Messaging, VoIP address...\n";
+    input.get(temp2, 256, '\n');
+    input.ignore(256, '\n');
+    int length2 = strlen(temp2) + 1;
+    a_device.capabilities = new char[length2];
+    strcpy(a_device.capabilities, temp2);
+
+    return input;
+}
+
+int phone::add()
+{
+    phone *aPhone = new phone;
+    cin >> *this;
     return 1;
 }
 
@@ -49,7 +89,8 @@ int phone::remove()
 
 void phone::display() const
 {
-    
+    if (this->number && this->capabilities)
+        cout << this;
 }
 
 int phone::search(device *to_search) 
@@ -73,7 +114,7 @@ pager::~pager()
     
 }
 
-int pager::add(device *to_add) 
+int pager::add() 
 {
 
     return 1;
@@ -111,7 +152,7 @@ voip::~voip()
     
 }
 
-int voip::add(device *to_add) 
+int voip::add() 
 {
 
     return 1;

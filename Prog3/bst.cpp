@@ -65,6 +65,8 @@ bool contact::operator ==(const contact &a_contact)
 ostream &operator <<(ostream &output, const contact &a_contact)
 {
     output << "\nContact Info:\n" << a_contact.contact_name << endl;
+    output << "\nDevice Info: \n" << endl;
+    //a_contact.a_device->display();
     return output;
 }
 
@@ -145,10 +147,9 @@ bool contact::set_right(contact *is_right)
 int contact::add() {
 
     contact *temp = new contact;
-    //temp->contact_name = new char;
     cin >> *temp;
     add(root, temp->contact_name);
-    //delete temp;
+    delete temp;
     return 1;
 
 }

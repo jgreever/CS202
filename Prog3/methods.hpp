@@ -26,9 +26,13 @@ class phone : public device
 {
     public:
         phone();
-        phone(const phone &);
+        phone(const phone &toCopy);
         ~phone();
-        int add(device *to_add);
+
+        friend ostream &operator <<(ostream &output, const phone &a_device);
+        friend istream &operator >>(istream &input, phone &a_device);
+
+        int add();
         int remove();
         void display() const;
         int search(device *to_search);
@@ -44,7 +48,7 @@ class pager : public device
         pager(const pager &);
         ~pager();
 
-        int add(device *to_add);
+        int add();
         int remove();
         void display() const;
         int search(device *to_search);
@@ -60,7 +64,7 @@ class voip : public device
         voip(const voip &);
         ~voip();
 
-        int add(device *to_add);
+        int add();
         int remove();
         void display() const;
         int search(device *to_search);
@@ -69,4 +73,5 @@ class voip : public device
         char *number, *capabilities;
 };
 
- #endif
+
+#endif
