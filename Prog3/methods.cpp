@@ -76,7 +76,9 @@ istream &operator >>(istream &input, phone &a_device) {
 
 int phone::add()
 {
-    phone *aPhone = new phone;
+    //phone *aPhone = new phone();
+    this->number = new char;
+    this->capabilities = new char;
     cin >> *this;
     return 1;
 }
@@ -90,7 +92,7 @@ int phone::remove()
 void phone::display() const
 {
     if (this->number && this->capabilities)
-        cout << this;
+        cout << *this;
 }
 
 int phone::search(device *to_search) 

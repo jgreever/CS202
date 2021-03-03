@@ -65,8 +65,7 @@ bool contact::operator ==(const contact &a_contact)
 ostream &operator <<(ostream &output, const contact &a_contact)
 {
     output << "\nContact Info:\n" << a_contact.contact_name << endl;
-    //output << "\nDevice Info: \n" << endl;
-    //a_contact.a_device->display();
+    a_contact.a_device->display();
     return output;
 }
 
@@ -77,9 +76,10 @@ istream &operator >>(istream &input, contact *a_contact)
     cout << "\nEnter the contact name: ";
     input.get(hold, 256);
     input.ignore(100, '\n');
-    int length = strlen(hold) + 1;
+    //int length = strlen(hold) + 1;
     //a_contact = new char[length];
     strcpy(a_contact->contact_name, hold);
+
     return input;
 }
 
@@ -193,7 +193,9 @@ int contact::add(contact *&root, char *a_name)
 {
     if (!root) {
         root = new contact;
+        root->a_device = new phone;
         root->set_name(a_name);
+        root->a_device->add();
         root->set_left(nullptr);
         root->set_right(nullptr);
         return 1;
