@@ -57,6 +57,7 @@ int main(int argc, const char * argv[]) {
     newList.add();
     newList.display();
 
+    newList.removeAll();
 /*  delete aVoip;
     delete aPager;
     delete aPhone;

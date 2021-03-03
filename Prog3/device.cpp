@@ -15,9 +15,17 @@
 
 #include "methods.hpp"
 
-device::device() {} // Abstract class constructor
+// Abstract class constructor
+device::device() : number(nullptr), capabilities(nullptr) {} 
 
-device::~device() {} // Abstract class destructor
+ // Abstract class destructo
+device::~device() {
+        if (number)
+            delete []number;
+        if (capabilities)
+            delete []capabilities;
+        number = capabilities = nullptr;
+}
 
 int device::add()
 {

@@ -35,13 +35,13 @@ contact::contact(const contact &a_contact) : left(a_contact.left), right(a_conta
 // Default class destructor
 contact::~contact()
 {
+    //removeAll(root);
     root = left = right = nullptr;
-    if (contact_name)
-        delete []contact_name;
-    contact_name = nullptr;
-    if (a_device)
-        delete a_device;
-    a_device = nullptr;
+    if (this->contact_name)
+        delete []this->contact_name;
+    if (this->a_device)
+        delete this->a_device;
+    this->a_device = nullptr;
 }
 
 // Operator overloads for contact class
@@ -61,25 +61,25 @@ bool contact::operator ==(const contact &a_contact)
     return strcmp(this->contact_name, a_contact.contact_name) == 0;
 }
 
-// Stream Extraction Assignment Operator
+// Stream Insertion Assignment Operator
 ostream &operator <<(ostream &output, const contact &a_contact)
 {
     output << "\nContact Info:\n" << a_contact.contact_name << endl;
-    output << "\nDevice Info: \n" << endl;
+    //output << "\nDevice Info: \n" << endl;
     //a_contact.a_device->display();
     return output;
 }
 
-// Stream Insertion Assignment Operator
-istream &operator >>(istream &input, contact &a_contact)
+// Stream Extraction Assignment Operator
+istream &operator >>(istream &input, contact *a_contact)
 {
-    char temp[256];
+    char hold[256];
     cout << "\nEnter the contact name: ";
-    input.get(temp, 256, '\n');
-    input.ignore(256, '\n');
-    int length = strlen(temp) + 1;
-    a_contact.contact_name = new char[length];
-    strcpy(a_contact.contact_name, temp);
+    input.get(hold, 256);
+    input.ignore(100, '\n');
+    int length = strlen(hold) + 1;
+    //a_contact = new char[length];
+    strcpy(a_contact->contact_name, hold);
     return input;
 }
 
@@ -147,9 +147,10 @@ bool contact::set_right(contact *is_right)
 int contact::add() {
 
     contact *temp = new contact;
-    cin >> *temp;
-    add(root, temp->contact_name);
-    delete temp;
+    temp->contact_name = new char[256];
+    cin >> temp;
+    root->add(this->root, temp->contact_name);
+    //delete temp;
     return 1;
 
 }
@@ -188,11 +189,6 @@ void contact::display(contact *to_display)
     }
 }
 
-void contact::removeAll()
-{
-    removeAll(*root);
-}
-
 int contact::add(contact *&root, char *a_name)
 {
     if (!root) {
@@ -212,7 +208,7 @@ int contact::add(contact *&root, char *a_name)
         cout << "Entry already exists.\n";
         return 0;
     }
-   return 0;
+    return 0;
 }
 
 int contact::edit(contact &a_contact, char *a_name)
@@ -225,10 +221,17 @@ int contact::search(contact &a_contact, char *to_search)
     return 1;
 }
 
-void contact::removeAll(contact &to_remove) {
+void contact::removeAll() {
+    removeAll(root);
+}
 
-    if (!root) return;
-    removeAll(*root->go_left());
-    removeAll(*root->go_right());
+void contact::removeAll(contact *&cList) {
 
+    while (cList->root) {
+        removeAll(cList->root->go_left());
+        removeAll(cList->root->go_right());
+        delete cList->root;
+    }
+    delete root;
+    root = nullptr;
 }

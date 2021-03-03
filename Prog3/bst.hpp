@@ -37,7 +37,7 @@ class contact
         contact &operator =(const contact &a_contact);
         bool operator ==(const contact &a_contact);
         friend ostream &operator <<(ostream &output, const contact &a_contact);
-        friend istream &operator >>(istream &input, contact &a_contact);
+        friend istream &operator >>(istream &input, contact *a_contact);
         friend bool operator >(const contact &a_contact, const contact &b_contact);
         friend bool operator <(const contact &a_contact, const contact &b_contact);
         friend bool operator >=(const contact &a_contact, const contact &b_contact);
@@ -65,7 +65,7 @@ class contact
         int edit(contact &a_contact, char *a_name);
         int search(contact &a_contact, char *to_search);
         void display(contact *display);
-        void removeAll(contact &to_remove);
+        void removeAll(contact *&cList);
         contact *root;
         contact *left;
         contact *right;
