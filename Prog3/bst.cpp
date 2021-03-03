@@ -42,6 +42,7 @@ contact::~contact()
     if (this->a_device)
         delete this->a_device;
     this->a_device = nullptr;
+    this->contact_name = nullptr;
 }
 
 // Operator overloads for contact class
@@ -64,7 +65,7 @@ bool contact::operator ==(const contact &a_contact)
 // Stream Insertion Assignment Operator
 ostream &operator <<(ostream &output, const contact &a_contact)
 {
-    output << "\nContact Info:\n" << a_contact.contact_name << endl;
+    output << "\n\n\nContact Info:\n" << a_contact.contact_name << endl;
     a_contact.a_device->display();
     return output;
 }
@@ -76,8 +77,6 @@ istream &operator >>(istream &input, contact *a_contact)
     cout << "\nEnter the contact name: ";
     input.get(hold, 256);
     input.ignore(100, '\n');
-    //int length = strlen(hold) + 1;
-    //a_contact = new char[length];
     strcpy(a_contact->contact_name, hold);
 
     return input;
@@ -163,10 +162,7 @@ int contact::edit(char *to_edit)
 
 int contact::search(char *to_search)
 {
-    root->go_left();
-    if (root->contact_name == to_search)
-        return 1;
-    root->go_right();
+    search(root, to_search);
     return 0;
 }
 
@@ -207,7 +203,6 @@ int contact::add(contact *&root, char *a_name)
         add(root->go_right(), a_name);
     }
     else {
-        cout << "Entry already exists.\n";
         return 0;
     }
     return 0;
@@ -218,8 +213,22 @@ int contact::edit(contact &a_contact, char *a_name)
     return 1;
 }
 
-int contact::search(contact &a_contact, char *to_search)
-{
+int contact::search(contact *a_contact, char *to_search) {
+
+    if (strcmp(a_contact->contact_name, to_search) == 0) {
+        cout << "\nEntry found!\n";
+        cout << *a_contact;
+    }
+    if (a_contact->right) {
+        a_contact = a_contact->go_right();
+        return search(a_contact, to_search);
+    }
+    if (a_contact->left) {
+        a_contact = a_contact->go_left();
+        return search(a_contact, to_search);
+    }
+    else
+        cout << "\nEntry not found...\n";  
     return 1;
 }
 

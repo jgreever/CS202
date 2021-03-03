@@ -16,15 +16,18 @@
 #include "methods.hpp"
 
 // Abstract class constructor
-device::device() : number(nullptr), capabilities(nullptr) {} 
+device::device() : number(nullptr), capabilities(nullptr), next(nullptr){} 
 
  // Abstract class destructo
 device::~device() {
         if (number)
             delete []number;
         if (capabilities)
-            delete []capabilities;
+            delete[] capabilities;
+        if (next)
+            delete next;
         number = capabilities = nullptr;
+        next = nullptr;
 }
 
 int device::add()

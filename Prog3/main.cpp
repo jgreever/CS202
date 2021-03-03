@@ -38,30 +38,20 @@
 int main(int argc, const char * argv[]) {
     contact newList;
 
-/*  phone *aPhone = new phone;
-    pager *aPager = new pager;
-    voip *aVoip = new voip;
-    device *newPhone = reinterpret_cast<device *>(&aPhone);
-    device *newPager = reinterpret_cast<device *>(&aPager);
-    device *newVoip = reinterpret_cast<device *>(&aVoip);
- */
     newList.add();
+    newList.add();
+    newList.add();
+    //newList.add();
     newList.display();
 
-    newList.add();
-    newList.display();
-
-    newList.add();
-    newList.display();
-
-    newList.add();
-    newList.display();
-
+    char searchEntry[256];
+    cout << "\nEnter the name of the contact to search for:\n";
+    cin.get(searchEntry, 265, '\n');
+    cin.ignore(100, '\n');
+    newList.search(searchEntry);
+    
     newList.removeAll();
-/*  delete aVoip;
-    delete aPager;
-    delete aPhone;
- */
+
     return 0;
 
 }

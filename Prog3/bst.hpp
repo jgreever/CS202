@@ -63,7 +63,7 @@ class contact
     private:
         int add(contact *&a_contact, char *a_name);
         int edit(contact &a_contact, char *a_name);
-        int search(contact &a_contact, char *to_search);
+        int search(contact *a_contact, char *to_search);
         void display(contact *display);
         void removeAll(contact *&cList);
         contact *root;

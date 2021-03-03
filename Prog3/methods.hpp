@@ -39,6 +39,7 @@ class phone : public device
 
     private:
         char *number, *capabilities;
+        device *next;
 };
 
 class pager : public device
@@ -55,6 +56,7 @@ class pager : public device
 
     private:
         char *number, *capabilities;
+        device *next;  
 };
 
 class voip : public device
@@ -71,6 +73,7 @@ class voip : public device
 
     private:
         char *number, *capabilities;
+        device *next;
 };
 
 

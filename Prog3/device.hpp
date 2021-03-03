@@ -33,6 +33,7 @@ class device
 
     private:
         char *number, *capabilities;
+        device *next;
 };
 
 

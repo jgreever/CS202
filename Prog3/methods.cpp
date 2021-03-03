@@ -20,17 +20,20 @@
 #include "methods.hpp"
 
 
-phone::phone() : number(nullptr), capabilities(nullptr)
+phone::phone() : number(nullptr), capabilities(nullptr), next(nullptr)
 {
     // Default constructor, no args needed
 }
 
-phone::phone(const phone &toCopy) : number(toCopy.number), capabilities(toCopy.capabilities)
+phone::phone(const phone &toCopy) : number(toCopy.number), capabilities(toCopy.capabilities), next(toCopy.next)
 {
     if (number)
-        delete number;
+        delete []number;
     if (capabilities)
-        delete capabilities;
+        delete []capabilities;
+    if (next)
+        delete next;
+    next = toCopy.next; 
     number = new char[strlen(toCopy.number) + 1];
     strcpy(number, toCopy.number);
     capabilities = new char[strlen(toCopy.capabilities) + 1];
@@ -40,16 +43,19 @@ phone::phone(const phone &toCopy) : number(toCopy.number), capabilities(toCopy.c
 phone::~phone() 
 {
     if (number)
-        delete number;
+        delete []number;
     if (capabilities)
-        delete capabilities;
+        delete []capabilities;
+    if (next)
+        delete next;
     number = capabilities = nullptr;
+    next = nullptr;
 }
 
 ostream &operator <<(ostream &output, const phone &a_device) {
 
     output << "\nDevice:\n" << a_device.number << endl;
-    output << "\nDevice Capabilities:\n" << a_device.capabilities << endl;
+    output << "\nDevice Capabilities:\n" << a_device.capabilities << "\n\n";
     return output;
 }
 
@@ -76,9 +82,6 @@ istream &operator >>(istream &input, phone &a_device) {
 
 int phone::add()
 {
-    //phone *aPhone = new phone();
-    this->number = new char;
-    this->capabilities = new char;
     cin >> *this;
     return 1;
 }
