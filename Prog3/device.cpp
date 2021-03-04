@@ -18,7 +18,7 @@
 // Abstract class constructor
 device::device() : number(nullptr), capabilities(nullptr), next(nullptr){} 
 
- // Abstract class destructo
+ // Abstract class destructor
 device::~device() {
         if (number)
             delete []number;
@@ -45,10 +45,4 @@ int device::remove()
 void device::display() const
 {
     // Pure virtual function
-}
-
-int device::search(device *to_search)
-{
-    // Pure virtual function
-    return 1;
 }

@@ -1,12 +1,16 @@
 /** contact.cpp
- * 
+ *
  * Justin Greever
  * CS202 - Program 3
  * 2/18/2021
- * 
+ *
  * This file contains the functions for the contact class. This will be
  * the start of our BST. A new BST object will be created in main.cpp
  * that points to this class.
+ *
+ * This is what I think an OOP program would be coded. I have chosen not
+ * to use a node class, and instead just have the root ptr within the
+ * BST's private data along with left/right, etc.
  * 
  */
 
@@ -35,7 +39,6 @@ contact::contact(const contact &a_contact) : left(a_contact.left), right(a_conta
 // Default class destructor
 contact::~contact()
 {
-    //removeAll(root);
     root = left = right = nullptr;
     if (this->contact_name)
         delete []this->contact_name;
@@ -46,6 +49,11 @@ contact::~contact()
 }
 
 // Operator overloads for contact class
+// This was a difficult thing to get figured out. At first
+// I thought it would share with other classes real easy, but
+// then found out that was not the truth. I believe every one
+// of these are working properly. Ugly as they are, they do
+// work.
 // Copy Assignment Operator (=)
 contact &contact::operator =(const contact &a_contact)
 {
@@ -76,7 +84,7 @@ istream &operator >>(istream &input, contact *a_contact)
     char hold[256];
     cout << "\nEnter the contact name: ";
     input.get(hold, 256);
-    input.ignore(100, '\n');
+    cin.ignore(100, '\n');
     strcpy(a_contact->contact_name, hold);
 
     return input;
@@ -143,13 +151,13 @@ bool contact::set_right(contact *is_right)
     return true;
 }
 
-int contact::add() {
+int contact::add(int choice) {
 
     contact *temp = new contact;
     temp->contact_name = new char[256];
     cin >> temp;
-    root->add(this->root, temp->contact_name);
-    //delete temp;
+    cin.ignore(100, '\n');
+    root->add(this->root, temp->contact_name, choice);
     return 1;
 
 }
@@ -173,7 +181,6 @@ void contact::display() {
 
 void contact::display(contact *to_display)
 {
-    //if (to_display->left || to_display->right) {
     cout << *to_display;
     if (to_display->right) {
         to_display = to_display->go_right();
@@ -185,11 +192,20 @@ void contact::display(contact *to_display)
     }
 }
 
-int contact::add(contact *&root, char *a_name)
-{
+int contact::add(contact *&root, char *a_name, int choice) {
+
     if (!root) {
         root = new contact;
-        root->a_device = new phone;
+        if (choice == 1)
+            root->a_device = new phone;
+        else if (choice == 2)
+            root->a_device = new pager;
+        else if (choice == 3)
+            root->a_device = new voip;
+        else {
+            cout << "\nInvalid entry, try again...\n";
+            return 0;
+        }
         root->set_name(a_name);
         root->a_device->add();
         root->set_left(nullptr);
@@ -197,10 +213,10 @@ int contact::add(contact *&root, char *a_name)
         return 1;
     }
     else if(a_name < root->contact_name) {
-        add(root->go_left(), a_name);
+        add(root->go_left(), a_name, choice);
     }
     else if(a_name > root->contact_name) {
-        add(root->go_right(), a_name);
+        add(root->go_right(), a_name, choice);
     }
     else {
         return 0;
@@ -219,11 +235,11 @@ int contact::search(contact *a_contact, char *to_search) {
         cout << "\nEntry found!\n";
         cout << *a_contact;
     }
-    if (a_contact->right) {
+    else if (a_contact->right) {
         a_contact = a_contact->go_right();
         return search(a_contact, to_search);
     }
-    if (a_contact->left) {
+    else if (a_contact->left) {
         a_contact = a_contact->go_left();
         return search(a_contact, to_search);
     }

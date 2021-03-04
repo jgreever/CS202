@@ -35,7 +35,7 @@ class phone : public device
         int add();
         int remove();
         void display() const;
-        int search(device *to_search);
+        //int search(device *to_search);
 
     private:
         char *number, *capabilities;
@@ -49,10 +49,14 @@ class pager : public device
         pager(const pager &);
         ~pager();
 
+        
+        friend ostream &operator <<(ostream &output, const pager &a_device);
+        friend istream &operator >>(istream &input, pager &a_device);
+
         int add();
         int remove();
         void display() const;
-        int search(device *to_search);
+        //int search(device *to_search);
 
     private:
         char *number, *capabilities;
@@ -66,10 +70,14 @@ class voip : public device
         voip(const voip &);
         ~voip();
 
+        
+        friend ostream &operator <<(ostream &output, const voip &a_device);
+        friend istream &operator >>(istream &input, voip &a_device);
+
         int add();
         int remove();
         void display() const;
-        int search(device *to_search);
+        //int search(device *to_search);
 
     private:
         char *number, *capabilities;

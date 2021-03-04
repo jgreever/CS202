@@ -36,22 +36,63 @@
 #include "methods.hpp"
 
 int main(int argc, const char * argv[]) {
-    contact newList;
+    contact newList; // Makes a new contact list
+    int menuChoice = 0;
+    int choice = 0;
 
-    newList.add();
-    newList.add();
-    newList.add();
-    //newList.add();
-    newList.display();
+    do {
 
-    char searchEntry[256];
-    cout << "\nEnter the name of the contact to search for:\n";
-    cin.get(searchEntry, 265, '\n');
-    cin.ignore(100, '\n');
-    newList.search(searchEntry);
-    
-    newList.removeAll();
+        cout << "\n\n";
+        cout << "  Prog3 Device Contact List Organizer\n";
+        cout << "  ====================================\n";
+        cout << "  1.  Add an entry\n";
+        cout << "  2.  Display an entry\n";
+        cout << "  3.  Search for an entry\n";
+        cout << "  4.  Remove all entries\n";
+        cout << "\n";
+        cout << "  0.  Exit\n";
+        cout << "  ====================================\n";
+        cout << "  Enter your selection: ";
+        cin >> menuChoice;
+        cin.ignore(100, '\n');
+        cout << endl;
+      
+        switch (menuChoice) {
+            case 1:
+                cout << "\nWhat type of device will we be adding?\n";
+                cout << "(1) for Phone, (2) for Pager, (3) for VoIP: ";
+                cin >> choice;
+                cin.ignore(100, '\n');
+                newList.add(choice);
+                cin.clear();
+                break;
 
+            case 2:
+                newList.display();
+                cin.clear();
+                break;
+
+            case 3:
+                char searchEntry[256];
+                cout << "\nEnter the name of the contact to search for:\n";
+                cin.get(searchEntry, 265, '\n');
+                cin.ignore(100, '\n');
+                newList.search(searchEntry);
+                cin.clear();
+                break;
+
+            case 4:
+                newList.removeAll();
+                cin.clear();
+                break;
+
+            case 0:
+                break;
+
+            default:
+                cout << menuChoice << " is not a valid choice, please try again.\n";
+                cin.clear();
+            }
+    } while (menuChoice != 0);
     return 0;
-
 }

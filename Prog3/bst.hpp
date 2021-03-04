@@ -54,14 +54,14 @@ class contact
         bool set_right(contact *is_right);
 
         // Class functions (Wrappers)
-        int add(); // Wrapper function for adding contacts
+        int add(int choice); // Wrapper function for adding contacts
         int edit(char *to_edit); // Wrapper function for editing contacts
         int search(char *to_search); // Wrapper function for searching contacts
         void display(); // Wrapper function for displaying contacts
         void removeAll(); // Wrapper function for removing all contacts
 
     private:
-        int add(contact *&a_contact, char *a_name);
+        int add(contact *&a_contact, char *a_name, int choice);
         int edit(contact &a_contact, char *a_name);
         int search(contact *a_contact, char *to_search);
         void display(contact *display);
