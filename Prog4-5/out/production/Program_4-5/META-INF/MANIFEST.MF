@@ -1,2 +1,2 @@
 Manifest-Version: 1.0
-Main-Class: ninja.introverted.Main
+Main-Class: program_4_5.Main
