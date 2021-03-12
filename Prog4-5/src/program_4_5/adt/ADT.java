@@ -25,6 +25,24 @@ public class ADT {
      * session)
      */
     public static class ARR extends ADT {
+
+        public static class arrNode extends ARR {
+            private String hiitRoutine;
+            private arrNode next;
+
+            public arrNode() {
+                hiitRoutine = null;
+                next = null;
+            }
+
+            public arrNode getNext() {
+                return this.next;
+            }
+
+            public void setNext(arrNode isNext) {
+                this.next = isNext;
+            }
+        }
     }
 
 
@@ -65,15 +83,41 @@ public class ADT {
         }
 
         public static int addHIITNode() {
-            if (root == null)
+            if (root == null) {
                 root = new Node();
+                root.hiitList[0] = new ARR.arrNode();
+            }
             Node temp = new Node();
             System.out.println("\nPlease enter the HIIT Exercise: ");
             temp.itemName = Utils.getInput();
             System.out.println("\nPlease enter amount of repetitions: ");
             temp.itemInfo = Utils.getInput();
-            System.out.println("\nPlease enter the time for each repetition: ");
-            temp.hiitList = Utils.getInput();
+            boolean isDone = false;
+            while(!isDone) {
+                System.out.println("\nPlease enter the day(s) for this Exercise: ");
+                System.out.println("(0) Sunday, (1) Monday, (2) Tuesday, (3) Wednesday, " +
+                        "(4) Thursday, (5) Friday, (6) Saturday");
+                int whatDay = Utils.getChoice();
+                Utils.userInput.nextLine();
+                System.out.println("\n");
+                System.out.println("\nEnter the time to start the HIIT Exercise: ");
+                temp.hiitList[whatDay].hiitRoutine = Utils.getInput();
+                if (getRoot().hiitList[whatDay].hiitRoutine == null) {
+                    root.hiitList[whatDay] = temp.hiitList[whatDay];
+                } else {
+                    root.hiitList[whatDay].getNext().hiitRoutine =
+                            temp.hiitList[whatDay].hiitRoutine;
+                }
+                System.out.println("\nEnter another Day/Time? (1) for Yes, (2) for No: ");
+                int choice = Utils.getChoice();
+                Utils.userInput.nextLine();
+                if(choice == 1) {
+                    isDone = false;
+                }
+                else {
+                    isDone = true;
+                }
+            }
             if (addNode(root, temp) == 1) {
                 System.out.println("\nSuccess! Activity added.");
                 return 1;
@@ -87,18 +131,18 @@ public class ADT {
             if (root == null) {
                 root = new Node(toAdd);
 
-                if(root.hiitList != null) {
+/*                if(root.hiitList != null) {
                     System.out.println("\nYou entered the following:" +
                             "\nHIIT Activity: " + root.itemName +
                             "\nHIIT Repetitions: " + root.itemInfo +
-                            "\nHIIT Time/Repetition: " + root.hiitList);
+                            "\nHIIT Time/Repetition: " + root.hiitList[0].hiitRoutine);
                 }
                 else {
-                    /* TODO: Debugging output, remove before turning in */
+                    *//* TODO: Debugging output, remove before turning in *//*
                     System.out.println("\nYou entered the following:" +
                             "\nItem Name: " + root.itemName +
                             "\nItem Information: " + root.itemInfo);
-                }
+                }*/
                 return 1;
             }
             if (root.next == null) {
@@ -128,21 +172,23 @@ public class ADT {
      */
     public static class Node extends ADT {
         /* These can be adjusted to fit the program, but two strings and a next pointer for now */
-        String itemName;
-        String itemInfo;
-        String hiitList;
-        Node next;
+        private String itemName;
+        private String itemInfo;
+        private ARR.arrNode[] hiitList = new ARR.arrNode[6];
+        private Node next;
 
         /* Default Node class constructor */
         public Node() {
             this.itemName = null;
             this.itemInfo = null;
-            this.hiitList = null;
+            for(int i = 0; i < 6; ++i) {
+                this.hiitList[i] = new ARR.arrNode();
+            }
             this.next = null;
         }
 
         /* Default Node class copy constructor w/o next pointer */
-        public Node(String iName, String iInfo, String ahiitList) {
+        public Node(String iName, String iInfo, ARR.arrNode[] ahiitList) {
             this.itemName = iName;
             this.itemInfo = iInfo;
             this.hiitList = ahiitList;
@@ -150,7 +196,7 @@ public class ADT {
         }
 
         /* Default Node class copy constructor w/next pointer */
-        public Node(String iName, String iInfo, String ahittList, Node addNext) {
+        public Node(String iName, String iInfo, ARR.arrNode[] ahittList, Node addNext) {
             this.itemName = iName;
             this.itemInfo = iInfo;
             this.hiitList = ahittList;
@@ -177,10 +223,10 @@ public class ADT {
          * @return pass back the String data concatenated
          */
         public String getData() {
-            if (this.hiitList != null)
+            if (this.hiitList[0].hiitRoutine != null)
                 return ("\nActivity Name: " + this.itemName +
                         "\nActivity Information: " + this.itemInfo +
-                        "\nHIIT Info: " + this.hiitList);
+                        "\nHIIT Info: " + this.hiitList[0].hiitRoutine);
             else
                 return ("\nActivity Name: " + this.itemName +
                         "\nActivity Information: " + this.itemInfo);
