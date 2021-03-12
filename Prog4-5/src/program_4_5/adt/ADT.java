@@ -14,10 +14,21 @@
  */
 package program_4_5.adt;
 
+import program_4_5.activity.exercise.HIIT;
 import program_4_5.utils.Utils;
 
 public class ADT {
     /**
+     * This is the ARR class. It will be used for the HIIT derived class.
+     * It will be an array of head pointers to a LLL that will hold onto
+     * information about workouts/times/etc (so you can plan an entire gym
+     * session)
+     */
+    public static class ARR extends ADT {
+    }
+
+
+    /*
      * This is the Linked List class. This will take care of managing any data
      * that we store in a LLL. The basic functions are add/edit/search/display/delete
      */
@@ -26,13 +37,14 @@ public class ADT {
         private static Node root;
 
         /* Default LinkedList class constructor */
-        public LinkedList() {
-            root = new Node();
+        private LinkedList() {
+            root = null;
         }
 
         /**
          * This is our addNode function that will take grab userInput via the Utils class
          * and create a new Node to be added to the LLL/ARR.
+         *
          * @return a 0 or 1
          */
         public static int addNode() {
@@ -43,32 +55,56 @@ public class ADT {
             temp.itemName = Utils.getInput();
             System.out.println("\nPlease enter the Activity information: ");
             temp.itemInfo = Utils.getInput();
-            if (addNode(getRoot(), temp) == 1) {
+            if (addNode(root, temp) == 1) {
                 System.out.println("\nSuccess! Activity added.");
                 return 1;
-            }
-            else {
+            } else {
                 System.out.println("\nFailed to add... Try again.");
                 return 0;
             }
         }
 
-        public static int addNode(Node root, Node toAdd) {
+        public static int addHIITNode() {
+            if (root == null)
+                root = new Node();
+            Node temp = new Node();
+            System.out.println("\nPlease enter the HIIT Exercise: ");
+            temp.itemName = Utils.getInput();
+            System.out.println("\nPlease enter amount of repetitions: ");
+            temp.itemInfo = Utils.getInput();
+            System.out.println("\nPlease enter the time for each repetition: ");
+            temp.hiitList = Utils.getInput();
+            if (addNode(root, temp) == 1) {
+                System.out.println("\nSuccess! Activity added.");
+                return 1;
+            } else {
+                System.out.println("\nFailed to add... Try again.");
+                return 0;
+            }
+        }
+
+        private static int addNode(Node root, Node toAdd) {
             if (root == null) {
                 root = new Node(toAdd);
 
-                /* TODO: Debugging output, remove before turning in */
-                System.out.println("\nYou entered the following:" +
-                        "\nItem Name: " + root.itemName +
-                        "\nItem Information: " + root.itemInfo);
-
+                if(root.hiitList != null) {
+                    System.out.println("\nYou entered the following:" +
+                            "\nHIIT Activity: " + root.itemName +
+                            "\nHIIT Repetitions: " + root.itemInfo +
+                            "\nHIIT Time/Repetition: " + root.hiitList);
+                }
+                else {
+                    /* TODO: Debugging output, remove before turning in */
+                    System.out.println("\nYou entered the following:" +
+                            "\nItem Name: " + root.itemName +
+                            "\nItem Information: " + root.itemInfo);
+                }
                 return 1;
             }
             if (root.next == null) {
                 root.setNext(toAdd);
                 return 1;
-            }
-            else {
+            } else {
                 addNode(root.next, toAdd);
             }
             return 1;
@@ -90,30 +126,34 @@ public class ADT {
      * setup for a simple LLL and ARR. It can be adapted or a new class added for things
      * like BST/Tables/etc down the road.
      */
-    public static class Node {
+    public static class Node extends ADT {
         /* These can be adjusted to fit the program, but two strings and a next pointer for now */
-        private String itemName;
-        private String itemInfo;
-        private Node next;
+        String itemName;
+        String itemInfo;
+        String hiitList;
+        Node next;
 
         /* Default Node class constructor */
         public Node() {
             this.itemName = null;
             this.itemInfo = null;
+            this.hiitList = null;
             this.next = null;
         }
 
         /* Default Node class copy constructor w/o next pointer */
-        public Node(String iName, String iInfo) {
+        public Node(String iName, String iInfo, String ahiitList) {
             this.itemName = iName;
             this.itemInfo = iInfo;
+            this.hiitList = ahiitList;
             this.next = null;
         }
 
         /* Default Node class copy constructor w/next pointer */
-        public Node(String iName, String iInfo, Node addNext) {
+        public Node(String iName, String iInfo, String ahittList, Node addNext) {
             this.itemName = iName;
             this.itemInfo = iInfo;
+            this.hiitList = ahittList;
             this.next = addNext;
         }
 
@@ -121,6 +161,7 @@ public class ADT {
         public Node(Node toCopy) {
             this.itemName = toCopy.itemName;
             this.itemInfo = toCopy.itemInfo;
+            this.hiitList = toCopy.hiitList;
             this.next = toCopy.next;
         }
 
@@ -132,15 +173,23 @@ public class ADT {
         /**
          * This is our getter for getting data from the object. It will pass back
          * the String data concatenated for viewing.
+         *
          * @return pass back the String data concatenated
          */
         public String getData() {
-            return ("\nActivity Name: " + this.itemName + "\nActivity Information: " + this.itemInfo);
+            if (this.hiitList != null)
+                return ("\nActivity Name: " + this.itemName +
+                        "\nActivity Information: " + this.itemInfo +
+                        "\nHIIT Info: " + this.hiitList);
+            else
+                return ("\nActivity Name: " + this.itemName +
+                        "\nActivity Information: " + this.itemInfo);
         }
 
         /**
          * This is our setter for setting data. It will take two string objects
          * passed into it and store them in the current Node.
+         *
          * @param iName the Activity Name
          * @param iInfo the Activity Information
          */
@@ -152,6 +201,7 @@ public class ADT {
         /**
          * This is our getter for getting the next pointer and returning it to the
          * calling function. This is needed for proper traversal.
+         *
          * @return pass this.next back
          */
         public Node getNext() {
@@ -161,6 +211,7 @@ public class ADT {
         /**
          * This is our setter for setting the next pointer. It will take the Node that
          * is passed in, and set it as the current Nodes next pointer.
+         *
          * @param upNext our next pointer
          */
         public void setNext(Node upNext) {
@@ -168,3 +219,4 @@ public class ADT {
         }
     }
 }
+

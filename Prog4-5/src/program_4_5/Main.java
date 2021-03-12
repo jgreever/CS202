@@ -18,6 +18,12 @@ package program_4_5;
 
 import program_4_5.utils.Menu;
 
+/*
+ * The Main.java and Main class are just here for running the
+ * MainMenu class. There are no options that need to be passed in
+ * from Main, and all Input/Output is handled by the appropriate
+ * class.
+ */
 public class Main {
     public static void main(String[] args) {
         Menu.MainMenu();

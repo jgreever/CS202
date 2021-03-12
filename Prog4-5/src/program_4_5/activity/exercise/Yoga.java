@@ -13,12 +13,10 @@ public class Yoga extends Exercise {
         return 1;
     }
 
-    @Override
     public void searchActivity() {
 
     }
 
-    @Override
     public void displayActivity() {
 
     }
