@@ -14,7 +14,6 @@
  */
 package program_4_5.adt;
 
-import program_4_5.activity.exercise.HIIT;
 import program_4_5.utils.Utils;
 
 public class ADT {
@@ -25,13 +24,14 @@ public class ADT {
      * session)
      */
     public static class ARR extends ADT {
+        private static arrNode[] head;
 
         public static class arrNode extends ARR {
             private String hiitRoutine;
             private arrNode next;
 
             public arrNode() {
-                hiitRoutine = null;
+                hiitRoutine = "";
                 next = null;
             }
 
@@ -85,7 +85,7 @@ public class ADT {
         public static int addHIITNode() {
             if (root == null) {
                 root = new Node();
-                root.hiitList[0] = new ARR.arrNode();
+                root.hiitList = new ARR.arrNode();
             }
             Node temp = new Node();
             System.out.println("\nPlease enter the HIIT Exercise: ");
@@ -101,22 +101,17 @@ public class ADT {
                 Utils.userInput.nextLine();
                 System.out.println("\n");
                 System.out.println("\nEnter the time to start the HIIT Exercise: ");
-                temp.hiitList[whatDay].hiitRoutine = Utils.getInput();
-                if (getRoot().hiitList[whatDay].hiitRoutine == null) {
-                    root.hiitList[whatDay] = temp.hiitList[whatDay];
+                temp.hiitList.hiitRoutine = Utils.getInput();
+                if (root.hiitList.hiitRoutine == null) {
+                    root.hiitList = temp.hiitList;
                 } else {
-                    root.hiitList[whatDay].getNext().hiitRoutine =
-                            temp.hiitList[whatDay].hiitRoutine;
+                    root.hiitList.setNext(temp.hiitList);
+                    //.hiitRoutine = temp.hiitList[whatDay].hiitRoutine;
                 }
                 System.out.println("\nEnter another Day/Time? (1) for Yes, (2) for No: ");
                 int choice = Utils.getChoice();
                 Utils.userInput.nextLine();
-                if(choice == 1) {
-                    isDone = false;
-                }
-                else {
-                    isDone = true;
-                }
+                isDone = choice != 1;
             }
             if (addNode(root, temp) == 1) {
                 System.out.println("\nSuccess! Activity added.");
@@ -130,19 +125,6 @@ public class ADT {
         private static int addNode(Node root, Node toAdd) {
             if (root == null) {
                 root = new Node(toAdd);
-
-/*                if(root.hiitList != null) {
-                    System.out.println("\nYou entered the following:" +
-                            "\nHIIT Activity: " + root.itemName +
-                            "\nHIIT Repetitions: " + root.itemInfo +
-                            "\nHIIT Time/Repetition: " + root.hiitList[0].hiitRoutine);
-                }
-                else {
-                    *//* TODO: Debugging output, remove before turning in *//*
-                    System.out.println("\nYou entered the following:" +
-                            "\nItem Name: " + root.itemName +
-                            "\nItem Information: " + root.itemInfo);
-                }*/
                 return 1;
             }
             if (root.next == null) {
@@ -174,21 +156,19 @@ public class ADT {
         /* These can be adjusted to fit the program, but two strings and a next pointer for now */
         private String itemName;
         private String itemInfo;
-        private ARR.arrNode[] hiitList = new ARR.arrNode[6];
+        private ARR.arrNode hiitList; // = new ARR.arrNode[6];
         private Node next;
 
         /* Default Node class constructor */
         public Node() {
-            this.itemName = null;
-            this.itemInfo = null;
-            for(int i = 0; i < 6; ++i) {
-                this.hiitList[i] = new ARR.arrNode();
-            }
+            this.itemName = "";
+            this.itemInfo = "";
+            this.hiitList = new ARR.arrNode();
             this.next = null;
         }
 
         /* Default Node class copy constructor w/o next pointer */
-        public Node(String iName, String iInfo, ARR.arrNode[] ahiitList) {
+        public Node(String iName, String iInfo, ARR.arrNode ahiitList) {
             this.itemName = iName;
             this.itemInfo = iInfo;
             this.hiitList = ahiitList;
@@ -196,7 +176,7 @@ public class ADT {
         }
 
         /* Default Node class copy constructor w/next pointer */
-        public Node(String iName, String iInfo, ARR.arrNode[] ahittList, Node addNext) {
+        public Node(String iName, String iInfo, ARR.arrNode ahittList, Node addNext) {
             this.itemName = iName;
             this.itemInfo = iInfo;
             this.hiitList = ahittList;
@@ -217,16 +197,26 @@ public class ADT {
          */
 
         /**
+         * This will grab all the data from the ARR and return it to the calling
+         * function or display the data to the user.
+         *
+         * @return pass String data concatenated from ARR
+         */
+        public String getArrData() {
+            return ("\nActivity Name: " + this.itemName +
+                    "\nActivity Information: " + this.itemInfo +
+                    "\nHIIT Info: " + this.hiitList.hiitRoutine);
+        }
+
+        /**
          * This is our getter for getting data from the object. It will pass back
          * the String data concatenated for viewing.
          *
          * @return pass back the String data concatenated
          */
         public String getData() {
-            if (this.hiitList[0].hiitRoutine != null)
-                return ("\nActivity Name: " + this.itemName +
-                        "\nActivity Information: " + this.itemInfo +
-                        "\nHIIT Info: " + this.hiitList[0].hiitRoutine);
+            if (this.hiitList.hiitRoutine != "")
+                return getArrData();
             else
                 return ("\nActivity Name: " + this.itemName +
                         "\nActivity Information: " + this.itemInfo);
