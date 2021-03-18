@@ -8,29 +8,18 @@ import program_4_5.activity.garden.Indoor;
 import program_4_5.activity.garden.Outdoor;
 import program_4_5.activity.garden.Research;
 import program_4_5.adt.ADT;
+import program_4_5.adt.ADT.LinkedList;
 import program_4_5.utils.Utils;
 
-import static program_4_5.adt.ADT.LinkedList.getRoot;
-
+@SuppressWarnings("EmptyMethod")
 public class Activity {
-    /**
-     * This holds onto a Garden or Exercise Activity
-     */
-    protected Activity anActivity;
+    private LinkedList root = new LinkedList();
 
     /**
      * Default class constructor
      */
     public Activity() {
-        this.anActivity = null;
-    }
-
-    /**
-     * Default class Copy constructor
-     * @param copyActivity consists of two Strings
-     */
-    public Activity(Activity copyActivity) {
-        this.anActivity = copyActivity.anActivity;
+        root = null;
     }
 
     /*
@@ -42,6 +31,7 @@ public class Activity {
      * Add an activity to the list
      * @return a 0 or 1
      */
+    @SuppressWarnings("UnusedReturnValue")
     public int addActivity() {
         System.out.println("\nWhat type of Activity would you like to add?\n");
         System.out.println("1. Exercise\n2. Gardening\n");
@@ -72,23 +62,20 @@ public class Activity {
 
             /* New Cardio Exercise Activity */
             if (eChoice == 1) {
-                Activity newCardio = new Cardio();
-                newCardio.addActivity();
-                this.anActivity = (Exercise) newCardio;
+                anActivity = new Cardio();
+                anActivity.addActivity();
             }
 
             /* New HIIT Exercise Activity */
             if (eChoice == 2) {
-                Activity newHIIT = new HIIT();
+                Exercise newHIIT = new HIIT();
                 newHIIT.addActivity();
-                this.anActivity = (Exercise) newHIIT;
             }
 
             /* New Yoga Exercise Activity */
             if (eChoice == 3) {
-                Activity newYoga = new Yoga();
+                Exercise newYoga = new Yoga();
                 newYoga.addActivity();
-                this.anActivity = (Exercise) newYoga;
             }
         }
 
@@ -112,26 +99,68 @@ public class Activity {
             if (gChoice == 1) {
                 Activity newOutdoor = new Outdoor();
                 newOutdoor.addActivity();
-                this.anActivity = newOutdoor;
             }
 
             /* Cast new Indoor Garden Activity */
             if (gChoice == 2) {
                 Activity newIndoor = new Indoor();
                 newIndoor.addActivity();
-                this.anActivity = newIndoor;
             }
 
             /* Cast new Research Garden Activity */
             if (gChoice == 3) {
                 Activity newResearch = new Research();
                 newResearch.addActivity();
-                this.anActivity = newResearch;
             }
+            return 1;
         }
-
-        return 1;
+        return 0;
     }
+
+
+    public int addNode() {
+        if (root == null)
+            this.root = new LinkedList();
+        LinkedList temp = new LinkedList();
+        System.out.println("\nPlease enter the name of the Activity: ");
+        temp.itemName = Utils.getInput();
+        System.out.println("\nPlease enter the Activity information: ");
+        temp.itemInfo = Utils.getInput();
+        if (addNode(this.root, temp) == 1) {
+            System.out.println("\nSuccess! Activity added.");
+            return 1;
+        } else {
+            System.out.println("\nFailed to add... Try again.");
+            return 0;
+        }
+    }
+
+    private int addNode(Node current, Node toAdd) {
+        if (this.root == null) {
+            this.root = new Node(toAdd);
+            return 1;
+        }
+        if (current.getNext() == null) {
+            current.setNext(toAdd);
+            return 1;
+        } else {
+            addNode(current.getNext(), toAdd);
+        }
+        return 0;
+    }
+
+    /* Get our root node and return it */
+    public LinkedList.Node getRoot() {
+        return this.root;
+    }
+
+    /* Set our root node */
+    public void setRoot(LinkedList.Node toSet) {
+        this.root = toSet;
+    }
+}
+
+
 
     /*
      * Search for an activity in the list
@@ -144,11 +173,11 @@ public class Activity {
      * Display an activity from the list
      */
     public void displayActivity() {
-        if (getRoot() == null) {
+        if (ll.getRoot() == null) {
             System.out.println("\nEnd of the list.\n");
             return;
         }
-        displayActivity(ADT.LinkedList.getRoot().getNext());
+        displayActivity(ll.getRoot().getNext());
     }
 
     private void displayActivity(ADT.Node root) {

@@ -51,16 +51,15 @@ public class Menu {
                     doQuit = Utils.getChoice();
                     if (doQuit == 1) {
                         System.out.println("\nThank you for using Program 4.\nHave a wonderful day!\n");
-                        System.out.println("\nMade with\n");
                         System.out.println("""
                                                                                   \s
                                          ,---._                                   \s
                                        .-- -.' \\                                  \s
                                        |    |   :                                 \s
                                        :    ;   |                                 \s
-                                       :        |               .---.             \s
-                                       |    :   :  ,--.--.    /.  ./|   ,--.--.   \s
-                                       :          /       \\ .-' . ' |  /       \\  \s
+                                Made   :        |               .---.             \s
+                                 With  |    :   :  ,--.--.    /.  ./|   ,--.--.   \s
+                                  Java :          /       \\ .-' . ' |  /       \\  \s
                                        |    ;   |.--.  .-. /___/ \\: | .--.  .-. | \s
                                    ___ l          \\__\\/: . .   \\  ' .  \\__\\/: . . \s
                                  /    /\\    J   : ," .--.; |\\   \\   '  ," .--.; | \s

@@ -10,8 +10,6 @@
  */
 package program_4_5.activity.garden;
 
-import program_4_5.adt.ADT;
-
 public class Indoor extends Garden {
 
     /**
@@ -27,23 +25,7 @@ public class Indoor extends Garden {
      */
     @Override
     public int addActivity() {
-        ADT.LinkedList.addNode();
+        ll.addNode();
         return 1;
-    }
-
-    /**
-     * Search for an Activity
-     */
-    @Override
-    public void searchActivity() {
-
-    }
-
-    /**
-     * Display an activity
-     */
-    @Override
-    public void displayActivity() {
-
     }
 }

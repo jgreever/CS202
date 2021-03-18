@@ -17,32 +17,13 @@ package program_4_5.adt;
 import program_4_5.utils.Utils;
 
 public class ADT {
-    /**
-     * This is the ARR class. It will be used for the HIIT derived class.
-     * It will be an array of head pointers to a LLL that will hold onto
-     * information about workouts/times/etc (so you can plan an entire gym
-     * session)
+    /*
+     * This is going to be the best AVL tree out there. It will have a balance factor,
+     * height check to ensure the tree hasn't grown too large, and (hopefully) the ability
+     * to make copies of trees automagically!
      */
-    public static class ARR extends ADT {
-        private static arrNode[] head;
+    public class AVLTree  extends ADT {
 
-        public static class arrNode extends ARR {
-            private String hiitRoutine;
-            private arrNode next;
-
-            public arrNode() {
-                hiitRoutine = "";
-                next = null;
-            }
-
-            public arrNode getNext() {
-                return this.next;
-            }
-
-            public void setNext(arrNode isNext) {
-                this.next = isNext;
-            }
-        }
     }
 
 
@@ -50,13 +31,11 @@ public class ADT {
      * This is the Linked List class. This will take care of managing any data
      * that we store in a LLL. The basic functions are add/edit/search/display/delete
      */
+    @SuppressWarnings("UnusedReturnValue")
     public static class LinkedList extends ADT {
-        /* Our root node pointer for traversal */
-        private static Node root;
 
         /* Default LinkedList class constructor */
-        private LinkedList() {
-            root = null;
+        public LinkedList() {
         }
 
         /**
@@ -65,15 +44,15 @@ public class ADT {
          *
          * @return a 0 or 1
          */
-        public static int addNode() {
+/*        public int addNode() {
             if (root == null)
-                root = new Node();
+                this.root = new Node();
             Node temp = new Node();
             System.out.println("\nPlease enter the name of the Activity: ");
             temp.itemName = Utils.getInput();
             System.out.println("\nPlease enter the Activity information: ");
             temp.itemInfo = Utils.getInput();
-            if (addNode(root, temp) == 1) {
+            if (addNode(this.root, temp) == 1) {
                 System.out.println("\nSuccess! Activity added.");
                 return 1;
             } else {
@@ -82,70 +61,30 @@ public class ADT {
             }
         }
 
-        public static int addHIITNode() {
-            if (root == null) {
-                root = new Node();
-                root.hiitList = new ARR.arrNode();
+        private int addNode(Node current, Node toAdd) {
+            if (this.root == null) {
+                this.root = new Node(toAdd);
+                return 1;
             }
-            Node temp = new Node();
-            System.out.println("\nPlease enter the HIIT Exercise: ");
-            temp.itemName = Utils.getInput();
-            System.out.println("\nPlease enter amount of repetitions: ");
-            temp.itemInfo = Utils.getInput();
-            boolean isDone = false;
-            while(!isDone) {
-                System.out.println("\nPlease enter the day(s) for this Exercise: ");
-                System.out.println("(0) Sunday, (1) Monday, (2) Tuesday, (3) Wednesday, " +
-                        "(4) Thursday, (5) Friday, (6) Saturday");
-                int whatDay = Utils.getChoice();
-                Utils.userInput.nextLine();
-                System.out.println("\n");
-                System.out.println("\nEnter the time to start the HIIT Exercise: ");
-                temp.hiitList.hiitRoutine = Utils.getInput();
-                if (root.hiitList.hiitRoutine == null) {
-                    root.hiitList = temp.hiitList;
-                } else {
-                    root.hiitList.setNext(temp.hiitList);
-                    //.hiitRoutine = temp.hiitList[whatDay].hiitRoutine;
-                }
-                System.out.println("\nEnter another Day/Time? (1) for Yes, (2) for No: ");
-                int choice = Utils.getChoice();
-                Utils.userInput.nextLine();
-                isDone = choice != 1;
-            }
-            if (addNode(root, temp) == 1) {
-                System.out.println("\nSuccess! Activity added.");
+            if (current.getNext() == null) {
+                current.setNext(toAdd);
                 return 1;
             } else {
-                System.out.println("\nFailed to add... Try again.");
-                return 0;
+                addNode(current.getNext(), toAdd);
             }
+            return 0;
         }
 
-        private static int addNode(Node root, Node toAdd) {
-            if (root == null) {
-                root = new Node(toAdd);
-                return 1;
-            }
-            if (root.next == null) {
-                root.setNext(toAdd);
-                return 1;
-            } else {
-                addNode(root.next, toAdd);
-            }
-            return 1;
+        *//* Get our root node and return it *//*
+        public Node getRoot() {
+            return this.root;
         }
 
-        /* Get our root node and return it */
-        public static Node getRoot() {
-            return root;
+        *//* Set our root node *//*
+        public void setRoot(Node toSet) {
+            this.root = toSet;
         }
-
-        /* Set our root node */
-        public static void setRoot(Node root) {
-            LinkedList.root = root;
-        }
-    }
+    }*/
 
     /**
      * This is our Node class. It holds two strings and a next pointer. This is a basic
@@ -156,30 +95,26 @@ public class ADT {
         /* These can be adjusted to fit the program, but two strings and a next pointer for now */
         private String itemName;
         private String itemInfo;
-        private ARR.arrNode hiitList; // = new ARR.arrNode[6];
         private Node next;
 
         /* Default Node class constructor */
         public Node() {
             this.itemName = "";
             this.itemInfo = "";
-            this.hiitList = new ARR.arrNode();
             this.next = null;
         }
 
         /* Default Node class copy constructor w/o next pointer */
-        public Node(String iName, String iInfo, ARR.arrNode ahiitList) {
+        public Node(String iName, String iInfo) {
             this.itemName = iName;
             this.itemInfo = iInfo;
-            this.hiitList = ahiitList;
             this.next = null;
         }
 
         /* Default Node class copy constructor w/next pointer */
-        public Node(String iName, String iInfo, ARR.arrNode ahittList, Node addNext) {
+        public Node(String iName, String iInfo, Node addNext) {
             this.itemName = iName;
             this.itemInfo = iInfo;
-            this.hiitList = ahittList;
             this.next = addNext;
         }
 
@@ -187,7 +122,6 @@ public class ADT {
         public Node(Node toCopy) {
             this.itemName = toCopy.itemName;
             this.itemInfo = toCopy.itemInfo;
-            this.hiitList = toCopy.hiitList;
             this.next = toCopy.next;
         }
 
@@ -197,27 +131,12 @@ public class ADT {
          */
 
         /**
-         * This will grab all the data from the ARR and return it to the calling
-         * function or display the data to the user.
-         *
-         * @return pass String data concatenated from ARR
-         */
-        public String getArrData() {
-            return ("\nActivity Name: " + this.itemName +
-                    "\nActivity Information: " + this.itemInfo +
-                    "\nHIIT Info: " + this.hiitList.hiitRoutine);
-        }
-
-        /**
          * This is our getter for getting data from the object. It will pass back
          * the String data concatenated for viewing.
          *
          * @return pass back the String data concatenated
          */
         public String getData() {
-            if (this.hiitList.hiitRoutine != "")
-                return getArrData();
-            else
                 return ("\nActivity Name: " + this.itemName +
                         "\nActivity Information: " + this.itemInfo);
         }

@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Utils {
 
     /* Our userInput function, gets user input and returns a String */
-    public static Scanner userInput = new Scanner(System.in);
+    public static final Scanner userInput = new Scanner(System.in);
 
     /*
      * Enums: These are setup so that I can assign a quick value to
